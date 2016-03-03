@@ -9,6 +9,8 @@
         url: 'http://andy-hook.co.uk/'
     };
 
+    var current_date = new Date();
+
     // Manually require modules that won"t get picked up by gulp-load-plugins
     var gulp = require('gulp'),
         es = require('event-stream'),
@@ -69,7 +71,8 @@
             minifyHTML    = require('metalsmith-html-minifier'),
             msIf          = require('metalsmith-if'),
             glob          = require('glob'),
-            copyAssets = require('metalsmith-copy-assets-540');
+            copyAssets = require('metalsmith-copy-assets-540'),
+            siteMap = require('metalsmith-sitemap');
 
         var Metalsmith    = require('metalsmith');
 
@@ -279,6 +282,13 @@
                 .use(copyAssets({
                 	src: 'src/README.md'
                 }))
+
+                .use(msIf(prod_env, siteMap({
+                    'hostname': site.url,
+                    'omitIndex': true,
+                    'changefreq': 'daily',
+                    'lastmod': current_date
+                })))
 
                 .destination(paths.build)
 
