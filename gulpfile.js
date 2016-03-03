@@ -287,7 +287,11 @@
                     'hostname': site.url,
                     'omitIndex': true,
                     'changefreq': 'daily',
-                    'lastmod': current_date
+                    'lastmod': current_date,
+                    'pattern': [
+                        '**/*.html',
+                        '**/*.pdf'
+                    ]
                 })))
 
                 .destination(paths.build)

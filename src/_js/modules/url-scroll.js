@@ -5,7 +5,8 @@ define(['helpers', 'metrics', 'modules/scroll-window'], function(helper, metric,
 
     var hash = window.location.hash,
         path = window.location.pathname,
-        work_dir = '/work';
+        work_dir = '/work',
+        fragment_identifier = '.js__project-fragment';
 
     // By default all browsers jump to a matching local anchor, this function simply scrolls the window quickly back to the top
     // so that the regular scroll effect is visible
@@ -19,7 +20,7 @@ define(['helpers', 'metrics', 'modules/scroll-window'], function(helper, metric,
     // Scan path for work directory and if present return true as being a project page
     // Not very accurate but works for now right now
     // TODO: Find a more robust solution
-    function checkProjectPage() {
+    function checkForWorkURL() {
         if(window.location.href.indexOf(work_dir) > -1) {
            return true;
         }
@@ -29,8 +30,11 @@ define(['helpers', 'metrics', 'modules/scroll-window'], function(helper, metric,
     // --------------------------------------------------
     function performScroll() {
 
+        var $project_container = $(metric.cache.project_container),
+            $project_fragment = $(fragment_identifier);
+
         // Scroll to hash if present and not a project page
-        if (hash && !checkProjectPage()) {
+        if (hash && !checkForWorkURL()) {
 
             var $target = $(hash);
 
@@ -38,9 +42,15 @@ define(['helpers', 'metrics', 'modules/scroll-window'], function(helper, metric,
                scrollWindow.scrollToElement($target, true); 
             }
 
-        // Otherwise check if its a project page and scroll to the container if so
-        } else if (checkProjectPage()) {
+        // Check if its a project page and scroll to the container
+        // Checks for existence of project content to determine if it's a project page
+        // TODO: This is hacky, need to produce a better solution
+        } else if (checkForWorkURL() && $project_fragment.length) {
             scrollWindow.scrollToElement($(metric.cache.project_container), true);
+
+        // Check if it's still a work url and scroll to the work container
+        } else if (checkForWorkURL()) {
+            scrollWindow.scrollToElement(metric.$c.work, true);
         }
 
     }

@@ -22,7 +22,8 @@ define(['helpers', 'plugins/throttle-debounce'], function(helper, throttle_debou
             hero: $('.js__hero'),
             hero_unit: $('.js__hero__unit'),
             hero_placeholder: $('.js__hero__placeholder'),
-            project: $('.js__project')
+            project: $('.js__project'),
+            work: $('.js__work')
         };
 
     // Common variables
