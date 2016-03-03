@@ -20,7 +20,7 @@
 
         // Prod environment variable
         prod_env = (argv.prod_env === 'true') ? true : false,
-        dev_site_path = 'http://192.168.0.15:8080/andy-hook-metalsmith/build/',
+        dev_site_path = 'http://192.168.0.15:8080/andy-hook.co.uk/build/',
         prod_site_path = site.url;
 
     // Load plugins
