@@ -1,0 +1,16 @@
+<!-- Open Graph data -->
+<meta property="og:locale" content="en_GB" />
+<meta property="og:type" content="website">
+<meta property="og:title" content="{{#if title}}{{ title }}{{else}}{{ page-title }}{{/if}} - {{ site-title }}">
+<meta property="og:description" content="{{#if title}}{{ impact }}{{else}}{{ site-description }}{{/if}}">
+<meta property="og:url" content="{{absolute_path this.path}}">
+<meta property="og:site_name" content="{{ site-title }}">
+<meta property="og:image" content="{{#if title}}{{absolute_path this.path}}/thumb/{{get_filename this.path}}-facebook.jpg{{else}}{{absolute_path this.path}}assets/social/andy-hook-facebook.jpg{{/if}}">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@Andy_Hook">
+<meta name="twitter:creator" content="@Andy_Hook">
+<meta name="twitter:title" content="{{#if title}}{{ title }}{{else}}{{ page-title }}{{/if}} - {{ site-title }}">
+<meta name="twitter:description" content="{{#if title}}{{ impact }}{{else}}{{ site-description }}{{/if}}">
+<meta name="twitter:image" content="{{#if title}}{{absolute_path this.path}}/thumb/{{get_filename this.path}}-twitter.jpg{{else}}{{absolute_path this.path}}assets/social/andy-hook-twitter.jpg{{/if}}">

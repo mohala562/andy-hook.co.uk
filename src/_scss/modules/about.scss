@@ -1,0 +1,378 @@
+// Module - About
+// --------------------------------------------------
+.about {
+  @extend %content-inverted;
+  @extend %loading_effects;
+
+  position: relative;
+
+  overflow: hidden;
+
+  background-color: #ddd;
+  z-index: z('about', 'base');
+}
+
+// Description
+// --------------------------------------------------
+.about__description__col {
+  @extend %description__col;
+}
+
+.about__description__col--left {
+  @extend %description__col--left;
+}
+
+.about__description__col--right {
+  @extend %description__col--right;
+}
+
+.about__description {
+  @extend %section-padding-y;
+  @extend %clearfix;
+  @extend %foreground-sliding-effect;
+
+  position: relative;
+
+  z-index: z('about', 'about__description');
+}
+
+// Title
+.about__description__title {
+  @extend %description__title;
+  @extend %foreground-sliding-effect;
+
+  // Visibility effects
+  @include effect-base {
+    opacity: 0;
+  }
+
+  @include effect-base--enhanced {
+    transform: translate3d(0,1.5em,0);
+  }
+
+  @include effect-visible {
+    transition: 
+      transform $ts__about * 10 $e__fast-in,
+      opacity $ts__about linear;
+
+    transition-delay: $ts__about * .3;
+
+    opacity: 1;
+  }
+
+  @include effect-visible--enhanced {
+    transform: translate3d(0,0,0);
+  }
+}
+
+// Impact text
+.about__description__impact {
+
+  // Mimic h2 appearance though h3 is used in mark-up for the semantic value
+  @include type-scale-h2;
+
+  @extend %description__impact;
+  @extend %foreground-sliding-effect;
+
+  margin-bottom: 0;
+
+  // Visibility effects
+  @include effect-base {
+    opacity: 0;
+  }
+
+  @include effect-base--enhanced {
+    transform: translate3d(0,1.5em,0);
+  }
+
+  @include effect-visible {
+    transition: 
+      transform $ts__about * 6 $e__fast-in,
+      opacity $ts__about * 1 linear;
+
+    transition-delay: $ts__about * .4;
+
+    opacity: 1;
+  }
+
+  @include effect-visible--enhanced {
+    transform: translate3d(0,0,0);
+  }
+
+  a {
+    @extend %enhanced-link;
+    @extend %enhanced-link--title;
+  }
+
+  &:after {
+    @extend %foreground-sliding-effect;
+
+    // Visibility effects
+    @include effect-base {
+      opacity: 0;
+    }
+
+    @include effect-base--enhanced {
+      transform: translate3d(0,2em,0);
+    }
+
+    @include effect-visible {
+      transition: 
+        transform $ts__project__header * 4 $e__fast-in,
+        opacity $ts__about linear;
+        
+      transition-delay: $ts__about * .5;
+
+      opacity: 1;
+    }
+
+    @include effect-visible--enhanced {
+      transform: translate3d(0,0,0);
+    }
+  }
+}
+
+// Detail text
+.about__description__detail {
+  @extend %description__detail;
+  @extend %foreground-sliding-effect;
+
+  a {
+    @extend %enhanced-link;
+  }
+
+  // Visibility effects
+  @include effect-base {
+    opacity: 0;
+  }
+
+  @include effect-base--enhanced {
+    transform: translate3d(0,3em,0);
+  }
+
+  @include effect-visible {
+    transition: 
+      transform $ts__about * 5 $e__fast-in,
+      opacity $ts__about linear;
+      
+    transition-delay: $ts__about * .6;
+
+    opacity: 1;
+
+    @media (min-width: $screen-min-lg) {
+      transition-delay: $ts__about * .4;
+    }
+  }
+
+  @include effect-visible--enhanced {
+    transform: translate3d(0,0,0);
+  }
+}
+
+// Social
+// --------------------------------------------------
+.about__social {
+  @extend %clearfix;
+
+  padding: 0;
+  margin: 0;
+
+  svg {
+    fill: $tertiary-color--invert;
+  }
+
+  font-size: 1.5em;
+
+  @media (min-width: $screen-min-lg) {
+    float: left;
+  }
+
+  @media (max-width: $screen-max-lg) {
+    padding: 1.4em 0;
+    line-height: 1;
+  }
+
+  @media (min-width: $screen-min-xs) {
+    font-size: 2em;
+  }
+
+  @media (min-width: $screen-min-lg) {
+    padding-top: 1.5em;
+    float: left;
+  }
+
+  @media (max-width: $screen-max-lg) {
+    text-align: center;
+  }
+
+  @media (min-width: $screen-min-md) {
+    font-size: 2.2em;
+  }
+
+  @include effect-base--enhanced {
+    transform: translateY(1em);
+  }
+
+  @include effect-visible {
+    transition: 
+      transform $ts__about * 10 $e__fast-in,
+      opacity $ts__about * 2 linear;
+
+    opacity: 1;
+  }
+
+  @include effect-visible--enhanced {
+    transform: translateY(0);
+  }
+
+  li {
+    @extend %icon-wrapper;
+
+    margin-right: 1.25em;
+
+    &:last-child {
+      margin-right: 0;
+    }
+
+    @media (max-width: $screen-max-lg) {
+      display: inline-block
+    }
+
+    @media (min-width: $screen-min-lg) {
+      float: left;
+    }
+
+    // Visibility effects
+    @include effect-base {
+      opacity: 0;
+    }
+
+    @include effect-base--enhanced {
+      transform: translateY(1em);
+    }
+
+    @include effect-visible {
+      transition: 
+        transform $ts__about * 4 $e__fast-in,
+        opacity $ts__about linear;
+
+      opacity: 1;
+    }
+
+    @include effect-visible--enhanced {
+      transform: translateY(0);
+    }
+
+    // Entry animation cascade
+    $social-links: 4;
+    $delay-base: $ts__about / 2;
+
+    // Loop it with nth-child (subtract amount to lower delay at start)
+    @for $i from 1 through $social-links {
+
+      @include effect-visible {
+        @if $i == 0 {
+          $delay: #{$delay-base};
+        } @else {
+          $delay: #{$delay-base + ($i / 10)};
+        }
+
+        &:nth-child(#{$i}) {
+
+          // Match delay for the opacity transition and animation movement
+          transition-delay: $delay;
+        }
+      }
+    }
+  }
+}
+
+// Links
+.about__social__link {
+  @extend %fill-space;
+
+  transition: 
+    opacity $ts__footer__details / 2 linear,
+    transform $ts__footer__details $e__ease;
+
+  top: 0;
+  left: 0;
+
+  display: block;
+
+  opacity: .7;
+
+  transform: scale(1);
+
+  #{$no-touch} &:hover,
+  #{$no-touch} &:active {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+
+  #{$touch} &:active {
+    opacity: 1;
+  }
+}
+
+// Background
+// --------------------------------------------------
+
+// Container
+.about__background {
+  @extend %fill-space;
+
+  z-index: z('about', 'about__background', 'base');
+
+  top: 0;
+  left: 0;
+
+  // Based on background image
+  background-color: #0b4c52;
+}
+
+// Gradient
+.about__background__gradient {
+  @extend %fill-space;
+  @include gradient-diagonal($gradient-color-primary, $gradient-color-secondary);
+
+  top: 0;
+  left: 0;
+
+  opacity: .7;
+
+  z-index: z('about', 'about__background', 'about__background__gradient');
+}
+
+// Image positioning container
+// Used for scroll effects
+.about__background__image__pos {
+  @extend %fill-space;
+
+  left: 0;
+  bottom: 0;
+}
+
+// Image
+.about__background__image {
+  @extend %fill-space;
+  @extend %background-sprite;
+
+  height: 130%;
+
+  bottom: 0;
+  left: 0;
+
+  background-position: center bottom;
+  background-size: cover;
+
+  z-index: z('about', 'about__background', 'about__background__image');
+
+  #{$s__background-effects} & {
+    animation: inflate $ts__slow-inflate linear infinite alternate;
+
+    @media (min-width: $screen-min-xs) {
+      animation: inflate-sway $ts__slow-inflate linear infinite alternate;
+    }
+  }
+}

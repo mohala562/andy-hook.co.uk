@@ -1,0 +1,272 @@
+// Tools - Animation
+// Settings for transition, animation duration as well as custom animations and easing timings
+// --------------------------------------------------
+
+// Transition speed base variables
+// Allows a relationship to be built between different sub module transitions
+// --------------------------------------------------
+
+// Topbar
+$ts__topbar: .4s;
+$ts__topbar--mobile: .4s;
+$ts__topbar__brand: .4s;
+$ts__topbar__nav: .4s;
+
+// Hero
+$ts__hero__intro: .4s;
+$ts__hero__button: .4s;
+$ts__hero__parallax: .4s;
+
+// Gallery
+$ts__gallery__thumbnail: .3s;
+
+// Project
+$ts__project__header: .4s;
+$ts__project__description: .4s;
+$ts__project__image: .4s;
+
+// About
+$ts__about: .4s;
+
+// Skills
+$ts__skills: .4s;
+
+$ts__skills-item-delay--first: 0s;
+$ts__skills-item-delay--second: .25s;
+$ts__skills-item-delay--third: $ts__skills-item-delay--second * 2;
+
+$ts__skills-item-icon-delay: 0s;
+$ts__skills-item-title-delay: $ts__skills * .2;
+$ts__skills-item-border-delay: $ts__skills * .3;
+$ts__skills-item-descr-delay: $ts__skills * .4;
+
+// Footer
+$ts__footer__details: .4s;
+$ts__footer__signature: .4s;
+$ts__footer__cv: .4s;
+$ts__footer__details: .4s;
+
+// Error
+$ts__error: .4s;
+
+// Warning
+$ts__warning: .4s;
+
+// Loading
+$ts__loading: .4s;
+
+$ts__page-spinner: 1s;
+$ts__generic-loading-spinner: .4s;
+
+
+// Generic
+// --------------------------------------------------
+$ts__slow-inflate: 40s;
+$ts__project-slide: .5s;
+
+
+// Custom easing
+// --------------------------------------------------
+$e__ease: cubic-bezier(0.390, 0.250, 0.150, 0.915);
+$e__elastic: cubic-bezier(0.425, -0.195, 0.005, 1.215);
+$e__slow-in: cubic-bezier(0.745, 0.030, 0.175, 0.935);
+$e__fast-in: cubic-bezier(.075,.82,.165,1);
+
+// Shared transition properties
+// --------------------------------------------------
+$project-nav-transform-transition: transform $ts__topbar__nav * 2 ease;
+
+
+// Animations
+// --------------------------------------------------
+
+// Simple fade in
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes arrow-right {
+  0% {
+    opacity: 0;
+    transform: translateX(-3em);
+  }
+
+  100% {
+  	opacity: 1;
+  	transform: translateX(0);
+  }
+}
+
+@keyframes arrow-left {
+  0% {
+    opacity: 0;
+    transform: translateX(3em);
+  }
+
+  100% {
+  	opacity: 1;
+  	transform: translateX(0);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 1;
+    transform: scale(0);
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(1);
+  }
+}
+
+@keyframes inflate {
+  0% {
+    transform: scale(1);
+  }
+
+  100% {
+    transform: scale(1.2);
+  }
+}
+
+@keyframes inflate-sway {
+
+  // Always use pixels with multiple transform properties
+  // Otherwise IE11 doesn't run them concurrently and also gets the units wrong
+
+  // Rotation is used to trigger subpixel rendering in IE and FF
+  0% {
+    transform: scale(1) rotate(0) translate3D(0,0,0);
+  }
+
+  100% {
+    transform: scale(1.3) rotate(1deg) translate3D(64px, 48px,0);
+  }
+}
+
+// Hero
+// --------------------------------------------------
+@keyframes hero-arrow-down {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  25% {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+
+  50% {
+    opacity: 0;
+    transform: translateY(-14px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes hero-button-arrow-down {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  25% {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+
+  50% {
+    opacity: 0;
+    transform: translateY(-16px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes floating-particles {
+  0% {
+    transform: translate3D(0, 0, 0) rotate(0) scale(1);
+  }
+
+  100% {
+    transform: translate3D(-64px, -64px, 0) rotate(20deg) scale(1.2);
+  }
+}
+
+// Page loader
+// --------------------------------------------------
+
+// Border
+@keyframes page-loader {
+  0% {
+    transform: translate3d(0,0,0) rotate(0deg);
+  }
+  
+  25% {
+    transform: translate3d(0,0,0) rotate(180deg);
+  }
+  
+  50% {
+    transform: translate3d(0,0,0) rotate(180deg);
+  }
+  
+  75% {
+    transform: translate3d(0,0,0) rotate(360deg);
+  }
+  
+  100% {
+    transform: translate3d(0,0,0) rotate(360deg);
+  }
+}
+
+// Fill
+@keyframes page-loader-fill {
+  0% {
+    transform: translate3d(0,-100%,0);
+  }
+  
+  25% {
+    transform: translate3d(0,-100%,0);
+  }
+  
+  50% {
+    transform: translate3d(0,0,0);
+  }
+  
+  75% {
+    transform: translate3d(0,0,0);
+  }
+  
+  100% {
+    transform: translate3d(0,-100%,0);
+  }
+}
+
+// Footer
+// --------------------------------------------------
+
+// Signature stroke
+@keyframes stroke {
+  0% {
+    stroke-dashoffset: 1000;
+  }
+
+  100% { 
+    stroke-dashoffset: 0;
+  }
+}

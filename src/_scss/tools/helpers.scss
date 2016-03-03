@@ -1,0 +1,351 @@
+// Tools - Helpers
+// --------------------------------------------------
+
+// Clearfix
+//
+// For modern browsers
+// 1. The space content is one way to avoid an Opera bug when the
+//    contenteditable attribute is included anywhere else in the document.
+//    Otherwise it causes space to appear at the top and bottom of elements
+//    that are clearfixed.
+// 2. The use of `table` rather than `block` is only necessary if using
+//    `:before` to contain the top-margins of child elements.
+//
+// Source: http://nicolasgallagher.com/micro-clearfix-hack/
+// --------------------------------------------------
+// Clearfix as an extend
+// Use wherever possible to avoid code duplication
+%clearfix {
+  &:before,
+  &:after {
+    content: " "; // 1
+    display: table; // 2
+  }
+  &:after {
+    clear: both;
+  }
+}
+
+// Clearfix as mixin
+// For use inside media queries
+@mixin clearfix {
+  &:before,
+  &:after {
+    content: " "; // 1
+    display: table; // 2
+  }
+  &:after {
+    clear: both;
+  }
+}
+
+// Size and center an icon
+// --------------------------------------------------
+%centered-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-left: -0.5em;
+  margin-top: -0.5em;
+  width: 1em;
+  height: 1em;
+}
+
+// Icon wrapper
+// Center svg icons inside their parent wrappers
+// Decided to wrap every svg that I need to animate as it works around cross browser issues
+// --------------------------------------------------
+%icon-wrapper {
+  position: relative;
+
+  width: 1em;
+  height: 1em;
+  
+  svg {
+    @extend %centered-icon;
+  }
+}
+
+// Gradient
+// --------------------------------------------------
+
+// Linear
+@mixin gradient-linear($from-color, $to-color) {
+  background-image: linear-gradient(to top, $from-color, $to-color);
+  filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,StartColorStr='#{$to-color}', EndColorStr='#{$from-color}');
+}
+
+@mixin gradient-linear-horizontal($from-color, $to-color) {
+  background-image: linear-gradient(to right, $from-color, $to-color);
+  filter: progid:DXImageTransform.Microsoft.gradient(GradientType=1,StartColorStr='#{$from-color}', EndColorStr='#{$to-color}');
+}
+
+// Diagonals
+@mixin gradient-diagonal($from-color, $to-color) {
+  background-image: linear-gradient(135deg, $from-color, $to-color);
+  filter: progid:DXImageTransform.Microsoft.gradient(GradientType=1,StartColorStr='#{$from-color}', EndColorStr='#{$to-color}');
+}
+
+@mixin gradient-diagonal-invert($from-color, $to-color) {
+  background-image: linear-gradient(45deg, $from-color, $to-color);
+  filter: progid:DXImageTransform.Microsoft.gradient(GradientType=1,StartColorStr='#{$from-color}', EndColorStr='#{$to-color}');
+}
+
+// Text Shadow
+// --------------------------------------------------
+@mixin text-shadow-subtle {
+  text-shadow: 0 1px 0 rgba(0, 0, 0, .4);
+}
+
+@mixin text-shadow-dark {
+  text-shadow: 0 0 3px rgba(0, 0, 0, .8);
+}
+
+// Touch ready optimizations
+// Apply a series of fixes to enhance interactive elements on touch devices
+// Based on recommendations from Google fundamentals
+// https://developers.google.com/web/fundamentals/input/touch/activestates
+%touch-optimised {
+
+  // Webkit / Chrome Specific CSS to remove tap highlight color
+  -webkit-tap-highlight-color: transparent;
+
+  // Disable user-select on UI which Responds to Touch
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+
+  // Firefox Specific CSS to remove button differences and focus ring */
+  background-image: none;
+
+  &::-moz-focus-inner {
+    border: 0;
+  }
+
+  // Override Element Outline in Focus State
+  &:focus {
+    outline:0;
+  }
+}
+
+// Uppercase
+// --------------------------------------------------
+%text-uppercase {
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+// Render a pip
+// --------------------------------------------------
+%render-pip {
+  width: 1em;
+  height: 1em;
+  font-size: $pip-size;
+  background-color: $brand-color-primary;
+
+  // Create circle
+  border-radius: 50%;
+}
+
+// Render a decorative border
+// --------------------------------------------------
+
+// Horizontal
+%render-decorative-border {
+  font-size: 1rem;
+  background-color: $brand-color-primary;
+
+  width: $dec-border-width-sm;
+  height: $dec-border-thickness-sm;
+
+  @media (min-width: $screen-min-md) {
+    width: $dec-border-width-md;
+    height: $dec-border-thickness-md;
+  }
+
+  @media (min-width: $screen-min-lg) {
+    width: $dec-border-width-lg;
+    height: $dec-border-thickness-lg;
+  }
+}
+
+%render-decorative-border--small {
+  width: $dec-border-width-sm / 1.5;
+
+  @media (min-width: $screen-min-md) {
+    width: $dec-border-width-md / 1.5;
+  }
+
+  @media (min-width: $screen-min-lg) {
+    width: $dec-border-width-lg / 1.5;
+  }
+}
+
+// Vertical
+%render-decorative-border-vert {
+  font-size: 1rem;
+  background-color: $brand-color-primary;
+
+  width: $dec-border-thickness-sm;
+  height: $dec-border-width-sm;
+
+  @media (min-width: $screen-min-md) {
+    width: $dec-border-thickness-md;
+    height: $dec-border-width-md;
+  }
+
+  @media (min-width: $screen-min-lg) {
+    width: $dec-border-thickness-lg;
+    height: $dec-border-width-lg;
+  }
+}
+
+// Section padding
+// --------------------------------------------------
+
+// Vertical
+@mixin section-padding-y($multiplier: 1) {
+  padding-top: $section-padding-y * $multiplier;
+  padding-bottom: $section-padding-y * $multiplier;
+
+  // Shorthand is longer syntax in this instance but avoid conflicts down the road
+  @media (min-width: $screen-min-xs) {
+    padding-top: $section-padding-y-xs * $multiplier;
+    padding-bottom: $section-padding-y-xs * $multiplier;
+  }
+
+  @media (min-width: $screen-min-sm) {
+    padding-top: $section-padding-y-sm * $multiplier;
+    padding-bottom: $section-padding-y-sm * $multiplier;
+  }
+
+  @media (min-width: $screen-min-md) {
+    padding-top: $section-padding-y-md * $multiplier;
+    padding-bottom: $section-padding-y-md * $multiplier;
+  }
+
+  @media (min-width: $screen-min-lg) {
+    padding-top: $section-padding-y-lg * $multiplier;
+    padding-bottom: $section-padding-y-lg * $multiplier;
+  }
+
+  @media (min-width: $screen-min-xl) {
+    padding-top: $section-padding-y-xl * $multiplier;
+    padding-bottom: $section-padding-y-xl * $multiplier;
+  }
+
+  @media (min-width: $screen-min-max) {
+    padding-top: $section-padding-y-max * $multiplier;
+    padding-bottom: $section-padding-y-max * $multiplier;
+  }
+}
+
+// Placeholder for extending (And saving some bytes on duplicate styles)
+%section-padding-y {
+  @include section-padding-y;
+}
+
+// Content tube padding
+// --------------------------------------------------
+%collapsed-mode-content-padding {
+  $collapsed-mode-padding-x-xs: 1rem;
+  $collapsed-mode-padding-x-sm: 4rem;
+  $collapsed-mode-padding-x-md: 6.5rem;
+
+  padding-left: 0;
+  padding-right: 0;
+
+  @media (min-width: $screen-min-xs) {
+    padding-left: $collapsed-mode-padding-x-xs;
+    padding-right: $collapsed-mode-padding-x-xs;
+  }
+
+  @media (min-width: $screen-min-sm) {
+    padding-left: $collapsed-mode-padding-x-sm;
+    padding-right: $collapsed-mode-padding-x-sm;
+  }
+
+  @media (min-width: $screen-min-md) {
+    padding-left: $collapsed-mode-padding-x-md;
+    padding-right: $collapsed-mode-padding-x-md;
+  }
+
+  @media (min-width: $screen-min-lg) {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+// Apply description gutter
+// --------------------------------------------------
+@mixin description-gutter-space($prop) {
+
+  @media (min-width: $screen-min-lg) {
+    #{$prop}: $description-gutter-lg;
+  }
+
+  @media (min-width: $screen-min-xl) {
+    #{$prop}: $description-gutter-xl;
+  }
+
+  @media (min-width: $screen-min-max) {
+    #{$prop}: $description-gutter-max;
+  }
+}
+
+// Fill parent
+// Expand element to fill parent container
+// --------------------------------------------------
+%fill-space {
+  position: absolute;
+
+  width: 100%;
+  height: 100%;
+}
+
+// Expands width of element outside the bounds of its parent
+// --------------------------------------------------
+@mixin expand-width {
+  margin-left: -100%;
+  margin-right: -100%;
+
+  padding-left: 100%;
+  padding-right: 100%;
+}
+
+@mixin effect-base {
+  #{$s__base-effects} & {
+    @content;
+  }
+}
+
+@mixin effect-base--enhanced {
+  #{$s__enhanced-effects} & {
+    @content;
+  }
+}
+
+@mixin effect-visible {
+  #{$s__base-effects} #{$s__section-visible} & {
+    @content;
+  }
+}
+
+@mixin effect-visible--enhanced {
+  #{$s__enhanced-effects} #{$s__section-visible} & {
+    @content;
+  }
+}
+
+@mixin effect-initialized {
+  #{$s__base-effects} #{$s__doc-initialized} & {
+    @content;
+  }
+}
+
+@mixin effect-initialized--enhanced {
+  #{$s__enhanced-effects} #{$s__doc-initialized} & {
+    @content;
+  }
+}

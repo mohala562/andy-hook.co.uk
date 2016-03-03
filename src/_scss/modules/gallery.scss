@@ -1,0 +1,740 @@
+// Module - Gallery
+// --------------------------------------------------
+.gallery {
+  @include section-padding-y(.75);
+}
+
+// Row
+.gallery__row {
+  @extend %clearfix;
+
+  // Trim padding from first row
+  &:first-of-type {
+    padding-top: 0;
+
+    // In the first row remove the first thumbnail's padding (at breakpoint)
+    @media (max-width: $screen-max-xs-straddle-low) {
+
+      // Trim first and last
+      .gallery__thumbnail:first-of-type {
+          padding-top: 0;
+      }
+    }
+  }
+
+  // And trim last row
+  &:last-of-type {
+    padding-bottom: 0;
+
+    // In the last row remove the first thumbnail's padding (at breakpoint)
+    @media (max-width: $screen-max-xs-straddle-low) {
+        .gallery__thumbnail:last-of-type {
+            padding-bottom: 0;
+        }
+    }
+  }
+
+  @media (min-width: $screen-min-xs-straddle-low) {
+    margin-left: -$thumbnail-space-xs;
+    margin-right: -$thumbnail-space-xs;
+
+    padding-top: $thumbnail-space-xs;
+    padding-bottom: $thumbnail-space-xs;
+  }
+
+  @media (min-width: $screen-min-sm) {
+    margin-left: -$thumbnail-space-sm;
+    margin-right: -$thumbnail-space-sm;
+
+    padding-top: $thumbnail-space-sm;
+    padding-bottom: $thumbnail-space-sm;
+  }
+
+  @media (min-width: $screen-min-md) {
+    margin-left: -$thumbnail-space-md;
+    margin-right: -$thumbnail-space-md;
+
+    padding-top: $thumbnail-space-md;
+    padding-bottom: $thumbnail-space-md;
+  }
+
+  @media (min-width: $screen-min-lg) {
+    margin-left: -$thumbnail-space-lg;
+    margin-right: -$thumbnail-space-lg;
+
+    padding-top: $thumbnail-space-lg;
+    padding-bottom: $thumbnail-space-lg;
+  }
+
+  @media (min-width: $screen-min-xl) {
+    margin-left: -$thumbnail-space-xl;
+    margin-right: -$thumbnail-space-xl;
+
+    padding-top: $thumbnail-space-xl;
+    padding-bottom: $thumbnail-space-xl;
+  }
+
+  @media (min-width: $screen-min-max) {
+    margin-left: -$thumbnail-space-max;
+    margin-right: -$thumbnail-space-max;
+
+    padding-top: $thumbnail-space-max;
+    padding-bottom: $thumbnail-space-max;
+  }
+
+
+  // Alternate layout of thumbnails
+  &:nth-child(odd) {
+
+    #{$thumbnail-large} {
+      @media (min-width: $screen-min-lg) {
+        left: 0;
+      }
+    }
+
+    #{$thumbnail-small} {
+      @media (min-width: $screen-min-lg) {
+        float: right;
+      }
+    }
+  }
+
+  &:nth-child(even) {
+
+    #{$thumbnail-large} {
+      @media (min-width: $screen-min-lg) {
+        right: 0;
+      }
+    }
+
+    #{$thumbnail-small} {
+      @media (min-width: $screen-min-lg) {
+        float: left;
+      }
+    }
+  }
+}
+
+// Row inner positioning
+// Trims excess from large thumbnails and acts as a positioning container
+.gallery__row__pos {
+  @extend %clearfix;
+
+  position: relative;
+
+  // Hide overflow if you want to make the rows look perfectly aligned, otherwise transitions look better with the overflow visible
+  //overflow: hidden;
+}
+
+// Thumbnail
+// --------------------------------------------------
+.gallery__thumbnail {
+  width: 100%;
+
+  @media (max-width: $screen-max-xs-straddle-low) {
+    padding-top: $thumbnail-space;
+    padding-bottom: $thumbnail-space;
+  }
+
+  // Padding written shorthand to avoid padding rule specificity conflicts
+  @media (min-width: $screen-min-xs-straddle-low) {
+    float: left;
+    width: 50%;
+
+    padding-left: $thumbnail-space-xs;
+    padding-right: $thumbnail-space-xs;
+  }
+
+  @media (min-width: $screen-min-sm) {
+    padding-left: $thumbnail-space-sm;
+    padding-right: $thumbnail-space-sm;
+  }
+
+  @media (min-width: $screen-min-md) {
+    padding-left: $thumbnail-space-md;
+    padding-right: $thumbnail-space-md;
+  }
+
+  @media (min-width: $screen-min-lg) {
+    padding-left: $thumbnail-space-lg;
+    padding-right: $thumbnail-space-lg;
+  }
+
+  @media (min-width: $screen-min-xl) {
+    padding-left: $thumbnail-space-xl;
+    padding-right: $thumbnail-space-xl;
+  }
+
+  @media (min-width: $screen-min-max) {
+    padding-left: $thumbnail-space-max;
+    padding-right: $thumbnail-space-max;
+  }
+}
+
+.gallery__thumbnail__shadow {
+  @extend %fill-space;
+
+  top: 0;
+  left: 0;
+
+  box-shadow: inset 0px 0px 7rem -26px rgba($brand-color-dark, .5);
+
+  z-index: z('work', 'gallery', 'gallery__thumbnail', 'gallery__thumbnail__shadow');
+}
+
+// Positioner
+.gallery__thumbnail__pos {
+
+  box-shadow: inset 0 0 20px -20px rgba(0,0,0,1);
+
+  position: relative;
+
+  padding-top: 125%;
+
+  // Cause of a flicker bug in chrome when rapidly scrolling the view
+  // TODO: Investigate further
+  border-radius: $border-radius;
+  overflow: hidden;
+
+  // Visibility effects
+  @include effect-base {
+    opacity: 0;
+  }
+
+  @include effect-base--enhanced {
+    transform: translate3d(0,5em,0);
+  }
+
+  @include effect-visible {
+    transition: 
+      opacity $ts__gallery__thumbnail * 1.75 linear,
+      transform $ts__gallery__thumbnail * 5 $e__fast-in;
+
+    opacity: 1;
+  }
+
+  @include effect-visible--enhanced {
+    transform: translate3d(0,0,0);
+  }
+
+  #{$thumbnail-large} & {
+
+    @media (min-width: $screen-min-lg) {
+      padding-top: 65.5%;
+    }
+  }
+
+  #{$thumbnail-small} & {
+
+    @media (min-width: $screen-min-lg) {
+      padding-top: 136%;
+    }
+  }
+}
+
+.gallery__thumbnail__mask {
+
+}
+
+// Link
+.gallery__thumbnail__link {
+  @extend %fill-space;
+  @extend %touch-optimised;
+  
+  top: 0;
+  left: 0;
+
+  overflow:hidden;
+
+  background-color: $brand-color-medium;
+}
+
+// Loading overlay
+.gallery__thumbnail__loading {
+  @extend %fill-space;
+
+  transition: opacity $ts__gallery__thumbnail linear;
+
+  top: 0;
+  left: 0;
+
+  z-index: z('work', 'gallery', 'gallery__thumbnail', 'gallery__thumbnail__loading', 'base');
+
+  background-color: $brand-color-medium;
+
+  #{$no-js} &,
+  #{$s__pf-loaded} & {
+    opacity: 0;
+  }
+}
+
+// Spinner
+.gallery__thumbnail__loading__spinner {
+  @extend %centered-icon;
+  @extend %generic-loading-spinner;
+  
+  font-size: 5em;
+
+  z-index: z('work', 'gallery', 'gallery__thumbnail', 'gallery__thumbnail__loading', 'gallery__thumbnail__loading__spinner');
+
+  svg {
+    width: 1em;
+    height: 1em;
+
+    fill: $brand-color-primary;
+  }
+}
+
+// Overlay
+.gallery__thumbnail__loading__overlay {
+  @extend %fill-space;
+
+  opacity: .5;
+  top: 0;
+  left: 0;
+
+  z-index: z('work', 'gallery', 'gallery__thumbnail', 'gallery__thumbnail__loading', 'gallery__thumbnail__loading__overlay');
+
+  // Alternate gradient style
+  .gallery__thumbnail:nth-child(odd) & {
+    @include gradient-diagonal(darken($brand-color-medium, 20%), darken($brand-color-medium, 10%));
+  }
+
+  .gallery__thumbnail:nth-child(even) & {
+    @include gradient-diagonal(darken($brand-color-medium, 10%), darken($brand-color-medium, 20%));
+  }
+}
+
+// Thumbnail overlay
+// --------------------------------------------------
+.gallery__thumbnail__overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+
+  top: 0;
+  left: 0;
+  z-index: z('work', 'gallery', 'gallery__thumbnail', 'gallery__thumbnail__overlay', 'base');
+
+  transform: translate3d(0,0,0);
+
+  #{$no-touch} &,
+  #{$no-js} & {
+    transition: opacity $ts__gallery__thumbnail / 2 linear;
+    opacity: 0;
+  }
+  
+  #{$no-touch} .gallery__thumbnail__link:hover &,
+  #{$no-js} .gallery__thumbnail__link:hover & {
+    opacity: .95;
+  }
+
+  #{$no-touch} .gallery__thumbnail__link:active &,
+  #{$no-js} .gallery__thumbnail__link:active & {
+    transition-duration:  $ts__gallery__thumbnail  / 3;
+    opacity: 1;
+  }
+}
+
+.gallery__thumbnail__overlay__gradient {
+
+  position: absolute;
+  width: 100%;
+  height: 100%;
+
+  bottom: 0;
+  left: 0;
+}
+
+// Top gradient
+.gallery__thumbnail__overlay__gradient--upper {
+
+  #{$touch} & {
+    
+    // Alpha gradient
+    background-image: linear-gradient(to top, rgba($brand-color-dark, 1), rgba($brand-color-dark, 0));
+
+    height: 125%;
+  }
+
+  #{$no-touch} &,
+  #{$no-js} & {
+    opacity: .9;
+
+    z-index: z('work', 'gallery', 'gallery__thumbnail', 'gallery__thumbnail__overlay', 'gallery__thumbnail__overlay__gradient--upper');
+  }
+
+  // Alternate gradient style
+  #{$no-touch} .gallery__thumbnail:nth-child(odd) &,
+  #{$no-js} .gallery__thumbnail:nth-child(odd) & {
+    @include gradient-diagonal($gradient-color-secondary, $gradient-color-primary);
+  }
+
+  #{$no-touch} .gallery__thumbnail:nth-child(even) &,
+  #{$no-js} .gallery__thumbnail:nth-child(even) & {
+    @include gradient-diagonal($gradient-color-primary, $gradient-color-secondary);
+  }
+}
+
+// Lower gradient
+.gallery__thumbnail__overlay__gradient--lower {
+
+  #{$touch} & {
+
+    transition: opacity $ts__gallery__thumbnail / 3 linear;
+    background-color: $brand-color-dark;
+    opacity: 0;
+  }
+
+  #{$no-touch} &,
+  #{$no-js} & {
+    opacity: .75;
+
+    z-index: z('work', 'gallery', 'gallery__thumbnail', 'gallery__thumbnail__overlay', 'gallery__thumbnail__overlay__gradient--lower');
+  }
+
+  // Alternate gradient style
+  #{$no-touch} .gallery__thumbnail:nth-child(odd) &,
+  #{$no-js} .gallery__thumbnail:nth-child(odd) & {
+    @include gradient-linear(rgba($heading-color, .5), rgba($heading-color, .8));
+  }
+
+  #{$no-touch} .gallery__thumbnail:nth-child(even) &,
+  #{$no-js} .gallery__thumbnail:nth-child(even) & {
+    @include gradient-linear(rgba($heading-color, .8), rgba($heading-color, .5));
+  }
+
+  #{$touch} .gallery__thumbnail__link:active & {
+    opacity: .4;
+  }
+}
+
+// Thumbnail image
+// --------------------------------------------------
+
+// Image positioning container
+// Used for scrolling effects
+.gallery__thumbnail__image__pos {
+  @extend %fill-space;
+
+  position: absolute;
+
+  top: 0;
+  left: 0;
+}
+
+// Image
+.gallery__thumbnail__image {
+  transition: transform $ts__gallery__thumbnail * 10 $e__fast-in;
+
+  position: absolute;
+  width: 100%;
+
+  top: 50%;
+  left: 0;
+
+  transform: translateY(-50%) scale(1);
+  transform: translate3d(0,-50%,0) scale(1);
+
+  z-index: z('work', 'gallery', 'gallery__thumbnail', 'gallery__thumbnail__image');
+
+  img {
+    display: block;
+    width: 100%;
+
+    #{$s__pf-loading} & {
+      opacity: 0;
+    }
+
+    #{$s__pf-loaded} & {
+      opacity: 1;
+    }
+  }
+
+  #{$no-touch} .gallery__thumbnail__link:hover &,
+  #{$no-js} .gallery__thumbnail__link:hover & {
+    transform: translateY(-50%) scale(1.1);
+    transform: translate3d(0,-50%,0) scale(1.1);
+  }
+
+  #{$no-touch}#{$s__enhanced-effects} .gallery__thumbnail__link:active & {
+    transition-duration: $ts__gallery__thumbnail * 4;
+
+    transform: translateY(-50%) scale(1.3);
+    transform: translate3d(0,-50%,0) scale(1.3);
+  }
+
+  #{$touch}#{$s__enhanced-effects} .gallery__thumbnail__link:active & {
+    transition-duration: $ts__gallery__thumbnail * 4;
+
+    transform: translateY(-50%) scale(1.1);
+    transform: translate3d(0,-50%,0) scale(1.1);
+  }
+}
+
+// Thumbnail caption
+// --------------------------------------------------
+
+// Wrapper for sliding effects
+.gallery__thumbnail__caption__pos {
+  @extend %fill-space;
+  @extend %foreground-sliding-effect;
+
+  top: 0;
+  left: 0;
+
+  z-index: z('work', 'gallery', 'gallery__thumbnail', 'gallery__thumbnail__caption');
+}
+
+// Main caption
+.gallery__thumbnail__caption {
+  @extend %content-inverted;
+
+  position: absolute;
+  left: 0;
+
+  #{$touch} & {
+
+    bottom: 0;
+    width: 100%;
+
+    padding: 2rem;
+
+    @media (min-width: $screen-min-xs) {
+      padding: 2.25rem;
+    }
+
+    @media (min-width: $screen-min-sm) {
+      padding: 2.5rem;
+    }
+
+    @media (min-width: $screen-min-md) {
+      padding: 3rem;
+    }
+  }
+
+  // Decorative border
+  &:after {
+
+    #{$no-touch} &,
+    #{$no-js} & {
+      @extend %render-decorative-border;
+      @extend %render-decorative-border--small;
+
+      transition: 
+        transform $ts__gallery__thumbnail * 5 $e__fast-in,
+        opacity $ts__gallery__thumbnail linear;
+
+      content: '';
+
+      position: absolute;
+
+      left: 50%;
+      bottom: 0;
+
+      opacity: 0;
+
+      height: $dec-border-thickness-sm;
+
+      transform: translateX(-50%);
+      transform: translate3d(-50%, -2em, 0);
+    }
+
+    #{$no-touch} .gallery__thumbnail__link:hover &,
+    #{$no-js} .gallery__thumbnail__link:hover & {
+      transition-delay: $ts__gallery__thumbnail / 1.3;
+
+      transform: translate3d(-50%, 0, 0);
+
+      opacity: 1;
+    }
+  }
+
+  #{$no-touch} &,
+  #{$no-js} & {
+
+    top: 50%;
+
+    width: 100%;
+
+    transform: translateY(-50%);
+
+    position: relative;
+  }
+}
+
+// Icon
+.gallery__thumbnail__caption__icon {
+
+  #{$touch} & {
+    display: none;
+  }
+
+  #{$no-touch} &,
+  #{$no-js} & {
+    transition: 
+      transform $ts__gallery__thumbnail * 4 $e__fast-in,
+      opacity $ts__gallery__thumbnail / 2 linear;
+
+    transform: translate3d(0, 0, 0) scale(3);
+
+    opacity: 0;
+
+    fill: $brand-color-primary;
+    line-height: 1;
+
+    text-align: center;
+
+    margin-bottom: 1.3em;
+
+    svg {
+      font-size: 3.75em;
+      display: inline-block;
+      width: 1em;
+      height: 1em;
+
+      @media (min-width: $screen-min-sm) {
+        font-size: 4em;
+      }
+
+      @media (min-width: $screen-min-lg) {
+        font-size: 5em;
+      }
+    }
+  }
+
+  #{$no-touch} .gallery__thumbnail__link:hover &,
+  #{$no-js} .gallery__thumbnail__link:hover & {
+    transition-delay: $ts__gallery__thumbnail / 2;
+
+    transform: translate3d(0, 0, 0) scale(1);
+
+    opacity: 1;
+  }
+
+  #{$no-touch} .gallery__thumbnail__link:active &,
+  #{$no-js} .gallery__thumbnail__link:active & {
+    transition-delay: 0s;
+
+    transform: translateY(0) scale(1.25);
+    transform: translate3d(0, 0, 0) scale(1.25);
+  }
+}
+
+// Title
+.gallery__thumbnail__caption__title {
+  @include text-shadow-dark;
+
+  #{$touch} & {
+    line-height: 1;
+    margin-bottom: .4em;
+
+    font-size: pem(20);
+
+    @media (min-width: $screen-min-xs) {
+      font-size: pem(26);
+    }
+
+    @media (min-width: $screen-min-sm) {
+      font-size: pem(28);
+    }
+
+    @media (min-width: $screen-min-md) {
+      font-size: pem(30);
+    }
+
+    @media (min-width: $screen-min-lg) {
+      font-size: pem(26);
+    }
+
+    @media (min-width: $screen-min-xl) {
+      font-size: pem(28);
+    }
+
+    @media (min-width: $screen-min-max) {
+      font-size: pem(30);
+    }
+  }
+  
+  #{$no-touch} &,
+  #{$no-js} & {
+    transition: 
+      transform $ts__gallery__thumbnail * 4 $e__fast-in,
+      opacity $ts__gallery__thumbnail linear;
+
+    text-align: center;
+    margin-bottom: .3em;
+
+    transform: translate3d(0, .5em, 0);
+
+    opacity: 0;
+  }
+
+  #{$no-touch} .gallery__thumbnail__link:hover &,
+  #{$no-js} .gallery__thumbnail__link:hover & {
+    transition-delay: $ts__gallery__thumbnail / 2;
+
+    transform: translate3d(0, 0, 0);
+
+    opacity: 1;
+  }
+}
+
+// Category
+.gallery__thumbnail__caption__category {
+  @include tertiary-text;
+
+  margin: 0;
+
+  #{$touch} & {}
+
+  #{$no-touch} &,
+  #{$no-js} & {
+    transition: 
+      transform $ts__gallery__thumbnail * 4 $e__fast-in,
+      opacity $ts__gallery__thumbnail linear;
+
+    text-align: center;
+    padding-bottom: 1.4em;
+
+    transform: translate3d(0, 2em, 0);
+
+    opacity: 0;
+
+    @media (min-width: $screen-min-md) {
+      padding-bottom: 2em;
+    }
+  }
+
+  #{$no-touch} .gallery__thumbnail__link:hover &,
+  #{$no-js} .gallery__thumbnail__link:hover & {
+    transition-delay: $ts__gallery__thumbnail / 1.3;
+
+    transform: translateY(0);
+    transform: translate3d(0, 0, 0);
+
+    opacity: 1;
+  }
+}
+
+// Modifier - Large thumbnail
+// --------------------------------------------------
+#{$thumbnail-large} {
+    
+  @media (min-width: $screen-min-lg) {
+    float: none;
+    position: absolute;
+    top: 0;
+
+    width: 66.66666667%;
+  }
+}
+
+// Modifier - Small thumbnail
+// --------------------------------------------------
+#{$thumbnail-small} {
+
+  @media (min-width: $screen-min-lg) {
+    width: 33.33333333%;
+  }
+}

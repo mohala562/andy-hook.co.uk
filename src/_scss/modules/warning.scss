@@ -1,0 +1,65 @@
+// Module - Warning
+// --------------------------------------------------
+
+// Container for adding the loading effects
+.warning {
+	@extend %content-inverted;
+
+	transition: background-color $ts__warning / 3 linear;
+
+	display: block;
+
+	top: 0;
+	width: 100%;
+	background-color: $status-error;
+
+	// Hover and active states
+	#{$no-touch} &:hover {
+		background-color: darken($status-error, 7%);
+	}
+
+	#{$no-touch} &:active {
+
+		// Make the transition much faster for better click feedback
+		transition-duration: $ts__warning / 5;
+
+		background-color: lighten($status-error, 5%);
+	}
+}
+
+// Title
+.warning__title {
+
+	margin: 0;
+	
+	@media (max-width: $screen-max-lg) {
+		padding-top: 1em;
+		padding-bottom: .25em;
+		text-align: center;
+	}
+
+	@media (min-width: $screen-min-lg) {
+		
+		float: left;
+		line-height: $warning-bar-fixed-height;
+	}
+}
+
+// Description
+.warning__description {
+
+	margin: 0;
+	
+	@media (max-width: $screen-max-lg) {
+		padding-top: .25em;
+		padding-bottom: 1em;
+
+		text-align: center;
+	}
+
+	@media (min-width: $screen-min-lg) {
+		
+		float: right;
+		line-height: $warning-bar-fixed-height;
+	}
+}

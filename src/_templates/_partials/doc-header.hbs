@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+
+{{! Add 'home' class if the 'order' property doesn't exist (So we know it's the home page) }}
+<!--[if IE 9]>         <html class="no-js ie9 {{#unless order}}home{{/unless}}"> <![endif]-->
+<!--[if gt IE 9]><!--> <html class="no-touch no-js {{#unless order}}home{{/unless}}"> <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>{{#if title}}{{ title }}{{else}}{{ page-title }}{{/if}} - {{ site-title }}</title>
+
+    {{> favicons}}
+
+    {{> social}}
+
+    <meta name="robots" content="noodp">
+
+    <!-- Description -->
+    <meta name="description" content="{{#if impact}}{{ impact }}{{else}}{{ site-description }}{{/if}}">
+
+    <link rel="canonical" href="{{absolute_path this.path}}">
+
+    <!-- Disable zoom -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+    <!-- Remove tap highlight on windows phone -->
+    <meta name="msapplication-tap-highlight" content="no">
+
+    <!-- Run these scripts as soon as possible -->
+    <script>
+        // Remove no-touch class as soon as possible if JS is enabled
+        // This is a workaround for modernizr not changing it based on device type, it simply adds .touch for example
+        document.documentElement.className = document.documentElement.className.replace('no-touch','');
+    </script>
+
+    <!-- Analytics -->
+    {{#if prod}}
+        <script>
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+            ga('create', 'UA-22526711-1', 'auto');
+            ga('send', 'pageview');
+        </script>
+
+    {{else}}
+        <!-- ga must be defined anyway as we use it in conditionals inside the main script -->
+        <script>
+            ga = false;
+        </script>
+    {{/if}}
+
+    <!-- Typekit -->
+    <script>
+      (function(d) {
+        var config = {
+          kitId: 'puu2rrm',
+          scriptTimeout: 3000,
+          async: true
+        },
+        h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+      })(document);
+    </script>
+
+    <!-- Style -->
+    <link rel="stylesheet" type="text/css" href="{{#if_eq layout 'main'}}{{absolute_path 'assets/css/style.min.css'}}{{else}}{{#if_eq layout 'error'}}{{absolute_path 'assets/css/error.min.css'}}{{/if_eq}}{{/if_eq}}">
+    
+    <!-- Modernizr -->
+    <script src="{{absolute_path 'assets/js/conditional/modernizr.min.js'}}"></script>
+</head>
+
+<!-- Initial load state classes applied here, be sure to check when updating scripts -->
+<body class="s__doc-show-loading">
+
+    {{> warnings}}
+
+    <!-- Spritesheet -->
+    {{> spritesheet}}

@@ -1,0 +1,468 @@
+// Module - Error
+// --------------------------------------------------
+
+// Adjustments to the wrapper
+.error__wrapper {
+	height: 100%;
+
+	min-height: prem(250);
+
+	@media (min-width: $screen-min-xs) {
+		min-height: prem(300);
+	}
+
+	@media (min-width: $screen-min-sm) {
+		min-height: prem(350);
+	}
+
+	@media (min-width: $screen-min-md) {
+		min-height: prem(450);
+	}
+
+	@media (min-width: $screen-min-lg) {
+		min-height: prem(500);
+	}
+
+	@media (min-width: $screen-min-xl) {
+		min-height: prem(600);
+	}
+}
+
+// Container for adding the loading effects
+.error {
+	@extend %loading_effects;
+	@extend %fill-space;
+}
+
+// Content container
+.error__content {
+	height: 100%;
+
+	z-index: z('error', 'error__content', 'base');
+}
+
+// Details
+// --------------------------------------------------
+
+// Apply index on containing element as transform3D creates a new stacking context
+.error__details__index {
+  z-index: z('error', 'error__content', 'error__parallax', 'error__details');
+}
+
+.error__details {
+	position: absolute;
+
+	top: 50%;
+	left: 0;
+
+	width: 100%;
+
+	text-align: center;
+
+	// Center vertically with some optical tweaks
+	transform: translateY(-35%);
+
+	// 3D transform hack to ensure details sit above graphical stroke
+	transform: translate3D(0,-35%, 1px);
+}
+
+.error__details__title {
+	@include font-stack-body;
+	@include type-scale-centered-title;
+	@include text-shadow-dark;
+
+	font-weight: $weight-bold;
+
+	letter-spacing: .03em;
+
+	margin-bottom: 0;
+	line-height: .96;
+
+	color: $error-color-pale;
+
+  // Visibility effects
+  @include effect-base {
+    opacity: 0;
+  }
+
+  @include effect-base--enhanced {
+    transform: translate3d(0,.3em,0);
+  }
+
+  @include effect-initialized {
+    transition: 
+	    transform $ts__error * 6 $e__fast-in,
+	    opacity $ts__error linear;
+
+    opacity: 1;
+  }
+
+  @include effect-initialized--enhanced {
+    transform: translate3d(0,0,0);
+  }
+}
+
+.error__details__sub {
+	@include type-scale-centered-sub;
+	@include text-shadow-dark;
+
+  // Visibility effects
+  @include effect-base {
+    opacity: 0;
+  }
+
+  @include effect-base--enhanced {
+    transform: translate3d(0, 2em, 0);
+  }
+
+  @include effect-initialized {
+    transition: 
+	    transform $ts__error * 6 $e__fast-in,
+	    opacity $ts__error linear;
+
+  	transition-delay: $ts__error / 2;
+
+    opacity: .75;
+  }
+
+  @include effect-initialized--enhanced {
+    transform: translate3d(0,0,0);
+  }
+
+	color: $body-color--invert;
+}
+
+.error__details__border {
+	@extend %render-decorative-border;
+
+	position: absolute;
+
+	left: 50%;
+	bottom: 0;
+
+	// Center
+	transform: translateX(-50%);
+
+	// Visibility effects
+  @include effect-base {
+    opacity: 0;
+  }
+
+  @include effect-base--enhanced {
+    transform: translate3d(-50%, 3em, 0);
+  }
+
+  @include effect-initialized {
+    transition: 
+		  transform $ts__error * 6 $e__fast-in,
+		  opacity $ts__error linear;
+
+	  transition-delay: $ts__error;
+
+    opacity: 1;
+  }
+
+  @include effect-initialized--enhanced {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+// Parallax scene
+// --------------------------------------------------
+
+// Scene container
+.error__parallax {
+  @extend %fill-space;
+
+  margin: 0;
+  padding: 0;
+  bottom: 0;
+  right: 0;
+
+  font-size: 1em;
+}
+
+// Additional layer style
+// Used by parallax
+.layer {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+}
+
+// Particles
+// --------------------------------------------------
+
+// Particles wrapper for animation purposes (Transitions and animations conflict when used on the same element)
+.error__particles__pos {
+  position: absolute;
+
+  width: 100%;
+  height: 100%;
+
+  // Visibility effects
+  @include effect-base {
+    opacity: 0;
+  }
+
+  @include effect-base--enhanced {
+    transform: scale(1.3);
+  }
+
+  @include effect-initialized {
+    transition: 
+    	transform $ts__error * 4 $e__ease,
+    	opacity $ts__error * 4 linear;
+
+    opacity: 1;
+  }
+
+  @include effect-initialized--enhanced {
+    transform: scale(1);
+  }
+}
+
+// Particles
+.error__particles {
+  @extend %particles-base;
+
+  @media (max-width: $screen-max-xs) {
+    font-size: .5em;
+  }
+}
+
+// Variants
+
+// Apply index on containing element as transform3D creates a new stacking context
+.error__particles--background__index {
+  z-index: z('error', 'error__content', 'error__parallax', 'error__particles--background');
+}
+
+.error__particles--background {
+  opacity: .2;
+  animation-duration: 30s;
+  background-position: bottom center;
+}
+
+// Apply index on containing element as transform3D creates a new stacking context
+.error__particles--middleground__index {
+  z-index: z('error', 'error__content', 'error__parallax', 'error__particles--middleground');
+}
+
+.error__particles--middleground {
+  opacity: .3;
+  animation-duration: 15s;
+  background-position: center center;
+  animation-direction: alternate-reverse;
+}
+
+// Apply index on containing element as transform3D creates a new stacking context
+.error__particles--foreground__index {
+  z-index: z('error', 'error__content', 'error__parallax', 'error__particles--foreground');
+}
+
+.error__particles--foreground {
+  opacity: .4;
+  animation-duration: 25s;
+  background-position: top center;
+}
+
+// Background
+// --------------------------------------------------
+
+// Make elements fill space
+.error__background,
+.error__background__gradient,
+.error__background__image__pos {
+  @extend %fill-space;
+
+  top: 0;
+  left: 0;
+}
+
+// Background
+.error__background {
+	@extend %fill-space;
+
+  z-index: z('error', 'error__background', 'base');
+
+  // Colour must match image background at smaller sizes
+  background-color: $brand-color-primary-dark;
+
+	// Visibility effects
+  @include effect-base {
+    opacity: 0;
+  }
+
+  @include effect-initialized {
+  	transition: opacity $ts__error * 2 linear;
+
+    opacity: 1;
+  }
+}
+
+// Image
+.error__background__image {
+  @extend %fill-space;
+  @include apply-background('error-background');
+
+  opacity: .9;
+
+  z-index: z('error', 'error__background', 'error__background__image');
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  animation: inflate $ts__slow-inflate linear infinite alternate;
+}
+
+// Gradient
+.error__background__gradient {
+  opacity: .6;
+}
+
+// Modifier - Top left
+.error__background__gradient--top-left {
+
+  z-index: z('error', 'error__background', 'error__background__gradient--top-left');
+
+  background-image: linear-gradient(135deg, rgba($gradient-color-secondary, 1) 0%, rgba($gradient-color-secondary,0) 90%);
+
+  @media (min-width: $screen-min-lg) {
+    background-image: linear-gradient(135deg, rgba($gradient-color-secondary, .5) 0%, rgba($gradient-color-secondary,0) 100%);
+  }
+}
+
+// Modifier - Bottom right
+.error__background__gradient--bottom-right {
+  z-index: z('error', 'error__background', 'error__background__gradient--bottom-right');
+
+  background-image: linear-gradient(135deg, rgba($gradient-color-primary, 0) 0%, rgba($gradient-color-primary,1) 200%);
+
+  @media (min-width: $screen-min-lg) {
+    background-image: linear-gradient(135deg, rgba($gradient-color-secondary, 0) 70%, rgba($gradient-color-secondary,.75) 100%);
+  }
+}
+
+// Modifier - Over gradient
+.error__background__gradient--base {
+	@include gradient-diagonal(lighten($gradient-color-secondary, 2%), lighten($gradient-color-primary, 2%));
+
+ 	z-index: z('error', 'error__background', 'error__background__gradient--base');
+
+  opacity: .8;
+
+  // Increase visibility if W3C gradients are not supported
+  // We do this because the alpha gradients above fail to render though the mixin with a fallback does so we may as well make it more visible
+  #{$no-cssgradients} & {
+    opacity: .8;
+  }
+}
+
+// Stroke
+// Use a rotation on the container and a counter rotation on the inside stroke to give the angled masking effect
+// --------------------------------------------------
+
+// Apply index on containing element as transform3D creates a new stacking context
+.error__stroke__index {
+  z-index: z('error', 'error__content', 'error__parallax', 'error__stroke');
+}
+
+.error__stroke__pos {
+	position: absolute;
+
+	width: $error-stroke-width;
+	height: $error-stroke-height;
+
+	top: 50%;
+	left: 50%;
+
+	// Adjust negative margins for better optical positioning
+	margin-top: -($error-stroke-height / 2.5);
+	margin-left: -($error-stroke-width / 1.75);
+
+	transform: rotate(-17deg);
+
+	// Use font size to scale the stroke
+	// This works because relative units were used to size the children
+	font-size: .37em;
+
+	@media (min-width: $screen-min-xs) {
+		font-size: .55em;
+	}
+
+	@media (min-width: $screen-min-sm) {
+		font-size: .7em;
+	}
+
+	@media (min-width: $screen-min-md) {
+		font-size: .8em;
+	}
+
+	@media (min-width: $screen-min-lg) {
+		font-size: .9em;
+	}
+
+	@media (min-width: $screen-min-xl) {
+		font-size: .95em;
+	}
+
+	@media (min-width: $screen-min-max) {
+		font-size: 1em;
+	}
+}
+
+// Masking element controls the stroke visibility
+.error__stroke__mask {
+	transition:
+		width $ts__error * 1.5 $e__ease,
+		opacity $ts__error linear;
+
+	transition-delay: $ts__error;
+
+	position: absolute;
+
+	height: $error-stroke-height;
+	width: 0;
+
+	top: 0;
+	right: 0;
+
+	overflow: hidden;
+
+	opacity: 0;
+
+	// Give width on document load with a no-js fallback
+	#{$s__doc-loaded} &,
+	#{$no-js} & {
+		width: 100%;
+		opacity: 1;
+	}
+}
+
+// Interior stroke with a background image
+.error__stroke {
+	position: absolute;
+
+	width: $error-stroke-width;
+	height: $error-stroke-height;
+
+	top: 0;
+	right: 0;
+
+	background-size: $error-stroke-width $error-stroke-height;
+	background-position: center;
+	background-repeat: no-repeat;
+
+	transform: rotate(17deg);
+
+	// Swap out the image for a higher resolution version as required
+	@media (max-width: $screen-max-sm) {
+		background-image: url(../img/error-stroke-large.png);
+	}
+
+	@media (min-width: $screen-min-sm) {
+		background-image: url(../img/error-stroke-large.png);
+	}
+}

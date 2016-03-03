@@ -1,0 +1,89 @@
+{{> doc-header layout="error"}}
+	
+	<div class="l__wrapper error__wrapper">
+
+		{{> topbar}}
+
+		<div class="error">
+
+		<div class="l-container error__content">
+
+			<!-- Main graphic -->
+			<ul class="error__parallax js__parallax" data-parallax-config="error">
+
+				<!-- Background particles -->
+				<li class="layer error__particles--background__index" data-depth="0.4">
+					
+					<!-- Wrapped in a positioner for scroll visibility effects (Can't use css animation and transition on the same element) -->
+					<div class="error__particles__pos">
+						<div class="error__particles error__particles--background"></div>
+					</div>
+					
+				</li>
+
+				<li class="layer error__details__index" data-depth=".75">
+					
+					<!-- Error details -->
+					<div class="error__details">
+						<h1 class="error__details__title">404</h1>
+						<p class="error__details__sub">Page or file not found</p>
+						<div class="error__details__border"></div>
+					</div>
+					
+				</li>
+
+				<!-- Middleground particles -->
+				<li class="layer error__particles--middleground__index" data-depth="1.5">
+					
+					<!-- Wrapped in a positioner for intro loading effects (Can't use css animation and transition on the same element) -->
+					<div class="error__particles__pos">
+						<div class="error__particles error__particles--middleground"></div>
+					</div>
+					
+				</li>
+
+				<!-- Stroke -->
+				<li class="layer error__stroke__index" data-depth=".5">
+
+					<div class="error__stroke__pos">
+
+						<!-- Mask is used for the sliding hide / show effect -->
+						<div class="error__stroke__mask">
+							<div class="error__stroke"></div>
+						</div>
+					</div>
+				</li>
+
+				<!-- Foreground particles -->
+				<li class="layer error__particles--foreground__index" data-depth="7">
+
+					<!-- Wrapped in a positioner for intro loading effects (Can't use css animation and transition on the same element) -->
+					<div class="error__particles__pos">
+						<div class="error__particles error__particles--foreground"></div>
+					</div>
+					
+				</li>
+				
+			</ul>
+		</div> <!-- /error__content -->
+
+		<!-- Background -->
+		<div class="error__background">
+			<div class="error__background__gradient error__background__gradient--top-left"></div>
+			<div class="error__background__gradient error__background__gradient--bottom-right"></div>
+			<div class="error__background__gradient error__background__gradient--base"></div>
+
+			<!-- Wrapped in a positioner for intro loading effects (Can't use css animation and transition on the same element) -->
+			<div class="error__background__image__pos">
+				<div class="error__background__image"></div>
+			</div>
+		</div>
+
+		</div>
+		
+		
+		{{> loading}}
+
+	</div> <!-- /error -->
+
+{{> doc-footer layout="error"}}

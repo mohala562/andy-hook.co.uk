@@ -1,0 +1,618 @@
+// Module - Footer
+// --------------------------------------------------
+.footer {
+    @extend %loading_effects;
+
+    position: relative;
+
+    z-index: z('footer', 'base');
+
+    background-color: $brand-color-dark;
+}
+
+// CV
+// --------------------------------------------------
+.footer__cv {
+  @include text-uppercase;
+  @include type-scale-tertiary;
+
+  @include section-padding-y(.6);
+
+  transition: background-color $ts__footer__cv linear;
+
+  background-color: $brand-color-primary-dark;
+
+  display: block;
+
+  position: relative;
+  overflow: hidden;
+
+  #{$no-touch} &:hover {
+     background-color: $brand-color-primary;
+  }
+
+  #{$no-touch} &:active,
+  #{$touch} &:active {
+    transition-duration: $ts__footer__cv / 2;
+
+    background-color: $brand-color-primary-light;
+  }
+}
+
+// Text
+.footer__cv__text {
+
+  text-align: center;
+
+  color: $heading-color--invert;
+
+  display: block;
+  width: 12em;
+  margin: auto;
+
+  text-transform: uppercase;
+
+  line-height: 1;
+
+  opacity: 1;
+
+  transform: translateY(0) scale(1);
+  transform: translate3D(0, 0, 0) scale(1);
+
+  strong {
+    color: $heading-color--invert;
+  }
+
+  // Visibility effects
+  @include effect-base {
+    opacity: 0;
+  }
+
+  @include effect-base--enhanced {
+    transform: scale(.5);
+  }
+
+  @include effect-visible {
+    transition: 
+      transform $ts__footer__cv $e__elastic,
+      opacity $ts__footer__cv / 3 linear;
+
+    opacity: 1;
+  }
+
+  @include effect-visible--enhanced {
+    transform: scale(1);
+  }
+
+  // Specificity must be higher to override the visibility effects
+  // Always place this block lower
+  #{$no-touch} .footer__cv:hover &,
+  #{$no-touch} .footer__cv:active & {
+    opacity: 0;
+
+    transform: translateY(4em) scale(.25);
+    transform: translate3D(0, 4em, 0) scale(.25);
+  }
+}
+
+// Icon
+.footer__cv__icon {
+  @extend %icon-wrapper;
+
+  transition: 
+    transform $ts__footer__cv $e__elastic,
+    opacity $ts__footer__cv linear;
+
+  font-size: 1.5em;
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  margin-top: -.5em;
+  margin-left: -.5em;
+
+  transform: translateY(-4em) scale(0);
+  transform: translate3D(0, -4em, 0) scale(0);
+
+  opacity: 0;
+
+  svg {
+    fill: $icon-color--invert;
+  }
+
+  #{$no-touch} .footer__cv:hover &,
+  #{$no-touch} .footer__cv:active & {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    transform: translate3D(0, 0, 0) scale(1);
+  }
+
+  #{$no-touch} .footer__cv:active &,
+  #{$touch} .footer__cv:active & {
+    transform: translateY(0) scale(1.2);
+    transform: translate3D(0, 0, 0) scale(1.2);
+  }
+  
+}
+
+// Signature
+// --------------------------------------------------
+
+// Container
+.footer__signature {
+  @include section-padding-y(.65);
+
+  background-color: $brand-color-dark;
+  
+  position: relative;
+}
+
+// Signature - Graphic
+// --------------------------------------------------
+.footer__signature__graphic {
+  position: relative;
+
+  margin: auto;
+
+  font-size: 8rem;
+
+  width: 1em;
+  height: 1em;
+
+  z-index: z('footer', 'footer__signature', 'footer__signature__graphic');
+
+  svg {
+    @extend %fill-space;
+
+    top: 0;
+    left: 0;
+  }
+
+  // Visibility effects
+  @include effect-base {
+    opacity: 0;
+  }
+
+  @include effect-base--enhanced {
+    transform: scale(2);
+  }
+
+  @include effect-visible {
+    transition: 
+      transform $ts__footer__signature * 4 $e__fast-in,
+      opacity $ts__footer__signature linear;
+
+    transition-delay: $ts__footer__signature;
+
+    opacity: 1;
+  }
+
+  @include effect-visible--enhanced {
+    transform: scale(1);
+  }
+
+  @media (min-width: $screen-min-xs) {
+    font-size: 9rem;
+  }
+
+  @media (min-width: $screen-min-sm) {
+    font-size: 10rem;
+  }
+
+  @media (min-width: $screen-min-md) {
+    font-size: 13rem;
+  }
+
+  @media (min-width: $screen-min-lg) {
+    font-size: 11rem;
+  }
+
+  @media (min-width: $screen-min-xl) {
+    font-size: 12rem;
+  }
+
+  @media (min-width: $screen-min-max) {
+    font-size: 13rem;
+  }
+}
+
+.footer__signature__graphic__path {
+
+  // Store delays for syncing between declarations
+  $left-delay: $ts__footer__signature;
+  $right-delay: $ts__footer__signature * 1.4;
+  $across-delay: $ts__footer__signature * 2.2;
+
+  stroke: $icon-color--invert;
+  stroke-width: 1em;
+  stroke-linecap: round;
+
+  // Supports SVG animation
+  #{$smil} & {
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 1000;
+  }
+
+  // Left mark
+  &.footer__signature__graphic__path--left {
+
+    #{$smil}  & {
+      opacity: 0;
+    }
+
+    #{$smil} #{$s__section-visible} & {
+      transition: opacity $ts__footer__signature / 3 linear $left-delay;
+
+      opacity: 1;
+
+      animation: stroke $ts__footer__signature * 1.2 $left-delay $e__ease forwards;  
+    }
+    
+  }
+
+  // Right mark
+  &.footer__signature__graphic__path--right {
+
+    #{$smil} & {
+      opacity: 0;
+    }
+
+    #{$smil} #{$s__section-visible} & {
+      transition: opacity $ts__footer__signature / 3 linear $right-delay;
+
+      opacity: 1;
+
+      animation: stroke $ts__footer__signature * 1.2 $right-delay $e__ease forwards;
+    }
+  }
+
+  // Across mark
+  &.footer__signature__graphic__path--across {
+
+    #{$smil} & {
+      opacity: 0;
+    }
+
+    #{$smil} #{$s__section-visible} & {
+      transition: opacity $ts__footer__signature / 3 linear $across-delay;
+
+      opacity: 1;
+
+      animation: stroke $ts__footer__signature * 1.75 $across-delay $e__ease forwards;
+    }
+  }
+}
+
+// Signature - Background
+// --------------------------------------------------
+.footer__signature__background {
+  @extend %fill-space;
+
+  left: 0;
+  top: 0;
+
+  overflow: hidden;
+
+  z-index: z('footer', 'footer__signature', 'footer__signature__background', 'base');
+}
+
+// Gradient
+.footer__signature__background__gradient {
+  position: absolute;
+
+  height: 100%;
+  width: 40%;
+
+  opacity: .5;
+
+  z-index: z('footer', 'footer__signature', 'footer__signature__background', 'footer__signature__background__gradient');
+
+  @media (min-width: $screen-min-md) {
+    width: 20%;
+  }
+}
+
+// Modifier - Left gradient
+.footer__signature__background__gradient--left {
+  left: 0;
+
+  // Alpha gradient
+  background-image: linear-gradient(to right, rgba($brand-color-dark, 1), rgba($brand-color-dark, 0));
+}
+
+// Modifier - Right gradient
+.footer__signature__background__gradient--right {
+  right: 0;
+
+  // Alpha gradient
+  background-image: linear-gradient(to right, rgba($brand-color-dark, 0), rgba($brand-color-dark, 1));
+}
+
+.footer__signature__background__image-pos {
+  @extend %fill-space;
+
+  left: 0;
+  top: 0;
+
+  position: relative;
+}
+
+// Image
+.footer__signature__background__image {
+  @extend %fill-space;
+  @include apply-background('footer-background');
+
+  background-size: cover;
+
+  height: 150%;
+
+  left: 0;
+  bottom: 0;
+
+  z-index: z('footer', 'footer__signature', 'footer__signature__background', 'footer__signature__background__image');
+
+  #{$s__background-effects} & {
+    animation: inflate $ts__slow-inflate linear infinite alternate;
+  }
+
+  @media (min-width: $screen-min-sm) {
+    height: 120%;
+  }
+}
+
+// Details
+// --------------------------------------------------
+.footer__details {
+  @extend %clearfix;
+  @include section-padding-y(.3);
+  @include type-scale-tertiary--small;
+
+  background-color: $brand-color-dark;
+
+  @media (max-width: $screen-max-sm) {
+    padding-top: 0;
+    padding-bottom: 0;
+    text-align: center;
+  }
+}
+
+// Social list
+.footer___social {
+  @extend %clearfix;
+
+  padding: 0;
+  margin: 0;
+
+  // Items
+  li {
+    @extend %icon-wrapper;
+
+    margin-right: 1.5em;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+
+  svg {
+    fill: $tertiary-color--invert;
+  }
+
+  font-size: 2em;
+
+  @media (max-width: $screen-max-sm) {
+    @include expand-width;
+
+    padding: 1em 0;
+    line-height: 1;
+
+    border-bottom: 1px solid $topbar-border-color;
+  }
+
+  @media (min-width: $screen-min-sm) {
+    float: left;
+  }
+
+  li {
+    @media (min-width: $screen-min-sm) {
+      float: left;
+    }
+
+    @media (max-width: $screen-max-sm) {
+      display: inline-block;
+    }
+
+    // Visibility effects
+    @include effect-base {
+      opacity: 0;
+    }
+
+    @include effect-base--enhanced {
+      transform: scale(.5);
+    }
+
+    @include effect-visible {
+      transition: 
+        transform $ts__footer__details ease,
+        opacity $ts__footer__details linear;
+
+      opacity: 1;
+    }
+
+    @include effect-visible--enhanced {
+      transform: scale(1);
+    }
+
+    // Entry animation cascade
+    $social-links: 4;
+
+    // Loop it with nth-child (subtract amount to lower delay at start)
+    @for $i from 1 through $social-links {
+
+      @include effect-visible {
+        &:nth-child(#{$i}) {
+
+          // Match delay for the opacity transition and animation movement
+          transition-delay: #{$i * .1 - .1}s;
+        }
+      }
+    }
+  }
+}
+
+// Social link
+.footer__social__link {
+  @extend %fill-space;
+
+  transition: 
+    opacity $ts__footer__details / 2 linear,
+    transform $ts__footer__details $e__ease;
+
+  top: 0;
+  left: 0;
+
+  display: block;
+
+  opacity: .5;
+
+  transform: scale(1);
+
+  #{$no-touch} &:hover,
+  #{$no-touch} &:active {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+
+  #{$touch} &:active {
+    opacity: 1;
+  }
+}
+
+// Auxiliary info
+.footer__details__aux {
+  @include font-stack-tertiary-text;
+
+  padding: 0;
+  margin: 0;
+
+  @media (max-width: $screen-max-sm) {
+    padding: 1.5em 0;
+    display: inline-block;
+  }
+
+  @media (min-width: $screen-min-sm) {
+    float: right;
+  }
+
+  // Visibility effects
+  @include effect-base {
+    opacity: 0;
+  }
+
+  @include effect-base--enhanced {
+    transform: scale(.95);
+  }
+
+  @include effect-visible {
+    transition: 
+      transform $ts__footer__details ease,
+      opacity $ts__footer__details linear;
+
+    opacity: 1;
+  }
+
+  @include effect-visible--enhanced {
+    transform: scale(1);
+  }
+
+  // Items
+  li {
+    position: relative;
+
+    &:first-child {
+
+      // Pip
+      &:before {
+        @extend %render-pip;
+
+        content: "";
+
+        position: absolute;
+        right: 0;
+        top: 50%;
+
+        margin-top: -.5em;
+
+        // Use render pip extension but hide because extends inside MQ's is dodgey
+        @media (max-width: $screen-max-xs) {
+          display: none;
+        }
+      }
+
+      @media (min-width: $screen-min-xs) {
+        margin-right: 2.5em;
+        padding-right: 2.5em;
+      }
+    }
+
+    &:last-child, {
+
+      // Pips
+      // Decorative display at smallest size
+      &:before,
+      &:after {
+        @extend %render-pip;
+
+        content: "";
+
+        position: absolute;
+        
+        top: 50%;
+        margin-top: -.5em;
+
+        // Use render pip extension but hide because extends inside MQ's is dodgey
+        @media (min-width: $screen-min-xs) {
+          display: none;
+        }
+      }
+
+      &:before {
+        right: 25%;
+      }
+
+      &:after {
+        left: 25%;
+      }
+    }
+
+    @media (max-width: $screen-max-xs) {
+      width: 100%;
+    }
+
+    @media (min-width: $screen-min-xs) {
+      float: left;
+      line-height: 2em;
+    }
+  }
+}
+
+// Aux link
+.footer__details__aux__link {
+  transition: opacity $ts__footer__details / 2 linear;
+
+  color: $tertiary-color--invert;
+
+  opacity: .5;
+
+  @media (max-width: $screen-max-xs) {
+    display: block;
+    padding: 1em 0;
+  }
+
+  #{$no-touch} &:hover,
+  #{$no-touch} &:active,
+  #{$touch} &:active, {
+    opacity: 1;
+  }
+}

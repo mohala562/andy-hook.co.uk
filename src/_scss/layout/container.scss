@@ -1,0 +1,66 @@
+// Layout - Container
+// --------------------------------------------------
+.l-container {
+  @extend %clearfix;
+
+  position: relative;
+  max-width: $screen-min-max;
+  margin: auto;
+
+  // Padding written shorthand to avoid rule specificity conflicts
+  padding-left: $gutter;
+  padding-right: $gutter;
+
+  @media (min-width: $screen-min-xs) {
+    padding-left: $gutter-xs;
+    padding-right: $gutter-xs;
+  }
+
+  @media (min-width: $screen-min-sm) {
+    padding-left: $gutter-sm;
+    padding-right: $gutter-sm;
+  }
+
+  @media (min-width: $screen-min-md) {
+    padding-left: $gutter-md;
+    padding-right: $gutter-md;
+  }
+
+  @media (min-width: $screen-min-xl) {
+    padding-left: $gutter-xl;
+    padding-right: $gutter-xl;
+  }
+
+  @media (min-width: $screen-min-max) {
+    padding-left: $gutter-max;
+    padding-right: $gutter-max;
+  }
+}
+
+// Modifier - Full width
+// --------------------------------------------------
+.l-container--full-width {
+  max-width: 100%;
+}
+
+// Modifier - Padded container
+// --------------------------------------------------
+.l-container--padded {
+  padding-top: 4.5rem;
+  padding-bottom: 4.5rem;
+
+  @media (min-width: $screen-min-md) {
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+  }
+
+  @media (min-width: $screen-min-xl) {
+    padding-top: 6.5rem;
+    padding-bottom: 6.5rem;
+  }
+
+  @media (min-width: $screen-min-max) {
+    padding-top: 8rem;
+    padding-bottom: 8rem;
+  }
+}

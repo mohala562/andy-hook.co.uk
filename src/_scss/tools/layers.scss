@@ -1,0 +1,198 @@
+// Tools - Layers
+// A clean way to deal with z-index layers in Sass
+// Based on this article by CSS tricks
+// http://css-tricks.com/handling-z-index/
+// --------------------------------------------------
+
+// A map of z-index amounts
+// All z-index values should be set here
+$z-layers: (
+  'topbar': (
+    'base': 100,
+
+    'topbar__nav__menu': (
+      'base': 1,
+      'base:hover': 1
+    ),
+
+    'topbar__overlay': 2,
+    'topbar__container': 3,
+    'topbar__close-overlay': 4,
+    'topbar__nav': 5,
+
+    'project-nav': (
+      'project-nav__item': 0,
+      'project-nav__item:hover': 1
+    ),
+
+  ),
+
+  'hero': (
+    'base': 1,
+
+    'hero__placeholder': 0,
+
+    'hero__unit': (
+
+      'base': 2,
+
+      'hero__background': (
+        'base': 1,
+
+        'hero__background__image': 2,
+        'hero__background__gradient--base': 3,
+        'hero__background__gradient--bottom-right': 4,
+        'hero__background__gradient--top-left': 5
+      ),
+
+      'hero__parallax': (
+        'base': 2,
+
+        'hero__particles--background': 3,
+        'hero__tablet': 5,
+        'hero__emblem': 7,
+        'hero__mascot': 7,
+        'hero__phone': 8,
+        'hero__butterfly': 9,
+        'hero__particles--middleground': 10,
+        'hero__particles--foreground': 11
+      ),
+
+      'hero__intro': 3,
+
+      'hero__shadow': 4
+    )
+  ),
+
+  'work': (
+    'base': 2,
+
+    'gallery': (
+
+      'gallery__thumbnail': (
+        'base': 0,
+
+        'gallery__thumbnail__image': 1,
+
+        'gallery__thumbnail__shadow': 2,
+
+        'gallery__thumbnail__overlay': (
+          'base': 3,
+          'gallery__thumbnail__overlay__gradient--lower': 1,
+          'gallery__thumbnail__overlay__gradient--upper': 2
+        ),
+
+        'gallery__thumbnail__caption': 4,
+
+        'gallery__thumbnail__loading': (
+          'base': 5,
+          'gallery__thumbnail__loading__overlay': 1,
+          'gallery__thumbnail__loading__spinner': 2
+        )
+      ),
+
+    )
+  ),
+
+  'project': (
+    'base': 3,
+    'project__image': (
+      'project__image__loading--loaded': 1,
+      //'project__image__graphic': 2,
+      'project__image__loading': 3,
+    ),
+
+    'project__header': (
+      'project__header__background': 1,
+      'project__header__gradient': 2,
+      'project__header__loading': 3,
+      'project__header__details': 4
+    )
+  ),
+
+  'about': (
+    'base': 4,
+    'about__background': (
+      'base': 1,
+      'about__background__image': 2,
+      'about__background__gradient': 3
+    ),
+    'about__description': 2
+  ),
+
+  'skills': (
+    'base': 5
+  ),
+
+  'footer': (
+    'base': 6,
+
+    'footer__signature': (
+      'footer__signature__background': (
+        'base': 1,
+        'footer__signature__background__image': 1,
+        'footer__signature__background__gradient': 2,
+      ),
+      'footer__signature__graphic': 2
+    )
+  ),
+
+  'loading': (
+    'visible': 200,
+    'hidden': 0,
+
+    'loading__particles--background': 1,
+    'loading__particles--middleground': 2,
+    'loading__particles--foreground': 3,
+  ),
+
+  'error': (
+
+    'error__background': (
+      'base': 1,
+      'error__background__image': 2,
+      'error__background__gradient--base': 3,
+      'error__background__gradient--bottom-right': 4,
+      'error__background__gradient--top-left': 5
+    ),
+
+    'error__content': (
+      'base': 2,
+
+      'error__parallax': (
+        'error__particles--background': 3,
+        'error__particles--middleground': 6,
+        'error__stroke': 1,
+        'error__details': 2,
+        'error__particles--foreground': 11
+      )
+    )
+  )
+);
+
+@function map-has-nested-keys($map, $keys...) {
+  @each $key in $keys {
+    @if not map-has-key($map, $key) {
+      @return false;
+    }
+    $map: map-get($map, $key);
+  }
+  
+  @return true;
+}
+
+@function map-deep-get($map, $keys...) {
+  @each $key in $keys {
+    $map: map-get($map, $key);
+  }
+ 
+  @return $map;
+}
+
+@function z($layers...) {
+  @if not map-has-nested-keys($z-layers, $layers...) {
+    @warn "No layer found for `#{inspect($layers)}` in $z-layers map. Property omitted.";
+  }
+ 
+  @return map-deep-get($z-layers, $layers...);
+}

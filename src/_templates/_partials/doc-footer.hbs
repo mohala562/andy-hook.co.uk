@@ -1,0 +1,45 @@
+		<!-- jQuery with fallback -->
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="/js/lib/jquery-2.2.0.min.js"><\/script>')</script>
+
+        {{#if prod}}
+
+            {{#if_eq layout 'main'}}
+
+                <script src="{{absolute_path 'assets/js/script.min.js'}}"></script>
+
+            {{else}}
+
+                {{#if_eq layout 'error'}}
+                    
+                <script src="{{absolute_path 'assets/js/error.min.js'}}"></script>
+
+                {{/if_eq}}
+
+            {{/if_eq}}
+
+        <!-- Otherwise use require -->
+        {{else}}
+
+            {{#if_eq layout 'main'}}
+
+                <!-- Run requirejs  -->
+                <script data-main="{{absolute_path '../src/_js/main'}}" src="{{absolute_path '../src/_js/lib/require.js'}}" type="text/javascript"></script>
+
+            {{else}}
+
+                {{#if_eq layout 'error'}}
+
+                <!-- Run requirejs -->
+                <script data-main="{{absolute_path '../src/_js/error'}}" src="{{absolute_path '../src/_js/lib/require.js'}}" type="text/javascript"></script>
+
+                {{/if_eq}}
+
+            {{/if_eq}}
+
+           
+        {{/if}}
+
+    </body>
+
+</html>

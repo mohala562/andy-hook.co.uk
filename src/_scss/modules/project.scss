@@ -1,0 +1,543 @@
+// Module - Project
+// --------------------------------------------------
+.project {
+  @extend %loading_effects;
+
+  position: relative;
+
+  background-color: $brand-color-light;
+  z-index: z('project', 'base');
+}
+
+// Header
+// --------------------------------------------------
+.project__header {
+  @extend %content-inverted;
+
+  padding: 6rem 0;
+
+  position: relative;
+  overflow: hidden;
+
+  background-color: $brand-color-dark;
+
+  @media (min-width: $screen-min-xs) {
+    padding: 7rem 0;
+  }
+
+  @media (min-width: $screen-min-sm) {
+    padding: 8rem 0;
+  }
+
+  @media (min-width: $screen-min-md) {
+    padding: 10rem 0;
+  }
+
+  @media (min-width: $screen-min-lg) {
+    padding: 8rem 0;
+  }
+
+  @media (min-width: $screen-min-xl) {
+    padding: 9rem 0;
+  }
+
+  @media (min-width: $screen-min-max) {
+    padding: 10rem 0;
+  }
+}
+
+// Header details
+// --------------------------------------------------
+.project__header__details {
+  @extend %foreground-sliding-effect;
+
+  position: relative;
+
+  text-align: center;
+
+  z-index: z('project', 'project__header', 'project__header__details');
+
+  // Decorative border
+  &:after {
+    @extend %render-decorative-border;
+
+    content: '';
+
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+
+    transform: translateX(-50%);
+
+    // Visibility effects
+    @include effect-base {
+      transition-delay: $ts__project__header / 4;
+
+      opacity: 0;
+    }
+
+    @include effect-base--enhanced {
+      transform: translate3d(-50%, -2em, 0);
+    }
+
+    @include effect-visible {
+      transition: 
+        transform $ts__project__header * 5 $e__fast-in,
+        opacity $ts__project__header linear;
+
+      transition-delay: $ts__project__header / 1.3;
+
+      opacity: 1;
+    }
+
+    @include effect-visible--enhanced {
+      transform: translate3d(-50%, 0, 0);
+    }
+  }
+}
+
+// Icon
+.project__header__details__icon {
+  @extend %icon-wrapper;
+  
+  fill: $brand-color-primary;
+  display: inline-block;
+
+  font-size: 5rem;
+
+  @media (min-width: $screen-min-sm) {
+    font-size: 5.5rem;
+  }
+
+  @media (min-width: $screen-min-md) {
+    font-size: 6rem;
+  }
+
+  @media (min-width: $screen-min-lg) {
+    font-size: 6.5rem;
+  }
+
+  @media (min-width: $screen-min-xl) {
+    font-size: 7rem;
+  }
+
+  @media (min-width: $screen-min-max) {
+    font-size: 7.5rem;
+  }
+
+  // Visibility effects
+  @include effect-base {
+    transition-delay: $ts__project__header / 4;
+
+    opacity: 0;
+  }
+
+  @include effect-base--enhanced {
+    transform: scale(3);
+  }
+
+  @include effect-visible {
+    transition: 
+      transform $ts__project__header * 4 $e__fast-in,
+      opacity $ts__project__header / 2 linear;
+
+    transition-delay: $ts__project__header * .3;
+
+    opacity: 1;
+  }
+
+  @include effect-visible--enhanced {
+    transform: scale(1);
+  }
+}
+
+// Title
+.project__header__details__title {
+  margin-top: .5em;
+  margin-bottom: .2em;
+
+  // Visibility effects
+  @include effect-base {
+    opacity: 0;
+  }
+
+  @include effect-base--enhanced {
+    transform: translate3d(0, .5em, 0);
+  }
+
+  @include effect-visible {
+    transition: 
+      transform $ts__project__header * 4 $e__fast-in,
+      opacity $ts__project__header linear;
+
+    transition-delay: $ts__project__header / 2;
+
+    opacity: 1;
+  }
+
+  @include effect-visible--enhanced {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+// Category
+.project__header__details__category {
+  @include type-scale-tertiary;
+
+  margin: 0;
+  padding-bottom: 2.5em;
+
+  // Visibility effects
+  @include effect-base {
+    opacity: 0;
+  }
+
+  @include effect-base--enhanced {
+    transform: translate3d(0, 2em, 0);
+  }
+
+  @include effect-visible {
+    transition: 
+      transform $ts__project__header * 4 $e__fast-in,
+      opacity $ts__project__header linear;
+
+    transition-delay: $ts__project__header / 1.3;
+
+    opacity: 1;
+  }
+
+  @include effect-visible--enhanced {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+// Header loading overlay
+// --------------------------------------------------
+.project__header__loading {
+  transition: opacity $ts__project__header linear;
+  
+  position: absolute;
+  width: 100%;
+  height: 100%;
+
+  top: 0;
+  left: 0;
+
+  background-color: $brand-color-dark;
+
+  z-index: z('project', 'project__header', 'project__header__loading');
+
+  #{$s__pf-loading} & {
+    opacity: 1;
+  }
+
+  #{$no-js} &,
+  #{$js} #{$s__pf-loaded}#{$s__section-visible} & {
+    opacity: 0;
+  }
+}
+
+// Header gradient
+// --------------------------------------------------
+.project__header__gradient {
+  position: absolute;
+
+  width: 100%;
+  height: 75%;
+
+  bottom: 0;
+  left: 0;
+
+  opacity: .75;
+
+  // Alpha gradient
+  background-image: linear-gradient(to top, rgba($brand-color-dark, 1), rgba($brand-color-dark, 0));
+
+  z-index: z('project', 'project__header', 'project__header__gradient');
+}
+
+// Header background
+// --------------------------------------------------
+
+// Positioning container for scroll effects
+.project__header__background__pos {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+
+  left: 0;
+  top: 0;
+}
+
+.project__header__background {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+
+  left: 0;
+  top: 0;
+  
+  #{$s__background-effects} & {
+    animation: inflate $ts__slow-inflate linear infinite alternate;
+  }
+    
+}
+
+.project__header__background__image {
+  position: absolute;
+
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+
+  background-color: $brand-color-dark;
+
+  z-index: z('project', 'project__header', 'project__header__background');
+
+  img {
+    display: block;
+    width: auto;
+  }
+
+  // Cover entire width of viewport to allow for very large viewport scaling
+  @media (min-width: $screen-min-max) {
+    width: 100%;
+
+    img {
+      width: 100%;
+    }
+  }
+}
+
+// Project description
+// --------------------------------------------------
+.project__description__col {
+  @extend %description__col;
+}
+
+.project__description__col--left {
+  @extend %description__col--left;
+}
+
+.project__description__col--right {
+  @extend %description__col--right;
+}
+
+.project__description {
+  @extend %section-padding-y;
+  @extend %clearfix;
+  @extend %foreground-sliding-effect;
+}
+
+// Impact text
+.project__description__impact {
+  @extend %description__impact;
+
+  // Visibility effects
+  @include effect-base {
+    opacity: 0;
+  }
+
+  @include effect-base--enhanced {
+    transform: translate3d(0,1.5em,0);
+  }
+
+  @include effect-visible {
+    transition: 
+      transform $ts__project__description * 5 $e__fast-in,
+      opacity $ts__project__description linear;
+
+    transition-delay: $ts__project__description * .4;
+
+    opacity: 1;
+  }
+
+  @include effect-visible--enhanced {
+    transform: translate3d(0, 0, 0);
+  }
+
+  &:after {
+
+    // Visibility effects
+    @include effect-base {
+      opacity: 0;
+    }
+
+    @include effect-base--enhanced {
+      transform: translate3d(0,2em,0);
+    }
+
+    @include effect-visible {
+      transition: 
+        transform $ts__project__description * 4 $e__fast-in,
+        opacity $ts__project__description linear;
+
+      transition-delay: $ts__project__description * .5;
+
+      opacity: 1;
+    }
+
+    @include effect-visible--enhanced {
+      transform: translate3d(0, 0, 0);
+    }
+  }
+
+}
+
+// Detail text
+.project__description__detail {
+  @extend %description__detail;
+
+  // Visibility effects
+  @include effect-base {
+    opacity: 0;
+  }
+
+  @include effect-base--enhanced {
+    transform: translate3d(0,3em,0);
+  }
+
+  @include effect-visible {
+    transition:
+      transform $ts__project__description * 5 $e__fast-in,
+      opacity $ts__project__description linear;
+    
+    transition-delay: $ts__project__description * .6;
+
+    opacity: 1;
+
+    @media (min-width: $screen-min-lg) {
+      transition-delay: $ts__project__description * .4;
+    }
+  }
+
+  @include effect-visible--enhanced {
+    transform: translate3d(0, 0, 0);
+  }
+
+  a {
+    @extend %enhanced-link;
+  }
+}
+
+// Image
+// --------------------------------------------------
+.project__image {
+  position: relative;
+  overflow: hidden;
+
+  width: 100%;
+
+  // Ensure lazy loading doesn't trigger for every image
+  // Bit of a hack with an arbitrary value
+  // TODO: Make this more robust
+  #{$js} & {
+    min-height: 50rem;
+  }
+
+  // Remove min height when image has loaded
+  &#{$s__pf-loaded} {
+
+    // Auto doesn't work on IOS
+    min-height: inherit;
+  }
+
+  img {
+    display: block;
+    width: 100%;
+  }
+
+  // Alternate gradient style
+  &:nth-child(odd) {
+    background-color: $brand-color-medium;
+  }
+
+  &:nth-child(even) {
+    background-color: $brand-color-light;
+  }
+}
+
+// Loading overlay
+.project__image__loading {
+  @extend %fill-space;
+
+  transition: 
+    opacity $ts__project__image / 2 linear,
+    visibility 0s linear 0s;
+
+  top: 0;
+  left: 0;
+
+  z-index: z('project', 'project__image', 'project__image__loading');
+
+  visibility: visible;
+
+  #{$js} & {
+    opacity: 1;
+  }
+
+  #{$no-js} &,
+  #{$s__pf-loaded} & {
+    transition: 
+      opacity $ts__project__image / 2 linear,
+      visibility 0s linear $ts__project__image / 2;
+
+    opacity: 0;
+    visibility: hidden;
+    z-index: z('project', 'project__image', 'project__image__loading--loaded');
+  }
+
+  // Alternate background colours
+  .project__image:nth-child(odd) & {
+    background-color: $brand-color-medium;
+  }
+
+  .project__image:nth-child(even) & {
+    background-color: $brand-color-light;
+  }
+}
+
+// Spinner
+.project__image__loading__spinner {
+  @extend %centered-icon;
+  @extend %generic-loading-spinner;
+  
+  font-size: 5em;
+
+  svg {
+    width: 1em;
+    height: 1em;
+
+    fill: $brand-color-primary;
+  }
+}
+
+// Image asset
+.project__image__graphic {
+  transition: opacity $ts__project__image / 2 linear;
+  
+  display: block;
+  position: relative;
+  overflow: hidden;
+
+  //z-index: z('project', 'project__image', 'project__image__graphic');
+
+  // Center image because source size is larger than available space here
+  @media (min-width: $screen-min-max) and (max-width: $max-image-width + 'px') {
+    left:50%;
+    width: prem($max-image-width);
+    margin-left: -#{prem($max-image-width / 2)};
+  }
+  
+  img {
+    transition: opacity $ts__project__image linear;
+
+    #{$js} & {
+      opacity: 0;
+    }
+
+    #{$s__pf-loaded} & {
+      opacity: 1;
+    }
+  }
+}

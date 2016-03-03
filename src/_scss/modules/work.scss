@@ -1,0 +1,10 @@
+// Module - Work
+// --------------------------------------------------
+.work {
+    @extend %loading_effects;
+
+	background-color: $brand-color-light;
+    position: relative;
+
+    z-index: z('work', 'base');
+}

@@ -1,0 +1,23 @@
+<!-- Work area with gallery -->
+<section class="work js__work" id="work">
+
+    <!-- Decorative shadow -->
+    <div class="hero__shadow"></div>
+
+    <div class="gallery l-container">
+
+        <!-- Group thumbs into two per row -->
+        {{#grouped_each 2 collections.work}}
+
+            <div class="gallery__row">
+                <div class="gallery__row__pos">
+                    {{#each this}}
+                        {{> thumbnail}}
+                    {{/each}}
+                </div>
+            </div>
+               
+        {{/grouped_each}}
+
+    </div>
+</section> <!-- /work -->

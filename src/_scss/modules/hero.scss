@@ -1,0 +1,1130 @@
+// Module - Hero
+// --------------------------------------------------
+.hero {
+  @extend %loading_effects;
+
+  position: relative;
+
+  top: 0;
+  left: 0;
+
+  overflow: hidden;
+  
+  z-index: z('hero', 'base');
+  background-color: $topbar-background-color;
+
+  min-width: $document-min-width;
+
+  // Affixed
+  #{$s__hero-fixed} & {
+    position: fixed;
+  }
+  
+  #{$s__hero-fixed} &#{$s__section-hidden} {
+    position: absolute;
+  }
+}
+
+// Unit wrapper controls the fixed state of the entire hero element
+.hero__unit {
+  position: relative;
+  overflow: hidden;
+
+  z-index: z('hero', 'hero__unit', 'base');
+
+  @media (min-width: $screen-min-lg) {
+    position: absolute;
+
+    width: 100%;
+    height: 100%;
+
+    bottom: 0;
+    left: 0;
+  }
+}
+
+// Placeholder which maintains flow while the unit is fixed
+.hero__placeholder {
+  position: absolute;
+
+  top: 0;
+  left: 0;
+
+  z-index: z('hero', 'hero__placeholder');
+
+  // Affixed
+  #{$s__hero-fixed} & {
+    position: relative;
+    display: block;
+  }
+}
+
+// Half height of placeholder foe setting finer detail positions
+.hero__placeholder__half {
+  @extend %fill-space;
+
+  height: 50%;
+
+  bottom: 0;
+  left: 0;
+}
+
+
+// Set heights to mirror each other
+.hero,
+.hero__placeholder {
+  width: 100%;
+
+  @media (min-width: $screen-min-lg) {
+    height: 49rem;
+  }
+
+  @media (min-width: $screen-min-xl) {
+    height: 54rem;
+  }
+
+  @media (min-width: $screen-min-max) {
+    height: 56rem;
+  }
+}
+
+
+// Content wrapper
+.hero__content {
+  height: 100%;
+}
+
+// Intro
+// --------------------------------------------------
+
+// Positioner for sliding effects
+.hero__intro__pos {
+  @extend %foreground-sliding-effect;
+
+  position: relative;
+
+  z-index: z('hero', 'hero__unit', 'hero__intro');
+}
+
+
+// Main intro
+.hero__intro {
+  @extend %content-inverted;
+  @extend %collapsed-mode-content-padding;
+
+  position: relative;
+
+  padding-top: 5rem;
+  padding-bottom: 2rem;
+
+  @media (min-width: $screen-min-xs) {
+    padding-top: 6rem;
+    padding-bottom: 2rem;
+  }
+
+  @media (min-width: $screen-min-sm) {
+    padding-top: 11rem;
+    padding-bottom: 0;
+  }
+
+  @media (min-width: $screen-min-md) {
+    padding-top: 15rem;
+  }
+
+  @media (min-width: $screen-min-lg) {
+    padding-top: 15rem;
+  }
+
+  @media (min-width: $screen-min-xl) {
+    padding-top: 17rem;
+  }
+
+  @media (min-width: $screen-min-max) {
+    padding-top: 18rem;
+  }
+}
+
+// Title
+// --------------------------------------------------
+.hero__intro__title {
+  @include text-shadow-dark;
+
+  position: relative;
+  
+  margin-bottom: .65em;
+  padding-bottom: .45em;
+
+  // Decorative border
+  &:after {
+    @extend %render-decorative-border;
+
+    // Visibility effects
+    @include effect-base {
+      opacity: 0;
+    }
+
+    @include effect-base--enhanced {
+      transform: translate3d(0,5em,0);
+
+      @media (max-width: $screen-max-lg) {
+        transform: translate3d(-50%,3em,0);
+      }
+    }
+
+    @include effect-visible {
+      transition: 
+        transform $ts__hero__intro * 10 $e__fast-in,
+        opacity $ts__hero__intro / 2 linear;
+
+      transition-delay: $ts__hero__intro / 9;
+
+      opacity: 1;
+    }
+
+    @include effect-visible--enhanced {
+      transform: translate3d(0,0,0);
+
+      @media (max-width: $screen-max-lg) {
+        transform: translate3d(-50%,0,0);
+      }
+    }
+
+    content: "";
+
+    position: absolute;
+    bottom: 0;
+
+    @media (max-width: $screen-max-lg) {
+      transform: translateX(-50%);
+      left: 50%;
+    }
+
+    @media (min-width: $screen-min-lg) {
+      left: 0;
+    }
+  }
+
+  @media (max-width: $screen-max-xs) {
+    line-height: 1.65;
+  }
+
+  @media (min-width: $screen-min-xs) and (max-width: $screen-max-sm)  {
+    max-width: 12em;
+
+    // Shorthand to avoid overwriting other props
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  @media (max-width: $screen-max-lg) {
+    line-height: 1.2;
+    text-align: center;
+  }
+
+  @media (min-width: $screen-min-lg) {
+    margin-bottom: .7em;
+    padding-bottom: .6em;
+    max-width: 12em;
+  }
+}
+
+.hero__intro__title__line {
+  @extend %clearfix;
+
+  @media (min-width: $screen-min-xs) and (max-width: $screen-max-lg) {
+    display: inline-block;
+  }
+
+  // Visibility effects
+  @include effect-base {
+    opacity: 0;
+  }
+
+  @include effect-base--enhanced {
+    transform: translate3d(0,1em,0);
+  }
+
+  @include effect-visible {
+    transition: 
+      transform $ts__hero__intro * 10 $e__fast-in,
+      opacity $ts__hero__intro linear;
+
+    opacity: 1;
+  }
+
+  @include effect-visible--enhanced {
+    transform: translate3d(0,0,0);
+  }
+}
+
+// Title item
+.hero__intro__title__item {
+
+  @media (max-width: $screen-max-xs) {
+    display: block;
+  }
+
+  @media (min-width: $screen-min-xs) {
+    float: left;
+  }
+  
+}
+
+// Modifiers - Adjust words
+.hero__intro__title__item--first {
+
+  @media (min-width: $screen-min-xs) {
+    position: relative;
+    padding-right: .4em;
+
+    // Dividing pip
+    &:after {
+      @extend %render-pip;
+
+      content: "";
+
+      background-color: $brand-color-primary;
+
+      position: absolute;
+      right: 0;
+      top: 50%;
+
+      // Straddle between both words
+      // Vertically center
+      margin-top: -($pip-size / 2);
+      margin-right: -($pip-size / 2);
+
+      // Visibility effects
+      @include effect-base {
+        opacity: 0;
+      }
+
+      @include effect-base--enhanced {
+        transform: translate3d(0,10em,0);
+      }
+
+      @include effect-visible {
+        transition: 
+          transform $ts__hero__intro * 5 $e__fast-in,
+          opacity $ts__hero__intro linear;
+
+        transition-delay: $ts__hero__intro / 6;
+
+        opacity: 1;
+      }
+
+      @include effect-visible--enhanced {
+        transform: translate3d(0,0,0);
+      }
+    }
+  }
+ 
+}
+
+.hero__intro__title__item--second {
+  @media (min-width: $screen-min-xs) {
+    padding-left: .4em;
+  }
+}
+
+.hero__intro__title__item--third {
+  @media (min-width: $screen-min-xs) {
+    clear: both;
+  }
+}
+
+// Description
+// --------------------------------------------------
+.hero__intro__description {
+  font-weight: $weight-light;
+
+  max-width: 27em;
+
+  @media (max-width: $screen-max-lg) {
+    margin: auto;
+    margin-bottom: 2em;
+    text-align: center;
+  }
+
+  @media (min-width: $screen-min-lg) {
+    margin-bottom: 3.1em;
+    max-width: 26em;
+  }
+
+  // Enhance links
+  a {
+    @extend %enhanced-link;
+  }
+
+  // Visibility effects
+  @include effect-base {
+    opacity: 0;
+  }
+
+  @include effect-base--enhanced {
+    transform: translate3d(0,4em,0);
+  }
+
+  @include effect-visible {
+    transition: 
+      transform $ts__hero__intro * 7 $e__fast-in,
+      opacity $ts__hero__intro linear;
+
+    transition-delay: $ts__hero__intro / 3;
+
+    opacity: 1;
+  }
+
+  @include effect-visible--enhanced {
+    transform: translate3d(0,0,0);
+  }
+}
+
+// Button
+// --------------------------------------------------
+.hero__button {
+  @extend %clearfix;
+  @extend %touch-optimised;
+
+  @include font-stack-tertiary-text;
+
+  font-size: 1em;
+
+  color: $body-color-impact--invert;
+  background-color: transparent;
+  
+  border-radius: $border-radius;
+
+  position: relative;
+
+  display: block;
+
+  height: 3em;
+
+  // Visibility effects
+  @include effect-base {
+    opacity: 0;
+  }
+
+  @include effect-base--enhanced {
+    transform: translate3d(0,3em,0);
+  }
+
+  @include effect-visible {
+    transition: 
+      color $ts__hero__button / 2 linear,
+      background-color $ts__hero__button / 2 linear,
+      border-color $ts__hero__button / 2 linear,
+      transform $ts__hero__intro * 6 $e__fast-in $ts__hero__intro / 1.3,
+      opacity $ts__hero__intro linear $ts__hero__intro / 1.3;
+
+    opacity: 1;
+  }
+
+  @include effect-visible--enhanced {
+    transform: translate3d(0,0,0);
+  }
+
+  @media (max-width: $screen-max-lg) {
+    width: 100%;
+  }
+
+  @media (min-width: $screen-min-sm) {
+    height: 10em;
+  }
+
+  @media (min-width: $screen-min-md) {
+    height: 12em;
+  }
+  
+  @media (min-width: $screen-min-lg) {
+    height: auto;
+
+    border: 1px solid $tertiary-color--invert;
+    display: inline-block;
+
+    padding: $hero-button-padding-y $hero-button-padding-x;
+
+    #{$no-touch} &:hover {
+      color: $heading-color--invert;
+
+      border-color: lighten($tertiary-color--invert, 20%);
+      background-color: rgba($tertiary-color--invert, .2);
+    }
+
+    #{$no-touch} &:active,
+    #{$touch} &:active {
+      transition-duration: $ts__hero__button / 2;
+      background-color: rgba($tertiary-color--invert, .5);
+    }
+  }
+}
+
+// Text
+.hero__button__text {
+  display: inline-block;
+
+  padding-right: 2.25em;
+
+  @media (max-width: $screen-max-lg) {
+    display: none;
+  }
+}
+
+// Icon
+.hero__button__icon {
+  @extend %icon-wrapper;
+
+  font-size: 1em;
+
+  position: absolute;
+
+  top: 50%;
+
+  margin-top: -.5em;
+  
+  opacity: .75;
+
+  // Icon graphic
+  svg {
+    fill: $icon-color--invert;
+  }
+
+  #{$no-touch} .hero__button:hover & {
+    animation-timing-function: $e__ease;
+    animation-name: hero-arrow-down;
+    animation-duration: $ts__hero__button;
+
+    @media (min-width: $screen-min-lg) {
+      animation-name: hero-button-arrow-down;
+      animation-duration: $ts__hero__button;
+    }
+  }
+
+  #{$no-touch} .hero__button:hover &,
+  #{$touch} .hero__button:active &,
+  #{$no-touch} .hero__button:active & {
+    opacity: 1;
+  }
+
+  @media (max-width: $screen-max-lg) {
+    left: 50%;
+    margin-left: -.5em;
+  }
+
+  @media (min-width: $screen-min-md) {
+    font-size: 1.5em;
+  }
+
+  @media (min-width: $screen-min-lg) {
+    font-size: .8em;
+    right: $hero-button-padding-x;
+  }
+}
+
+
+// Parallax scene
+// --------------------------------------------------
+
+// Parallax scene container
+.hero__parallax {
+  @extend %fill-space;
+
+  position: absolute;
+
+  z-index: z('hero', 'hero__unit', 'hero__parallax', 'base');
+
+  margin: 0;
+  padding: 0;
+  bottom: 0;
+  right: 0;
+
+  @media (min-width: $screen-min-lg) {
+    font-size: .9em;
+  }
+
+  @media (min-width: $screen-min-lg-straddle-low) {
+    font-size: .92em;
+  }
+
+  @media (min-width: $screen-min-lg-straddle-high) {
+    font-size: .94em;
+  }
+
+  @media (min-width: $screen-min-xl) {
+    font-size: .97em;
+  }
+
+  @media (min-width: $screen-min-xl-straddle-low) {
+    font-size: .98em;
+  }
+
+  @media (min-width: $screen-min-xl-straddle-high) {
+    font-size: .99em;
+  }
+
+  @media (min-width: $screen-min-max) {
+    font-size: 1em;
+  }
+}
+
+// Wrapping container for seperate effects
+.hero__parallax__pos {
+  @extend %fill-space;
+
+  top: 0;
+  left: 0;
+}
+
+// Additional layer style
+// Used by parallax
+.layer {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+}
+
+// Butterfly
+// --------------------------------------------------
+
+// Apply index on containing element as transform3D creates a new stacking context
+.hero__butterfly__index {
+  z-index: z('hero', 'hero__unit', 'hero__parallax', 'hero__butterfly');
+}
+
+// Main instance
+.hero__butterfly {
+  position: absolute;
+
+  @extend %hero-graphic-transition-stack;
+
+  @media (max-width: $screen-max-lg) {
+    display: none;
+    transform: none;
+  }
+
+  // Request sprite image only when needed
+  @media (min-width: $screen-min-lg) {
+    @include hero-mascot-sprite;
+  }
+}
+
+// Variants
+
+// Wallace's position is based on it's parent so doesn't need nudging like the others
+.hero__butterfly--wallace {
+  top: -4.6em;
+  right: -1em;
+  width: 5.5em;
+  height: 6.0em;
+  background-position: -2.2em -19em;
+}
+
+.hero__butterfly--darwin {
+  $pos-x: 36.5em;
+  $pos-y: 32.5em;
+
+  @include nudge-hero-element($pos-x, $pos-y);
+
+  width: 7em;
+  height: 7em;
+  background-position: -1.4em -2.7em;
+
+  // Visibility effects
+  @include effect-base--enhanced {
+    transform: translate3d(0,7em,0);
+  }
+
+  @include effect-visible {
+    transition: transform $ts__hero__parallax * 2.6 ease;
+  }
+
+  @include effect-visible--enhanced {
+    transform: translate3d(0,0,0);
+  }
+}
+
+.hero__butterfly--monty {
+  $pos-x: 30.5em;
+  $pos-y: 30.5em;
+
+  @include nudge-hero-element($pos-x, $pos-y);
+
+  width: 5.5em;
+  height: 6.3em;
+  background-position: -2.2em -27.7em;
+
+  // Visibility effects
+  @include effect-base--enhanced {
+    transform: translate3d(0,7em,0);
+  }
+
+  @include effect-visible {
+    transition: transform $ts__hero__parallax * 2.4 ease;
+  }
+
+  @include effect-visible--enhanced {
+    transform: translate3d(0,0,0);
+  }
+}
+
+.hero__butterfly--sable {
+  $pos-x: 23em;
+  $pos-y: 18.5em;
+
+  @include nudge-hero-element($pos-x, $pos-y);
+
+  width: 6em;
+  height: 5.5em;
+  background-position: -2.4em -11.5em;
+
+  // Visibility effects
+  @include effect-base--enhanced {
+    transform: translate3d(0,8em,0);
+  }
+
+  @include effect-visible {
+    transition: transform $ts__hero__parallax * 2.1 ease;
+  }
+
+  @include effect-visible--enhanced {
+    transform: translate3d(0,0,0);
+  }
+}
+
+.hero__butterfly--ora {
+  $pos-x: 20em;
+  $pos-y: 14em;
+
+  @include nudge-hero-element($pos-x, $pos-y);
+
+  width: 5.813em;
+  height: 5.875em;
+  background-position: -2em -36.5em;
+
+  // Visibility effects
+  @include effect-base--enhanced {
+    transform: translate3d(0,9em,0);
+  }
+
+  @include effect-visible {
+    transition: transform $ts__hero__parallax * 1.8 ease;
+  }
+
+  @include effect-visible--enhanced {
+    transform: translate3d(0,0,0);
+  }
+}
+
+// Mascot
+// --------------------------------------------------
+
+// Apply index on containing element as transform3D creates a new stacking context
+.hero__mascot__index {
+  z-index: z('hero', 'hero__unit', 'hero__parallax', 'hero__mascot');
+}
+
+.hero__mascot {
+  $pos-x: 1.25em;
+  $pos-y: -4em;
+
+  @include nudge-hero-element($pos-x, $pos-y);
+  @extend %hero-graphic-transition-stack;
+
+  position: absolute;
+  width: 37em;
+  height: 49em;
+
+  background-position: -8em 0;
+
+  // Visibility effects
+  @include effect-base--enhanced {
+    transform: translate3d(0,6em,0);
+  }
+
+  @include effect-visible {
+    transition: transform $ts__hero__parallax * 1.75 ease;
+  }
+
+  @include effect-visible--enhanced {
+    transform: translate3d(0,0,0);
+  }
+
+  @media (max-width: $screen-max-lg) {
+    display: none;
+    transform: none;
+  }
+
+  @media (min-width: $screen-min-lg) {
+    @include hero-mascot-sprite;
+  }
+}
+
+// Phone
+// --------------------------------------------------
+
+// Apply index on containing element as transform3D creates a new stacking context
+.hero__phone__index {
+  z-index: z('hero', 'hero__unit', 'hero__parallax', 'hero__phone');
+}
+
+.hero__phone {
+  $pos-x: 36.5em;
+  $pos-y: -7em;
+
+  @include nudge-hero-element($pos-x, $pos-y);
+  @extend %hero-graphic-transition-stack;
+
+  border: $hero-device-border-thickness solid $brand-color-secondary;
+  position: absolute;
+  width: 16.9em;
+  height: 34em;
+
+  border-top-left-radius: pem(25);
+  border-top-right-radius: pem(25);
+
+  background-position: -1em -15em;
+
+  box-shadow: 0px 0px 5rem rgba($brand-color-dark, .2);
+
+  // Visibility effects
+  @include effect-base--enhanced {
+    transform: translate3d(0,6em,0);
+  }
+
+  @include effect-visible {
+    transition: transform $ts__hero__parallax * 2 ease;
+  }
+
+  @include effect-visible--enhanced {
+    transform: translate3d(0,0,0);
+  }
+
+  @media (max-width: $screen-max-lg) {
+    display: none;
+    transform: none;
+  }
+
+  // Request sprite image only when needed
+  @media (min-width: $screen-min-lg) {
+    @include hero-device-sprite;
+  }
+}
+
+// Tablet
+// --------------------------------------------------
+
+// Apply index on containing element as transform3D creates a new stacking context
+.hero__tablet__index {
+  z-index: z('hero', 'hero__unit', 'hero__parallax', 'hero__tablet');
+}
+
+.hero__tablet {
+  $pos-x: 0;
+  $pos-y: -7em;
+
+  @include nudge-hero-element($pos-x, $pos-y);
+
+  @extend %hero-graphic-transition-stack;
+
+  position: absolute;
+
+  border: $hero-device-border-thickness solid $brand-color-primary;
+
+  border-top-left-radius: pem(20);
+  border-top-right-radius: pem(20);
+
+  width: 43.9em;
+  height: 47.9em;
+  background-position: -20em -1.1em;
+
+  box-shadow: 0px 0px 5rem rgba($brand-color-dark, .2);
+
+  // Visibility effects
+  @include effect-base--enhanced {
+    transform: translate3d(0,4em,0);
+  }
+
+  @include effect-visible {
+    transition: transform $ts__hero__parallax * 2 ease;
+  }
+
+  @include effect-visible--enhanced {
+    transform: translate3d(0,0,0);
+  }
+
+  @media (max-width: $screen-max-lg) {
+    display: none;
+    transform: none;
+  }
+
+  // Request sprite image only when needed
+  @media (min-width: $screen-min-lg) {
+    @include hero-device-sprite;
+  }
+}
+
+// Emblem
+// --------------------------------------------------
+
+// Apply index on containing element as transform3D creates a new stacking context
+.hero__emblem__index {
+  z-index: z('hero', 'hero__unit', 'hero__parallax', 'hero__emblem');
+}
+
+.hero__emblem {
+  position: absolute;
+
+  background-position: center center;
+  background-size: cover;
+
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  width: 100%;
+  height: 82%;
+
+  opacity: .6;
+
+  display: none;
+
+  @media (min-width: $screen-min-sm) and (max-width: $screen-max-lg) {
+    display: block;
+
+    // Visibility effects
+    @include effect-base {
+      opacity: 0;
+    }
+
+    @include effect-base--enhanced {
+      transform: translate3d(-50%,-50%,0) scale(.95);
+    }
+
+    @include effect-visible {
+      transition: 
+        transform $ts__hero__parallax * 8 $e__fast-in,
+        opacity $ts__hero__parallax linear;
+
+      opacity: .7;
+    }
+
+    @include effect-visible--enhanced {
+      transform: translate3d(-50%,-50%,0) scale(1);
+    }
+  }
+
+  @media (min-width: $screen-min-sm) and (max-width: $screen-max-md) {
+    background-image: url(../img/hero-background-crest-small.png);
+  }
+
+  @media (min-width: $screen-min-md) and (max-width: $screen-max-lg) {
+    background-image: url(../img/hero-background-crest.png);
+  }
+}
+
+// Particles
+// --------------------------------------------------
+.hero__particles__pos {
+  $pos-x: 1.25em;
+  $pos-y: -4em;
+
+  @include nudge-hero-element($pos-x, $pos-y);
+  @extend %hero-graphic-transition-stack;
+
+  position: absolute;
+
+  width: 100%;
+  height: 100%;
+
+  // Visibility effects
+  @include effect-base {
+    opacity: 0;
+  }
+
+  @include effect-base--enhanced {
+    transform: translate3d(3em,3em,0) scale(.9);
+  }
+
+  @include effect-visible {
+    transition: 
+      transform $ts__hero__parallax * 3 ease,
+      opacity $ts__hero__parallax * 3 linear;
+
+    opacity: 1;
+  }
+
+  @include effect-visible--enhanced {
+    transform: translate3d(0,0,0) scale(1);
+  }
+}
+
+.hero__particles {
+  @extend %particles-base;
+
+  font-size: .4em;
+  
+  @media (min-width: $screen-min-xs) and (max-width: $screen-max-sm) {
+    font-size: .5em;
+  }
+
+  @media (min-width: $screen-min-sm) {
+    font-size: .9em;
+  }
+
+  @media (min-width: $screen-min-lg) {
+    left: 55%;
+    top: 30%;
+  }
+}
+
+// Variants
+
+// Apply index on containing element as transform3D creates a new stacking context
+.hero__particles--background__index {
+  z-index: z('hero', 'hero__unit', 'hero__parallax', 'hero__particles--background');
+}
+
+.hero__particles--background {
+  opacity: 1;
+  animation-duration: 30s;
+  background-position: bottom center;
+}
+
+// Apply index on containing element as transform3D creates a new stacking context
+.hero__particles--middleground__index {
+  z-index: z('hero', 'hero__unit', 'hero__parallax', 'hero__particles--middleground');
+}
+
+.hero__particles--middleground {
+  animation-duration: 15s;
+  background-position: center center;
+  animation-direction: alternate-reverse;
+}
+
+// Apply index on containing element as transform3D creates a new stacking context
+.hero__particles--foreground__index {
+  z-index: z('hero', 'hero__unit', 'hero__parallax', 'hero__particles--foreground');
+}
+
+.hero__particles--foreground {
+  opacity: 1;
+  animation-duration: 25s;
+  background-position: top center;
+}
+
+// Background
+// --------------------------------------------------
+
+// Make elements fill space
+.hero__background,
+.hero__background__gradient,
+.hero__background__image__pos {
+  @extend %fill-space;
+
+  top: 0;
+  left: 0;
+}
+
+// Background
+.hero__background {
+
+  z-index: z('hero', 'hero__unit', 'hero__background', 'base');
+
+  // Colour must match image bg at smaller sizes
+  background-color: $brand-color-primary-dark;
+}
+
+// Image
+.hero__background__image {
+  @extend %background-sprite;
+
+  opacity: .9;
+  position: absolute;
+  width: 100%; 
+  height: 100%;
+
+  z-index: z('hero', 'hero__unit', 'hero__background', 'hero__background__image');
+
+  background-size: cover;
+
+  background-repeat: no-repeat;
+
+  #{$no-touch} & {
+    animation: inflate $ts__slow-inflate linear infinite alternate;
+  }
+}
+
+// Gradient
+.hero__background__gradient {
+  opacity: .9;
+}
+
+// Modifier - Top left
+.hero__background__gradient--top-left {
+  z-index: z('hero', 'hero__unit', 'hero__background', 'hero__background__gradient--top-left');
+
+  background-image: linear-gradient(135deg, rgba($gradient-color-secondary, .9) 0%, rgba($gradient-color-secondary,0) 90%);
+
+  @media (min-width: $screen-min-lg) {
+    background-image: linear-gradient(135deg, rgba($gradient-color-secondary, .5) 0%, rgba($gradient-color-secondary,0) 30%);
+  }
+}
+
+// Modifier - Bottom right
+.hero__background__gradient--bottom-right {
+  z-index: z('hero', 'hero__unit', 'hero__background', 'hero__background__gradient--bottom-right');
+
+  background-image: linear-gradient(135deg, rgba($gradient-color-primary, 0) 0%, rgba($gradient-color-primary,1) 200%);
+
+  @media (min-width: $screen-min-lg) {
+    background-image: linear-gradient(135deg, rgba($gradient-color-secondary, 0) 70%, rgba($gradient-color-secondary,.75) 100%);
+  }
+}
+
+// Modifier - Over gradient
+.hero__background__gradient--base {
+  z-index: z('hero', 'hero__unit', 'hero__background', 'hero__background__gradient--base');
+
+  @include gradient-diagonal(lighten($gradient-color-secondary, 2%), lighten($gradient-color-primary, 2%));
+
+  opacity: .3;
+
+  @media (min-width: $screen-min-sm) {
+    opacity: .5;
+  }
+
+  @media (min-width: $screen-min-lg) {
+    opacity: .7;
+  }
+
+  // Increase visibility if W3C gradients are no supported
+  // We do this because the alpha gradients above fail to render though the mixin with fallback does
+  // So we may as well make it more visible
+  #{$no-cssgradients} & {
+    opacity: .8;
+  }
+}
+
+// Decorative shadow
+// --------------------------------------------------
+.hero__shadow {
+  $height: 3rem;
+
+  width: 100%;
+  height: $height;
+
+  position: absolute;
+  top: -$height;
+  left: 0;
+
+  background-image: linear-gradient(to top, rgba($brand-color-dark, 1), rgba($brand-color-dark, 0));
+
+  z-index: z('hero', 'hero__unit', 'hero__shadow');
+
+  opacity: .05;
+
+  @media (min-width: $screen-min-lg) {
+    opacity: .2;
+  }
+}

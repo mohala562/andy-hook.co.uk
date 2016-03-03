@@ -1,0 +1,1041 @@
+// Module - Topbar
+// --------------------------------------------------
+.topbar {
+  @extend %loading_effects;
+
+  z-index: z('topbar', 'base');
+
+  // Force graphics acceleration
+  // Raise above other 3D composed areas
+  transform: translate3D(0,0,100px);
+
+  background-color: $topbar-background-color;
+
+  position: absolute;
+
+  width: 100%;
+  min-width: $document-min-width;
+
+  // These padding values must not be removed by modifiers
+  // The switching script reads them to calculate when to attached the topbar
+  $padding-top: prem(15);
+  $padding-top-break: prem(45);
+  $padding-top-xl: prem(45);
+  $padding-top-max: prem(65);
+
+  padding-top: $padding-top;
+
+  @media (min-width: $screen-nav-break-lower-min) {
+    padding-top: $padding-top-break;
+  }
+
+  @media (min-width: $screen-min-xl) {
+    padding-top: $padding-top-xl;
+  }
+
+  @media (min-width: $screen-min-max) {
+    padding-top: $padding-top-max;
+  }
+
+  // Use a different transition stack when the page is not sliding
+  // This is because timings and easing functions differ depending on whether it needs to slide or not
+
+  // Be mindful of adding padding transition
+  // That property is being polled and can be wrongly retrieved if mid transition
+
+  // Use different transition stacks depending whether the hero is fixed or not..
+  #{$s__doc-static}#{$s__hero-fixed} & {
+    transition: 
+      transform $ts__topbar ease,
+      opacity $ts__topbar / 2 linear,
+      margin-top $ts__topbar $e__ease;
+  }
+
+  #{$s__doc-static}#{$s__hero-static} & {
+    transition: 
+      transform $ts__topbar ease,
+      opacity $ts__topbar / 2 linear,
+      background $ts__topbar / 3 linear;
+  }
+
+  // Offset top padding with a negative margin when in topbar mode
+  // These values must mirror the top padding!
+  &#{$s__nav-bar}#{$s__nav-closed} {
+    margin-top: -$padding-top;
+
+    @media (min-width: $screen-nav-break-lower-min) {
+      margin-top: -$padding-top-break;
+    }
+  }
+
+  // Add for both open AND closed states
+  &#{$s__nav-bar}#{$s__nav-closed},
+  &#{$s__nav-bar}#{$s__nav-open} {
+    @media (min-width: $screen-nav-break-higher-min) {
+      margin-top: -$padding-top-break;
+    }
+
+    @media (min-width: $screen-min-xl) {
+      margin-top: -$padding-top-xl;
+    }
+
+    @media (min-width: $screen-min-max) {
+      margin-top: -$padding-top-max;
+    }
+  }
+
+  // Nav is open
+  &#{$s__nav-open} {
+    @media (max-width: $screen-nav-break-higher-max) {
+      position: fixed;
+      transition: none !important;
+      background-color: transparent;
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  // Nav is fixed
+  #{$s__nav-fixed} & {
+    position: fixed;
+  }
+
+  // In hero mode
+  &#{$s__nav-hero} {
+    background-color: transparent;
+  }
+
+  // In bar mode
+  &#{$s__nav-bar} {
+    position: fixed;
+  }
+}
+
+// Mobile overlay
+.topbar__overlay {
+  transition: opacity $ts__topbar--mobile / 2 linear;
+
+  position: absolute;
+
+  content: "";
+
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  opacity: 0;
+  background-color: $brand-color-dark;
+
+  z-index: z('topbar', 'topbar__overlay');
+
+  @media (min-width: $screen-nav-break-higher-min) {
+    transition: none;
+  }
+
+  // Overlay is visible
+  #{$s__overlay-visible} & {
+    @media (max-width: $screen-nav-break-higher-max) {
+      opacity: 1;
+    }
+  }
+}
+
+// Container
+.topbar__container {
+  transition: padding-right $ts__topbar $e__ease;
+
+  position: relative;
+
+  z-index: z('topbar', 'topbar__container');
+
+  @media (max-width: $screen-nav-break-lower-max) {
+    padding-right: 0;
+  }
+
+  // Butt menu button against viewport on the right side
+  #{$s__project-open} & {
+    @media (max-width: $screen-max-max) {
+      padding-right: 0;
+    }
+  }
+  
+  // Nav is open
+  #{$s__nav-open} & {
+    @media (max-width: $screen-nav-break-higher-max) {
+      padding: 0;
+      height: 100%;
+    }
+  }
+}
+
+// Positioning wrapper
+.topbar__pos {
+  @extend %clearfix;
+  @extend %foreground-sliding-effect;
+
+  position: relative;
+  height: $topbar-height;
+
+  transform: translate3d(0, 0, 0);
+
+  @media (min-width: $screen-nav-break-lower-min) {
+    height: $topbar-height-medium;
+  }
+
+  @media (min-width: $screen-min-xl) {
+    height: $topbar-height-large;
+  }
+
+  // Nav is open
+  #{$s__nav-open} & {
+    @media (max-width: $screen-nav-break-higher-max) {
+      height: 100%;
+    }
+  }
+}
+
+// Brand
+.topbar__brand {
+
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+
+  #{$js} & {
+    transition: 
+      transform $ts__topbar__brand * 4 $e__fast-in,
+      opacity $ts__topbar__brand linear;
+
+    transform: translate3d(-3em, -50%, 0);
+
+    opacity: 0;
+  }
+
+  #{$js} #{$s__doc-initialized} & {
+    transform: translate3d(0, -50%, 0);
+
+    opacity: 1;
+  }
+
+  // Nav is open
+  #{$s__nav-open} & {
+    @media (max-width: $screen-nav-break-higher-max) {
+      display: none;
+    }
+  }
+}
+
+// Link
+.topbar__brand__link {
+  display: block;
+
+  &:after {
+    transition: 
+      transform $ts__topbar__brand * 5 $e__fast-in,
+      opacity $ts__topbar__brand linear;
+
+    content: "";
+
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    border: $border-thick solid $brand-color-light;
+    opacity: .3;
+
+    border-radius: $border-radius;
+
+    // Set element in 3d space to avoid display issues
+    // See: http://viget.com/inspire/webkit-transform-kill-the-flash
+    transform: translateZ(0);
+    transform-style: preserve-3d;
+    transform-origin: center;
+  }
+
+  // Hover
+  #{$no-touch} &:hover {
+    &:after {
+      transform: perspective(50px) rotateX(-180.1deg) rotateY(0deg);
+      opacity: .5;
+    }
+  }
+
+  // Active
+  #{$no-touch} &:active,
+  #{$touch} &:active {
+    &:after {
+      opacity: 1;
+    }
+  }
+}
+
+// Icon
+.topbar__brand__icon{
+  font-size: pem(25);
+  width: 1em;
+  height: 1em;
+  fill: #fff;
+
+  @media (min-width: $screen-nav-break-lower-min) {
+    font-size: pem(30);
+  }
+
+  @media (min-width: $screen-min-xl) {
+    font-size: pem(35);
+  }
+}
+
+// Nav container
+.topbar__nav {
+  @extend %clearfix;
+
+  transition: 
+    transform $ts__topbar__nav * 4 $e__fast-in,
+    opacity $ts__topbar__nav linear;
+
+  right: 0;
+
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+
+  z-index: z('topbar', 'topbar__nav');
+
+  #{$js} & {
+    transform: translate3d(5em, -50%, 0);
+    opacity: 0;
+  }
+
+  #{$s__doc-initialized} & {
+    transform: translate3d(0, -50%, 0);
+    opacity: 1;
+  }
+
+  // Nav is open
+  #{$s__nav-open} & {
+    @media (max-width: $screen-max-xs) {
+      padding-top: $topbar-height;
+    }
+
+    @media (min-width: $screen-min-xs) and (max-width: $screen-nav-break-higher-max) {
+      padding-top: $topbar-height * 1.25;
+    }
+
+    @media (max-width: $screen-nav-break-higher-max) {
+      width: 100%;
+    }
+  }
+}
+
+// Main nav list
+// --------------------------------------------------
+.main-nav {
+  @extend %clearfix;
+
+  transition: $project-nav-transform-transition;
+
+  margin: 0;
+  padding: 0;
+  float: left;
+
+  @media (max-width: $screen-nav-break-higher-max) {
+    opacity: 0;
+    display: none;
+  }
+
+  // Project nav is closed
+  #{$s__project-closed} & {
+    @include project-hidden-offset;
+  }
+
+  // Nav is open
+  #{$s__nav-open} & {
+    @media (max-width: $screen-nav-break-higher-max) {
+      display: block;
+
+      float: none;
+      opacity: 1;
+
+      // Clear any transforms that are present
+      transform: translateX(0);
+    }
+  }
+}
+
+// Item
+.main-nav__item {
+  float: left;
+  position: relative;
+
+  // Pip divider
+  &:after {
+    @extend %render-pip;
+
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 50%;
+    margin-top: -$pip-size;
+
+    #{$js} & {
+      transition:
+        opacity $ts__topbar__nav linear,
+        transform $ts__topbar__nav $e__fast-in;
+
+      opacity: 0;
+
+      transform: translate3d(10em,0,0);
+    }
+
+    #{$js} #{$s__doc-initialized} & {
+      opacity: 1;
+
+      transform: translate3d(0,0,0);
+    }
+  }
+
+  // Remove trailing pip
+  &:last-of-type {
+    &:after {
+      content: none;
+    }
+  }
+
+  @media (max-width: $screen-nav-break-higher-max) {
+    transition: 
+      opacity $ts__topbar--mobile $e__ease,
+      transform $ts__topbar--mobile $e__ease $ts__topbar--mobile;
+
+    opacity: 0;
+    transform: translate3d(0,1em,0) scale(1.25);
+  }
+
+  // Nav is open
+  #{$s__nav-open} & {
+    @media (max-width: $screen-nav-break-higher-max) {
+      float: none;
+      text-align: center;
+
+      &:after {
+        content: none;
+      }
+    }
+  }
+
+  // Nav is visible
+  #{$s__nav-visible} & {
+    @media (max-width: $screen-nav-break-higher-max) {
+      transition: 
+        opacity $ts__topbar--mobile $e__ease,
+        transform $ts__topbar--mobile $e__ease;
+
+      opacity: 1;
+
+      transform: translate3d(0,0,0) scale(1);
+    }
+  }
+
+  // Entry animation cascade
+  $top-level-links: 5;
+
+  // Loop it with nth-child (subtract amount to lower delay at start)
+  @for $i from 1 through $top-level-links {
+    #{$s__nav-visible} .main-nav &:nth-child(#{$i}) {
+      @media (max-width: $screen-nav-break-higher-max) {
+
+        // Match delay for the opacity transition and animation movement
+        transition-delay: #{$i * .09 - .09}s;
+      }
+    }
+  }
+}
+
+// Links
+.main-nav__link {
+  @extend %text-uppercase;
+  @include type-scale-nav;
+  @include text-shadow-dark;
+
+  transition: 
+    opacity $ts__topbar__nav / 3 linear,
+    padding $ts__topbar__nav * 2 ease,
+    transform $ts__topbar__nav $e__ease;
+
+  position: relative;
+
+  text-decoration: none;
+  font-weight: $weight-bold;
+  color: $heading-color--invert;
+
+  line-height: $topbar-height;
+
+  padding: 0 3em;
+  display: block;
+
+  opacity: .65;
+
+  #{$no-touch} .main-nav:hover & {
+    opacity: .65;
+  }
+
+  // Basic hover and active
+  #{$no-touch} .main-nav:hover &:hover {
+    opacity: 1;
+  }
+
+  #{$no-touch} .main-nav:hover &:active,
+  #{$touch} .main-nav:hover &:active, {
+    opacity: 1;
+  }
+
+  @media (min-width: $screen-nav-break-higher-min) {
+    line-height: $topbar-height-medium;
+
+    &#{$s__nav-highlight} {
+      opacity: 1;
+    }
+  }
+
+  @media (min-width: $screen-min-xl) {
+    line-height: $topbar-height-large;
+  }
+
+  // Trim padding from last link if the nav is closed or if the topbar is a static version
+  #{$s__project-closed} .main-nav__item:last-of-type &,
+  .topbar--static .main-nav__item:last-of-type & {
+    padding-right: 0;
+  }
+
+  // Nav is open
+  #{$s__nav-open} & {
+    @media (max-width: $screen-nav-break-higher-max) {
+      transition: opacity $ts__topbar--mobile linear;
+
+      opacity: .5;
+
+      height: 2.6em;
+
+      display: inline-block;
+      overflow: hidden;
+
+      padding: 0;
+      letter-spacing: .1em;
+      line-height: 3;
+
+      &:after {
+        transition: transform $ts__topbar--mobile * 1.25 $e__ease;
+
+        position: absolute;
+
+        content: '';
+
+        width: 100%;
+        height: 2px;
+        bottom: .2em;
+        left: 0;
+
+        background-color: $brand-color-primary;
+
+        // Hide
+        // Has buffer for cross browser rounding reasons
+        transform: translateX(-110%);
+      }
+    }
+  }
+
+  // Hover effects only when in mobile menu mode
+  #{$no-touch} #{$s__nav-open} &:hover {
+    @media (max-width: $screen-nav-break-higher-max) {
+      &:after {
+        transform: translateX(0);
+      }
+    }
+  }
+}
+
+// Project navigation
+// --------------------------------------------------
+
+// Project nav
+.project-nav {
+  @extend %clearfix;
+  
+  transition: 
+    $project-nav-transform-transition,
+    opacity $ts__topbar__nav / 2 linear,
+    visibility 0s linear 0s;
+
+  transform: translateX(0);
+
+  visibility: visible;
+
+  margin: 0;
+  padding: 0;
+
+  float: left;
+
+  #{$s__project-closed} & {
+    @include project-hidden-offset;
+
+    transition: 
+      transform $ts__topbar__nav * 2 $e__ease,
+      opacity $ts__topbar__nav / 2 linear,
+      visibility 0s linear $ts__topbar__nav; // Match visibility delay with opacity in, as not to cut it off short
+
+      opacity: 0;
+
+    visibility: hidden;
+  }
+
+  // Nav is open
+  #{$s__nav-open} & {
+    @media (max-width: $screen-nav-break-higher-max) {
+      display: none;
+    }
+  }
+}
+
+// Items
+.project-nav__item {
+  float: left;
+}
+
+// Links
+.project-nav__link {
+  @extend %touch-optimised;
+  @extend %text-uppercase;
+  @include type-scale-nav;
+
+  transition: 
+    width $ts__topbar__nav $e__elastic,
+    background-color $ts__topbar__nav / 2 linear,
+    border-color $ts__topbar__nav / 2 linear;
+
+  position: relative;
+
+  overflow: hidden; // Trim overflowing pos element else it affects the hover zone
+
+  height: $topbar-height;
+  width: $topbar-height;
+
+  text-decoration: none;
+  font-weight: $weight-bold;
+  color: $heading-color--invert;
+
+  border-left: 1px solid $topbar-border-color;
+  border-right: 1px solid $topbar-border-color;
+
+  // Overlap elements to give illusion of single border
+  z-index: z('topbar', 'project-nav','project-nav__item');
+  margin-right: -1px;
+
+  display: block;
+
+  #{$no-touch} &:hover {
+    background-color: $brand-color-primary;
+
+    // Change border color and raise index to make it visible
+    border-color: $brand-color-primary;
+    z-index: z('topbar', 'project-nav','project-nav__item:hover');
+
+    @media (min-width: $screen-min-xs) {
+      width: $topbar-height * 2.1;
+    }
+
+    @media (min-width: $screen-nav-break-lower-min) {
+      width: $topbar-height-medium * 1.93;
+    }
+
+    @media (min-width: $screen-min-xl) {
+      width: $topbar-height-large * 1.8;
+    }
+  }
+
+  // Active
+  #{$touch} &:active,
+  #{$no-touch} &:active {
+    transition-duration: $ts__topbar__nav / 3;
+
+    background-color: $brand-color-primary-light;
+
+    // Change border color and raise index to make it visible
+    border-color: $brand-color-primary-light;
+    z-index: z('topbar', 'project-nav','project-nav__item:hover');
+  }
+
+  @media (min-width: $screen-nav-break-lower-min) {
+    height: $topbar-height-medium;
+    width: $topbar-height-medium;
+  }
+
+  @media (min-width: $screen-min-xl) {
+    height: $topbar-height-large;
+    width: $topbar-height-large;
+  }
+}
+
+// Make hover widths slightly larger on the work variant
+#{$no-touch} .project-nav__link--work:hover {
+
+  @media (min-width: $screen-nav-break-lower-min) {
+    width: $topbar-height-medium * 2;
+  }
+
+  @media (min-width: $screen-min-xl) {
+    width: $topbar-height-large * 1.9;
+  }
+}
+
+// Modifier - Icon on the left
+.project-nav__link--left {}
+
+// Modifier - Icon on the left
+.project-nav__link--right {}
+
+// Internal position wrapper
+.project-nav__pos {
+  @extend %clearfix;
+
+  position: absolute;
+  top: 50%;
+
+  transform: translateY(-50%);
+
+  width: 8rem; // Don't allow the internal floats to collapse underneath each other
+
+  // Augment position based on modifier
+  .project-nav__link--left & {
+    left: $topbar-height / 2;
+    margin-left: -($topbar-nav-icon-size / 2);
+
+    @media (min-width: $screen-nav-break-lower-min) {
+      left: $topbar-height-medium / 2;
+    }
+
+    @media (min-width: $screen-min-xl) {
+      left: $topbar-height-large / 2;
+    }
+  }
+
+  .project-nav__link--right &,
+  .project-nav__link--work & {
+    right: $topbar-height / 2;
+    margin-right: -($topbar-nav-icon-size / 2);
+
+    @media (min-width: $screen-nav-break-lower-min) {
+      right: $topbar-height-medium / 2;
+    }
+
+    @media (min-width: $screen-min-xl) {
+      right: $topbar-height-large / 2;
+    }
+  }
+}
+
+// Icon
+.project-nav__pos__icon {
+  @extend %icon-wrapper;
+
+  transition: opacity $ts__topbar__nav / 2 linear;
+
+  font-size: $topbar-nav-icon-size;
+
+  padding: .1em 0;
+
+  opacity: .75;
+
+  animation-duration: $ts__topbar__nav * 1.5;
+  animation-timing-function: $e__ease;
+
+  .project-nav__link--left & {
+    float: left;
+    margin-right: 1.25em;
+  }
+
+  .project-nav__link--right &,
+  .project-nav__link--work & {
+    float: right;
+    margin-left: 1.25em;
+  }
+
+  // Animate arrows
+  #{$no-touch} .project-nav__link.project-nav__link--right:hover & {
+    @media (min-width: $screen-min-xs) {
+      animation-name: arrow-right;
+    }
+  }
+
+  #{$no-touch} .project-nav__link.project-nav__link--left:hover & {
+    @media (min-width: $screen-min-xs) {
+      animation-name: arrow-left;
+    }
+  }
+
+  // General hover
+  #{$no-touch} .project-nav__link:hover &,
+  #{$no-touch} .project-nav__link:active &,
+  #{$touch} .project-nav__link:active & {
+    opacity: 1;
+  }
+
+  // Icon graphic
+  svg {
+    fill: $icon-color--invert;
+  }
+}
+
+// Text
+.project-nav__pos__text {
+  transition: 
+    transform $ts__topbar__nav $e__ease,
+    opacity $ts__topbar__nav / 2 linear;
+
+  float: left;
+  line-height: 1;
+  opacity: 0; // Hidden by default
+
+  // Hover
+  #{$no-touch} .project-nav__link:hover & {
+    @media (min-width: $screen-min-xs) {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  // Modify for left
+  .project-nav__link--left & {
+    float: left;
+    transform: translateX(2em);
+  }
+
+  // Modify for right
+  .project-nav__link--right &,
+  .project-nav__link--work & {
+    float: right;
+    transform: translateX(-2em);
+  }
+}
+
+// Menu button
+// --------------------------------------------------
+.topbar__nav__menu {
+  @extend %touch-optimised;
+
+  transition: border-color 0s linear;
+
+  position: relative;
+
+  float: right;
+
+  height: $topbar-height;
+  width: $topbar-height;
+
+  z-index: z('topbar','topbar__nav__menu', 'base');
+
+  // Size button
+  @media (min-width: $screen-nav-break-lower-min) {
+    height: $topbar-height-medium;
+    width: $topbar-height-medium;
+
+    
+  }
+
+  @media (min-width: $screen-nav-break-higher-min) {
+    display: none;
+  }
+
+  #{$s__nav-bar} & {
+    border-color: $topbar-border-color;
+  }
+
+  // Transitions only in closed mode
+  #{$no-touch} #{$s__nav-closed}#{$s__nav-bar} & {
+    transition: 
+      background-color $ts__topbar__nav / 2 linear,
+      border-color $ts__topbar__nav / 2 linear;
+  }
+
+  // Hover
+  #{$no-touch} #{$s__nav-closed}#{$s__nav-bar} &:hover {
+    background-color: $brand-color-primary;
+
+    // Change border color and raise index to make it visible
+    border-color: $brand-color-primary;
+    z-index: z('topbar', 'topbar__nav__menu','base:hover');
+  }
+
+  // Active
+  #{$no-touch} #{$s__nav-closed}#{$s__nav-bar} &:active,
+  #{$touch} #{$s__nav-closed}#{$s__nav-bar} &:active {
+
+    transition-duration: $ts__topbar__nav / 3;
+    background-color: $brand-color-primary-light;
+
+    // Change border color and raise index to make it visible
+    border-color: $brand-color-primary-light;
+    z-index: z('topbar', 'topbar__nav__menu','base:hover');
+  }
+
+  // Remove background colour change on mobile nav
+  #{$no-touch} #{$s__nav-complete} &:hover {
+    background-color: transparent;
+    border-color: transparent;
+  }
+
+  // Nav is closed
+  #{$s__nav-closed} & {
+      overflow: hidden; // Prevent large close icon for affecting touch regions
+  }
+
+  // Nav is open
+  #{$s__nav-open} & {
+    @media (max-width: $screen-nav-break-higher-max) {
+  
+      border-color: transparent;
+
+      position: absolute;
+      top: 0;
+      left: 50%;
+    }
+
+    @media (max-width: $screen-nav-break-lower-max) {
+      margin-left: -($topbar-height / 2);
+    }
+
+    @media (max-width: $screen-nav-break-higher-max) {
+      margin-left: -($topbar-height-medium / 2);
+    }
+  }
+}
+
+// Nav icon
+.topbar__nav__menu__icon {
+  @extend %icon-wrapper;
+
+  font-size: $topbar-nav-icon-size;
+
+  position: absolute;
+
+  left: 50%;
+  top: 50%;
+
+  margin-left: -.5em;
+  margin-top: -.5em;
+
+  // Icon graphic
+  svg {}
+}
+
+// Modifier - Navicon specific
+.topbar__nav__menu__icon--navicon {
+  transition: opacity $ts__topbar__nav linear;
+
+  opacity: .75;
+
+  // Nav is closed
+  #{$no-touch} #{$s__nav-closed} .topbar__nav__menu:hover &,
+  #{$no-touch} #{$s__nav-closed} .topbar__nav__menu:active &,
+  #{$touch} #{$s__nav-closed} .topbar__nav__menu:active & {
+    @media (max-width: $screen-nav-break-higher-max) {
+      opacity: 1;
+    }
+  }
+
+  // Icon graphic
+  svg {
+    fill: $icon-color--invert;
+  }
+}
+
+// Modifier - Close specific
+.topbar__nav__menu__icon--close {
+
+  transition: 
+    opacity $ts__topbar--mobile / 2 linear,
+    fill $ts__topbar--mobile / 2 linear,
+
+    transform $ts__topbar--mobile $e__ease $ts__topbar--mobile; // Delay is set to prevent the transition out by being visible when closing the nav overlay
+
+  position: absolute;
+
+  font-size: pem(14);
+
+  opacity: 0;
+
+  // Prep pre-transition position when nav opens
+  transform: rotate(90deg) scale(30);
+
+  @media (min-width: $screen-min-xs) {
+    font-size: pem(16);
+  }
+
+  // Nav is visible
+  #{$s__nav-visible} & {
+    @media (max-width: $screen-nav-break-higher-max) {
+      transition-delay: 0s; // Fire transition immediately
+      opacity: .75;
+
+      transform: rotate(0deg) scale(1);
+    }
+  }
+
+  #{$no-touch} #{$s__nav-open}#{$s__nav-complete} .topbar__nav__menu:hover &,
+  #{$no-touch} #{$s__nav-open}#{$s__nav-complete} .topbar__nav__menu:active &,
+  #{$touch} #{$s__nav-open}#{$s__nav-complete} .topbar__nav__menu:active & {
+    @media (max-width: $screen-nav-break-higher-max) {
+      opacity: 1;
+    }
+  }
+
+  #{$no-touch} #{$s__nav-open}#{$s__nav-complete} .topbar__nav__menu:active &,
+  #{$touch} #{$s__nav-open}#{$s__nav-complete} .topbar__nav__menu:active & {
+    @media (max-width: $screen-nav-break-higher-max) {
+      fill: $brand-color-primary-light;
+    }
+  }
+
+  // Hover effects for the mobile menu only
+  #{$no-touch} #{$s__nav-open}#{$s__nav-complete} .topbar__nav__menu:hover & {
+
+    @media (max-width: $screen-nav-break-higher-max) {
+      transform: rotate(90deg) scale(2);
+    }
+  }
+
+  // Don't rotate on ie9 because it's really buggy on my test machine
+  #{$no-touch}#{$ie9} #{$s__nav-open}#{$s__nav-complete} .topbar__nav__menu:hover & {
+
+    @media (max-width: $screen-nav-break-higher-max) {
+      transform: rotate(0) scale(1.3);
+    }
+  }
+
+  // Icon graphic
+  svg {
+    fill: $brand-color-primary;
+  }
+}
+
+// Close overlay
+// Enables the menu to be closed by clicking the background
+// --------------------------------------------------
+.topbar__close-overlay {
+  display: none;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 100%;
+  z-index: z('topbar', 'topbar__close-overlay');
+
+  // Nav is open and in position
+  #{$s__nav-complete} & {
+    display: block;
+  }
+}

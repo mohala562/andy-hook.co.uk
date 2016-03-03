@@ -1,0 +1,117 @@
+<!-- Top navigation bar -->
+
+<!-- REMEMBER: s__nav-hero and s__nav-bar for specific style changes between modes  -->
+<div class="topbar js__topbar s__nav-closed s__nav-hero {{#if external-topbar}}js__topbar--static topbar--static{{else}}s__project-closed{{/if}}">
+
+    <!-- Constraining container -->
+    <div class="l-container topbar__container">
+
+        <!-- Position wrapper -->
+        <div class="topbar__pos">
+
+            <!-- Brand -->
+            <div class="topbar__brand">
+                <a href="{{absolute_path ''}}" class="topbar__brand__link" data-scroll="0">
+                    <svg class="topbar__brand__icon"><use xlink:href="#logo"></use></svg>
+                </a>
+            </div>
+
+            <!-- Navigation -->
+            <nav class="topbar__nav">
+
+                <!-- Main list -->
+                <ul class="main-nav js__main-nav">
+                    <li class="main-nav__item js__main-nav__item">
+                        <a class="main-nav__link js__main-nav__link" href="{{#if external-topbar}}/{{/if}}#home" data-scroll="href">Home</a>
+                    </li>
+
+                    <li class="main-nav__item js__main-nav__item">
+                        <a class="main-nav__link js__main-nav__link" href="{{#if external-topbar}}/{{/if}}#work" data-nav-highlight-extend="#project" data-scroll="href">Work</a>
+                    </li>
+                    
+                    <li class="main-nav__item js__main-nav__item">
+                        <a class="main-nav__link js__main-nav__link" href="{{#if external-topbar}}/{{/if}}#about" data-scroll="href">About</a>
+                    </li>
+
+                    <li class="main-nav__item js__main-nav__item">
+                        <a class="main-nav__link js__main-nav__link" href="{{#if external-topbar}}/{{/if}}#skills" data-scroll="href">Skills</a>
+                    </li>
+
+                    <!-- Last item has a class for hooked to animationEnd -->
+                    <!-- Tell me when they have all completed their animations -->
+                    <li class="main-nav__item js__main-nav__item">
+                        <a class="main-nav__link" href="mailto:contact@andyhook.co.uk">Contact</a>
+                    </li>
+                </ul>
+
+                {{#unless external-topbar}}
+
+                    <!-- Project nav -->
+                    <ul class="project-nav">
+                        <li class="project-nav__item">
+
+                            <!-- Check for "order" frontmatter to ensure it's a work project and render the next project path -->
+                            <!-- Uses handlebars sub expression syntax to get relative path -->
+                            <a class="project-nav__link project-nav__link--left js__project-nav__link--left js__pjax" href="{{#if order}}{{absolute_path (previous_path collections.work this.order)}}{{else}}#{{/if}}">
+                                <div class="project-nav__pos">
+                                    <div class="project-nav__pos__icon">
+                                        <svg><use xlink:href="#ui-angle-left"></use></svg>
+                                    </div>
+                                    <span class="project-nav__pos__text">Prev</span>
+                                </div>
+                            </a>
+                        </li>
+
+                        <li class="project-nav__item">
+
+                            {{! Check for "order" frontmatter to ensure it's a work project and render the previous project path }}
+                            {{! Uses handlebars sub expression syntax to get relative path }}
+                            <a class="project-nav__link project-nav__link--right js__project-nav__link--right js__pjax" href="{{#if order}}{{absolute_path (next_path collections.work this.order)}}{{else}}#{{/if}}">
+                                <div class="project-nav__pos">
+                                    <div class="project-nav__pos__icon">
+                                        <svg><use xlink:href="#ui-angle-right"></use></svg>
+                                    </div>
+                                    <span class="project-nav__pos__text">Next</span>
+                                </div>
+                            </a>
+                        </li>
+
+                        <li class="project-nav__item">
+                            <a class="project-nav__link project-nav__link--work" href="#work" data-scroll="href">
+                                <div class="project-nav__pos">
+                                    <div class="project-nav__pos__icon">
+                                        <svg><use xlink:href="#ui-grid"></use></svg>
+                                    </div>
+                                    
+                                    <span class="project-nav__pos__text">Work</span>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                {{/unless}}
+
+                <!-- Menu button -->
+                <button class="topbar__nav__menu js__topbar__menu">
+                    <div class="topbar__nav__menu__icon topbar__nav__menu__icon--navicon js__topbar__navicon">
+                        <svg><use xlink:href="#ui-navicon"></use></svg>
+                    </div>
+                    
+                    <div class="topbar__nav__menu__icon topbar__nav__menu__icon--close">
+                        <svg><use xlink:href="#ui-close"></use></svg>
+                    </div>
+                    
+                </button>
+            </nav>
+
+
+            <!-- Close menu overlay -->
+            <div class="topbar__close-overlay js__topbar__close-overlay"></div>
+
+        </div> <!-- /topbar__pos -->
+
+    </div> <!-- /topbar__container -->
+
+    <!-- Mobile nav cover -->
+    <div class="topbar__overlay js__topbar__overlay"></div>
+
+</div> <!-- /topbar -->

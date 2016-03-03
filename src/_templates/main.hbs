@@ -1,0 +1,31 @@
+{{> doc-header layout="main"}}
+    
+    <div class="l__wrapper">
+
+        {{> topbar}}
+
+        {{> hero}}
+
+        {{> work}}
+
+            {{! Don't render project contents on the homepage (Only on markdown files with "order" in the front-matter) }}
+            {{#if order}}
+                {{> project}}
+
+            {{! Render empty container ready for pjax inject }}
+            {{else}}
+                <article class="project js__project" id="project"></article>
+            {{/if}}
+
+       
+        {{> about}}
+
+        {{> skills}}
+
+    	{{> footer}}
+
+        {{> loading}}
+
+    </div>
+
+{{> doc-footer layout="main"}}

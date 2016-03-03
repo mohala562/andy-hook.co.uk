@@ -1,0 +1,85 @@
+<!-- Gallery thumbnail -->
+
+{{! Use custom helper to check if it's a large or small thumbnail and apply classes accordingly }}
+<div class="gallery__thumbnail {{#if_featured_thumb this.order}}gallery__thumbnail--large{{else}}gallery__thumbnail--small{{/if_featured_thumb}} js__gallery__thumbnail js__pf-image-controller js__pf-image-controller--lazyload" data-scroll-visibility="full">
+
+    <!-- Positioner -->
+    <div class="gallery__thumbnail__pos">
+    
+        <!-- Link -->
+        <!-- Ensure trailing slash is present to avoid server redirect, this breaks PJAX on github pages due to server redirect -->
+        <a href="{{absolute_path this.path}}/#project" class="gallery__thumbnail__link js__pjax">
+
+            <!-- Shadow -->
+            <div class="gallery__thumbnail__shadow"></div>
+
+            <!-- Loading cover -->
+            <div class="gallery__thumbnail__loading">
+                <div class="gallery__thumbnail__loading__spinner">
+                    <svg><use xlink:href="#ui-loading"></use></svg>
+                </div>
+
+                <div class="gallery__thumbnail__loading__overlay"></div>
+            </div>
+    
+            <!-- Caption -->
+            <div class="gallery__thumbnail__caption__pos">
+               <div class="gallery__thumbnail__caption">
+
+                    <!-- Icon -->
+                    <div class="gallery__thumbnail__caption__icon"><svg><use xlink:href="#category-{{this.icon}}"></use></svg></div>
+
+                    <!-- Title -->
+                    <h2 class="gallery__thumbnail__caption__title">{{this.title}}</h2>
+
+                    <!-- Category -->
+                    <p class="gallery__thumbnail__caption__category t-tertiary-text t-tertiary-text--small t-tertiary-text--opaque">{{this.category}}</p>
+
+                    <!-- Decorative border -->
+                    <div class="gallery__thumbnail__caption__border"></div>
+                    
+                </div> 
+            </div>
+           
+            <!-- Overlay -->
+            <div class="gallery__thumbnail__overlay">
+                <div class="gallery__thumbnail__overlay__gradient gallery__thumbnail__overlay__gradient--upper"></div>
+                <div class="gallery__thumbnail__overlay__gradient gallery__thumbnail__overlay__gradient--lower"></div>
+            </div>
+        
+            <!-- Image -->
+            <div class="gallery__thumbnail__image__pos">
+                <span class="gallery__thumbnail__image js__pf-image js__project__pf-image" data-alt="{{this.title}}">
+
+                    <span data-src="{{absolute_path this.path}}/thumb/{{get_filename this.path}}-thumb-x-small.jpg" data-media="(max-width: 339px)"></span>
+                    <span data-src="{{absolute_path this.path}}/thumb/{{get_filename this.path}}-thumb-medium.jpg" data-media="(min-width: 340px) and (max-width: 479px)"></span>
+                    <span data-src="{{absolute_path this.path}}/thumb/{{get_filename this.path}}-thumb-small.jpg" data-media="(min-width: 480px) and (max-width: 599px)"></span>
+                    <span data-src="{{absolute_path this.path}}/thumb/{{get_filename this.path}}-thumb-medium.jpg" data-media="(min-width: 600px) and (max-width: 767px)"></span>
+
+                    {{#if_featured_thumb this.order}}
+                
+                        <span data-src="{{absolute_path this.path}}/thumb/{{get_filename this.path}}-thumb-large.jpg" data-media="(min-width: 768px) and (max-width: 1999px)"></span>
+                        <span data-src="{{absolute_path this.path}}/thumb/{{get_filename this.path}}-thumb-featured-small.jpg" data-media="(min-width: 1200px) and (max-width: 1399px)"></span>
+                        <span data-src="{{absolute_path this.path}}/thumb/{{get_filename this.path}}-thumb-featured-large.jpg" data-media="(min-width: 1400px)"></span>
+
+                        <!-- Fallback content for non-JS browsers. Same img src as the initial, unqualified source element. -->
+                        <noscript>
+                            <img src="{{absolute_path this.path}}/thumb/{{get_filename this.path}}-thumb-large.jpg" alt="{{this.title}}">
+                        </noscript>
+                        
+                    {{else}}
+
+                        <span data-src="{{absolute_path this.path}}/thumb/{{get_filename this.path}}-thumb-large.jpg" data-media="(min-width: 768px)"></span>
+
+                        <!-- Fallback content for non-JS browsers. Same img src as the initial, unqualified source element. -->
+                        <noscript>
+                            <img src="{{absolute_path this.path}}/thumb/{{get_filename this.path}}-thumb-large.jpg" alt="{{this.title}}">
+                        </noscript>
+
+                    {{/if_featured_thumb}}
+                </span>
+            </div>
+           
+        </a>
+    </div>
+</div>

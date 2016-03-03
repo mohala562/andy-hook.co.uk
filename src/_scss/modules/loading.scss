@@ -1,0 +1,209 @@
+// Module - Loading
+// --------------------------------------------------
+.loading {
+
+  // Add transition delay on a single property in the stack
+  // Require repeat of entire property set with additional delay
+  transition: 
+    opacity $ts__loading linear,
+    z-index 0s linear $ts__loading,
+    visibility 0s linear $ts__loading;
+
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+
+  opacity: 0;
+
+  transform: translate3d(0,0,0);
+
+  // Always above the topbar prior to initialization
+  z-index: z('topbar', 'base') + 1;
+
+  background-color: $loading-background-color;
+
+  #{$s__doc-initialized} & {
+    z-index: z('loading', 'hidden');
+    visibility: hidden;
+  }
+
+  #{$s__doc-show-loading} & {
+    opacity: 1;
+    z-index: z('loading', 'visible');
+  }
+
+  // Always hide when no javascript is available
+  #{$no-js} & {
+    display: none;
+  }
+}
+
+// Effects positioner
+.loading__pos {
+  @extend $fill-space;
+
+  transition: 
+    transform $ts__loading * 3 $e__ease;
+
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+
+  #{$s__enhanced-effects} & {
+    transform: translate3d(0,0,0) scale(.5);
+  }
+
+  #{$s__enhanced-effects} #{$s__doc-show-loading} & {
+    transform: translate3d(0,0,0) scale(1);
+  }
+}
+
+// Particles wrapper for animation purposes
+// Animations and transitions interfere when applied to the same element
+.loading__particles__pos {
+  position: absolute;
+
+  width: 100%;
+  height: 100%;
+
+  visibility: hidden;
+
+  #{$s__base-effects} & {
+    transition: 
+      transform $ts__loading $e__ease,
+      opacity $ts__loading linear,
+      visibility 0s linear $ts__loading;
+
+    opacity: 0;
+  }
+
+  #{$s__enhanced-effects} & {
+    transform: scale(1.3);
+  }
+
+  #{$s__enhanced-effects} #{$s__doc-show-loading} & {
+    transform: scale(1);
+  }
+
+  #{$s__base-effects} #{$s__doc-show-loading} & {
+    transition-delay: 0s;
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+// Particles
+.loading__particles {
+  #{$s__enhanced-effects} & {
+    @extend %particles-base;
+
+    @media (max-width: $screen-max-xs) {
+      font-size: .5em;
+    }
+
+    @media (min-width: $screen-min-xs) {
+      font-size: .8em;
+    }
+
+    @media (min-width: $screen-min-md) {
+      font-size: 1em;
+    }
+  }
+}
+
+// Modifiers - Particle variants
+.loading__particles--background {
+  #{$s__enhanced-effects} & {
+    opacity: .3;
+    animation-duration: 30s;
+    background-position: bottom center;
+
+    z-index: z('loading', 'loading__particles--background');
+  }
+}
+
+.loading__particles--middleground {
+  #{$s__enhanced-effects} & {
+    opacity: .4;
+    animation-duration: 15s;
+    background-position: center center;
+    animation-direction: alternate-reverse;
+
+    z-index: z('loading', 'loading__particles--middleground');
+  }
+}
+
+.loading__particles--foreground {
+  #{$s__enhanced-effects} & {
+    opacity: .5;
+    animation-duration: 25s;
+    background-position: top center;
+
+    z-index: z('loading', 'loading__particles--foreground');
+  }
+}
+
+// Spinner
+.loading__spinner {
+  transition: 
+    transform $ts__loading $e__ease,
+    opacity $ts__loading / 2 linear,
+    visibility 0s linear $ts__loading / 2;
+
+  position: absolute;
+
+  font-size: 2em;
+
+  width: 1em;
+  height: 1em;
+
+  left: 50%;
+  top: 50%;
+
+  margin-left: -.5em;
+  margin-top: -.5em;
+
+  opacity: 0;
+  transform: scale(0);
+
+  visibility: hidden;
+
+  #{$s__doc-show-loading} & {
+    transition-delay: 0s;
+
+    visibility: visible;
+    opacity: .8;
+    transform: scale(1);
+  }
+}
+
+.loading__spinner__inner {
+  position: absolute;
+
+  width: 100%;
+  height: 100%;
+
+  border: ($border-thick * 2) solid $icon-color--invert;
+  border-radius: $border-radius;
+
+  animation: page-loader $ts__page-spinner * 3 infinite $e__elastic;
+
+  overflow: hidden;
+}
+
+.loading__spinner__inner__fill {
+  position: absolute;
+
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 100%;
+
+  background-color: $icon-color--invert;
+ 
+  animation: page-loader-fill $ts__page-spinner * 3 infinite $e__ease;
+}

@@ -1,0 +1,49 @@
+// Base
+// --------------------------------------------------
+html {
+  // Always show a scrollbar
+  overflow-y: scroll;
+}
+
+// Apply a natural box layout model to all elements, but allowing components to change
+// See: http://www.paulirish.com/2012/box-sizing-border-box-ftw/
+html {
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+html,
+body {
+  position: relative;
+  
+  // Set minimum width
+  min-width: $document-min-width;
+
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  background-color: $document-background-color;
+}
+
+svg {
+  display: block;
+}
+
+// Reset button
+button {
+	border: 0;
+	padding: 0;
+	background-color: transparent;
+
+  outline: none;
+}
+
+// Hide the spritesheet
+.spritesheet {
+  display: none;
+}

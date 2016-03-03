@@ -1,0 +1,80 @@
+<!-- Individual project -->
+<article class="project js__project" id="project">
+
+    <!-- Header -->
+    <header class="project__header js__pf-image-controller" data-scroll-visibility="full" data-scroll-visibility-direction="both">
+
+        <!-- Project details -->
+        <div class="project__header__details l-container">
+
+        	<!-- Icon -->
+       		<div class="project__header__details__icon"><svg><use xlink:href="#category-{{icon}}"></use></svg></div>
+
+            <!-- Title -->
+            <h1 class="project__header__details__title">{{ title }}</h1>
+
+            <!-- Category -->
+            <p class="project__header__details__category t-tertiary-text t-tertiary-text--regular t-tertiary-text--opaque">{{ category }}</p>
+        </div>
+
+        <!-- Header loading overlay -->
+        <div class="project__header__loading"></div>
+
+        <!-- Header gradient -->
+        <div class="project__header__gradient"></div>
+
+        <!-- Header background -->
+        <div class="project__header__background__pos" data-bottom-top="transform: translate3d(0rem,5rem,0rem); opacity: 0;" data-center-center="transform: translate3d(0rem,0rem,0rem); opacity: 1;" data-top-bottom="transform: translate3d(0rem,-5rem,0rem); opacity: 0;">
+            <div class="project__header__background">
+                <span class="project__header__background__image js__pf-image" data-alt="{{this.title}} - {{this.category}}">
+                    <span data-src="{{absolute_path this.path}}/header/{{get_filename this.path}}-header-480.jpg" data-media="(max-width: 479px)"></span>
+                    <span data-src="{{absolute_path this.path}}/header/{{get_filename this.path}}-header-768.jpg" data-media="(min-width: 480px) and (max-width: 767px)"></span>
+                    <span data-src="{{absolute_path this.path}}/header/{{get_filename this.path}}-header-1000.jpg" data-media="(min-width: 768px) and (max-width: 999px)"></span>
+                    <span data-src="{{absolute_path this.path}}/header/{{get_filename this.path}}-header-1200.jpg" data-media="(min-width: 1000px) and (max-width: 1199px)"></span>
+                    <span data-src="{{absolute_path this.path}}/header/{{get_filename this.path}}-header-1635.jpg" data-media="(min-width: 1200px) and (max-width: 1634px)"></span>
+                    <span data-src="{{absolute_path this.path}}/header/{{get_filename this.path}}-header-1900.jpg" data-media="(min-width: 1635px)"></span>
+
+                    <!-- Fallback content for non-JS browsers. Same img src as the initial, unqualified source element. -->
+                    <noscript>
+                        <img src="{{absolute_path this.path}}/header/{{get_filename this.path}}-header-1900.jpg" alt="{{this.title}} - {{this.category}}">
+                    </noscript>
+                </span>
+            </div>
+        </div>
+        
+      
+    </header>
+
+    <main class="project__body">
+
+        <!-- Description -->
+        <div class="project__description l-container" data-scroll-visibility="full" data-scroll-visibility-direction="both">
+
+            <!-- Description Col -->
+            <div class="project__description__col project__description__col--right">
+
+                <!-- Impact text -->
+                <h2 class="project__description__impact">{{ impact }}</h2>
+
+            </div>
+
+            <!-- Description Col -->
+            <div class="project__description__col project__description__col--left">
+
+                <!-- Full project detail -->
+                <div class="project__description__detail">
+                    {{{ contents }}}
+                </div>
+            </div>
+        </div>
+        
+        <!-- Main project content (Images) -->
+        <div class="project__content">
+
+            {{! Nested loops to output responsive project images from .md files }}
+            {{#each this.images}}
+                {{> project-image project_path=(absolute_path ../this.path)}}  
+            {{/each}}
+        </div>
+    </main>
+</article> <!-- /project -->

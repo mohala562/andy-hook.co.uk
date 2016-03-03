@@ -1,0 +1,521 @@
+// Base - Typography
+// --------------------------------------------------
+
+// Transform to uppercase with appropriate letter spacing
+@mixin text-uppercase {
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+// Body
+@mixin font-stack-body {
+  font-family: 'proxima-nova', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
+  font-style: normal;
+
+  // Separate bold weight and adjusted color
+  strong {
+    font-weight: $weight-bold;
+    color: $body-color-impact;
+  }
+
+  // No JS
+  #{$no-js} & {
+    font-family: 'Helvetica', 'Arial', sans-serif;
+  }
+}
+
+// Heading
+@mixin font-stack-heading {
+  font-family: 'futura-pt', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
+  font-style: normal;
+
+  // Separate bold weight
+  strong {
+    font-weight: $weight-medium;
+  }
+
+  // No JS
+  #{$no-js} & {
+    font-family: 'Helvetica', 'Arial', sans-serif;
+  }
+}
+
+// Tertiary
+@mixin font-stack-tertiary-text {
+  @include text-uppercase;
+
+  font-family: 'proxima-nova', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
+  
+  font-weight: $weight-bold;
+  font-style: normal;
+  
+  color: $body-color;
+}
+
+// Scale
+// --------------------------------------------------
+
+// Base paragraphs
+@mixin type-scale-base {
+  font-size: pem(14);
+
+  @media (min-width: $screen-min-xs) {
+    font-size: pem(16);
+  }
+
+  @media (min-width: $screen-min-sm) {
+    font-size: pem(18);
+  }
+
+  @media (min-width: $screen-min-md) {
+    font-size: pem(20);
+  }
+
+  @media (min-width: $screen-min-lg) {
+    font-size: pem(18);
+  }
+
+  @media (min-width: $screen-min-xl) {
+    font-size: pem(20);
+  }
+
+  @media (min-width: $screen-min-max) {
+    font-size: pem(22);
+  }
+}
+
+// Smaller variant
+@mixin type-scale-base--small {
+  font-size: pem(14);
+
+  @media (min-width: $screen-min-xs) {
+    font-size: pem(16);
+  }
+
+  @media (min-width: $screen-min-md) {
+    font-size: pem(20);
+  }
+
+  @media (min-width: $screen-min-lg) {
+    font-size: pem(16);
+  }
+
+  @media (min-width: $screen-min-xl) {
+    font-size: pem(18);
+  }
+
+  @media (min-width: $screen-min-max) {
+    font-size: pem(20);
+  }
+}
+
+// Tertiary text
+@mixin type-scale-tertiary {
+
+  font-size: pem(12);
+
+  @media (min-width: $screen-min-xs) {
+    font-size: pem(14);
+  }
+
+  @media (min-width: $screen-min-sm) {
+    font-size: pem(16);
+  }
+
+  @media (min-width: $screen-min-md) {
+    font-size: pem(18);
+  }
+
+  @media (min-width: $screen-min-lg) {
+    font-size: pem(16);
+  }
+
+  @media (min-width: $screen-min-max) {
+    font-size: pem(18);
+  }
+}
+
+// Tertiary text
+@mixin type-scale-tertiary--small {
+
+  font-size: pem(12);
+
+  @media (min-width: $screen-min-md) {
+    font-size: pem(14);
+  }
+
+  @media (min-width: $screen-min-xl) {
+    font-size: pem(16);
+  }
+}
+
+// Main navigation
+@mixin type-scale-nav {
+  font-size: pem(12);
+
+  @media (min-width: $screen-nav-break-lower-min) {
+    font-size: pem(13);
+  }
+
+  @media (min-width: $screen-min-xl) {
+    font-size: pem(14);
+  }
+
+  // Nav is open
+  #{$s__nav-open} & {
+    @media (max-width: $screen-max-xs) {
+      font-size: pem(20);
+    }
+
+    @media (min-width: $screen-min-xs) and (max-width: $screen-max-sm) {
+      font-size: pem(22);
+    }
+
+    @media (min-width: $screen-min-sm) and (max-width: $screen-nav-break-lower-max) {
+      font-size: pem(26);
+    }
+
+    @media (min-width: $screen-nav-break-lower-min) and (max-width: $screen-nav-break-higher-max) {
+      font-size: pem(30);
+    }
+  }
+}
+
+// Headings
+@mixin type-scale-h1 {
+  font-size: pem(34);
+
+  @media (min-width: $screen-min-xs) {
+    font-size: pem(42);
+  }
+
+  @media (min-width: $screen-min-sm) {
+    font-size: pem(54);
+  }
+
+  @media (min-width: $screen-min-md) {
+    font-size: pem(66);
+  }
+
+  @media (min-width: $screen-min-lg) {
+    font-size: pem(60);
+  }
+
+  @media (min-width: $screen-min-xl) {
+    font-size: pem(65);
+  }
+
+  @media (min-width: $screen-min-max) {
+    font-size: pem(70);
+  }
+}
+
+@mixin type-scale-h2 {
+  font-size: pem(22);
+
+  @media (min-width: $screen-min-xs) {
+    font-size: pem(26);
+  }
+
+  @media (min-width: $screen-min-sm) {
+    font-size: pem(30);
+  }
+
+  @media (min-width: $screen-min-md) {
+    font-size: pem(38);
+  }
+
+  @media (min-width: $screen-min-lg) {
+    font-size: pem(34);
+  }
+
+  @media (min-width: $screen-min-xl) {
+    font-size: pem(36);
+  }
+
+  @media (min-width: $screen-min-max) {
+    font-size: pem(42);
+  }
+}
+
+@mixin type-scale-h3 {
+  font-size: pem(20);
+
+  @media (min-width: $screen-min-xs) {
+    font-size: pem(22);
+  }
+
+  @media (min-width: $screen-min-sm) {
+    font-size: pem(26);
+  }
+
+  @media (min-width: $screen-min-md) {
+    font-size: pem(36);
+  }
+
+  @media (min-width: $screen-min-lg) {
+    font-size: pem(26);
+  }
+
+  @media (min-width: $screen-min-xl) {
+    font-size: pem(30);
+  }
+
+  @media (min-width: $screen-min-max) {
+    font-size: pem(36);
+  }
+}
+
+@mixin type-scale-centered-title {
+  font-size: pem(110);
+
+  @media (min-width: $screen-min-xs) {
+    font-size: pem(150);
+  }
+
+  @media (min-width: $screen-min-sm) {
+    font-size: pem(180);
+  }
+
+  @media (min-width: $screen-min-md) {
+    font-size: pem(190);
+  }
+
+  @media (min-width: $screen-min-lg) {
+    font-size: pem(230);
+  }
+
+  @media (min-width: $screen-min-xl) {
+    font-size: pem(240);
+  }
+
+  @media (min-width: $screen-min-max) {
+    font-size: pem(270);
+  }
+}
+
+// Larger variant
+@mixin type-scale-centered-sub {
+  font-size: pem(16);
+
+  @media (min-width: $screen-min-xs) {
+    font-size: pem(18);
+  }
+
+  @media (min-width: $screen-min-sm) {
+    font-size: pem(20);
+  }
+
+  @media (min-width: $screen-min-xl) {
+    font-size: pem(22);
+  }
+
+  @media (min-width: $screen-min-max) {
+    font-size: pem(24);
+  }
+}
+
+// Basics
+// --------------------------------------------------
+html {
+  font-size: $font-size-base;
+}
+
+body {
+  @include font-stack-body;
+
+  color: $body-color;
+  font-weight: $weight-regular;
+  line-height: $line-height-body;
+  letter-spacing: 1px;
+}
+
+// Reset margins and padding 
+h1,
+h2,
+h3,
+h4,
+h5,
+p,
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+  vertical-align: baseline;
+}
+
+// Heading
+// --------------------------------------------------
+h1,
+h2,
+h3,
+h4,
+h5 {
+  @include font-stack-heading;
+
+  margin-bottom: 1em;
+  color: $heading-color;
+  line-height: $line-height-heading;
+  font-weight: $weight-regular;
+}
+
+// Apply scales
+h1 {
+  @include type-scale-h1;
+}
+
+h2 {
+  @include type-scale-h2;
+}
+
+h3 {
+  @include type-scale-h3;
+}
+
+// Body
+// --------------------------------------------------
+p {
+  @include type-scale-base;
+
+  margin-bottom: 1.7em;
+  color: $body-color;
+  line-height: $line-height-body;
+  
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+// Lists
+// --------------------------------------------------
+ul,
+ol {
+  margin-bottom: 1em;
+  padding-left: 1em;
+  list-style: none;
+  
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+// Links
+// --------------------------------------------------
+a {
+  color: $body-color;
+  text-decoration: none;
+}
+
+// Tertiary text
+// --------------------------------------------------
+@mixin tertiary-text {
+  @include font-stack-tertiary-text;
+
+  color: $tertiary-color;
+}
+
+// Utility OOCSS style classes, used so that colours can be flipped by a placeholder extension
+.t-tertiary-text {
+  @include font-stack-tertiary-text;
+}
+
+.t-tertiary-text--regular {
+  @include type-scale-tertiary;
+}
+
+.t-tertiary-text--small {
+  @include type-scale-tertiary--small;
+}
+
+.t-tertiary-text--opaque {
+  opacity: .75;
+}
+
+// Typography helpers
+// --------------------------------------------------
+
+// Invert standard content colours
+%content-inverted {
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5 {
+    color: $heading-color--invert;
+  }
+
+  p {
+    color: $body-color--invert;
+  }
+  
+  strong {
+    color: $body-color-impact--invert;
+  }
+
+  a {
+    @extend %enhanced-link--inverted;
+  }
+
+  .t-tertiary-text {
+    color: $tertiary-color--invert;
+  }
+
+  .t-tertiary-text--pronounced {
+    color: $tertiary-color--pronounced-invert;
+  }
+}
+
+// Enhance visual effect on anchors
+%enhanced-link {
+  font-weight: $weight-bold;
+  display: inline-block;
+  vertical-align: bottom;
+  position: relative;
+  overflow: hidden;
+  color: $brand-color-primary;
+
+  // Underline
+  &:after {
+    transition: transform .3s $e__ease;
+
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+
+    transform: translateY(93%);
+    opacity: .1;
+
+    background-color: $brand-color-primary;
+  }
+
+  // Hover
+  #{$no-touch} &:hover,
+  #{$no-touch} &:active,
+  #{$no-js} &:hover,
+  #{$no-js} &:active,
+  #{$touch} &:active {
+
+    // Underline
+    &:after {
+      transform: translateY(0);
+    }
+  }
+}
+
+%enhanced-link--title {
+   font-weight: $weight-medium;
+}
+
+// Modifier - Inverted variant
+%enhanced-link--inverted {
+  color: $body-color-impact--invert;
+
+  // Underline
+  &:after {
+    background-color: $body-color-impact--invert;
+  }
+}

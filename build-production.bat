@@ -1,0 +1,1 @@
+gulp full-build --prod_env=true

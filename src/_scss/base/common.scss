@@ -1,0 +1,439 @@
+// Base - Common
+// Common mixins and extends that are shared between modules
+// --------------------------------------------------
+
+// Project nav hidden offset
+// Used to hide and show project navigation
+// --------------------------------------------------
+@mixin project-hidden-offset {
+
+  @media (max-width: $screen-nav-break-higher-max) {
+    transform: translateX($project-nav-offset);
+  }
+
+  @media (min-width: $screen-nav-break-higher-min) {
+    transform: translateX($project-nav-offset-medium);
+  }
+
+  @media (min-width: $screen-min-xl) {
+    transform: translateX($project-nav-offset-large);
+  }
+}
+
+// Background images
+// --------------------------------------------------
+
+// Applies a background across the required breakpoints using the established filename convention
+@mixin apply-background($filename) {
+
+  // Avoid overlap by setting ranges for each image request
+  // otherwise older browsers will request every image as we scale up 
+  @media (max-width: $screen-max-xs) {
+    background-image: url(../img/#{$filename}-extra-small.jpg);
+  }
+
+  @media (min-width: $screen-min-xs) and (max-width: $screen-max-md) {
+    background-image: url(../img/#{$filename}-small.jpg);
+  }
+
+  @media (min-width: $screen-min-md) and (max-width: $screen-max-lg) {
+    background-image: url(../img/#{$filename}-medium.jpg);
+  }
+
+  @media (min-width: $screen-min-lg) {
+    background-image: url(../img/#{$filename}-large.jpg);
+  }
+}
+
+// Use placeholder to avoid style overhead when sharing a sprite
+%background-sprite {
+  @include apply-background('background-sprite');
+}
+
+// Hero sprites
+// --------------------------------------------------
+@mixin hero-mascot-sprite {
+  background-image: url(../img/hero-graphic-sprite.png);
+
+  // Should match source image
+  // Care should be taken with image ratio
+  // Calculate based on source image size
+  background-size: pem(737) pem(787);
+
+  background-repeat: no-repeat;
+}
+
+@mixin hero-device-sprite {
+  background-image: url(../img/hero-device-sprite.jpg);
+
+  // Should match source image
+  // Care should be taken with image ratio
+  // Calculate based on source image size
+  background-size: pem(1044) pem(786);
+
+  background-repeat: no-repeat;
+}
+
+// Particle sprite
+// --------------------------------------------------
+%particles-sprite {
+
+  // Swap image resolution when needed
+  @media (max-width: $screen-max-sm) {
+    background-image: url(../img/particles-sprite-small.png);
+  }
+
+  @media (min-width: $screen-min-sm) {
+    background-image: url(../img/particles-sprite-large.png);
+  }
+
+  // Should match source image
+  background-size: pem(1800) pem(2999);
+
+  background-repeat: no-repeat;
+}
+
+%particles-base {
+  @extend %particles-sprite;
+
+  position: absolute;
+
+  $width: 1800;
+  $height: 1000;
+
+  width: pem($width);
+  height: pem($height);
+
+  margin-left: pem(-($width / 2));
+  margin-top: pem(-($height / 2));
+
+  left: 50%;
+  top: 50%;
+
+  #{$s__enhanced-effects} & {
+    animation-name: floating-particles;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    animation-timing-function: linear;
+  }
+
+  // Disable animation if section is hidden
+  #{$s__section-hidden} & {
+    animation: none;
+  }
+
+}
+
+// Hero transition changes
+// An easier way to manage format switching transitions
+// This is applied to the main graphical elements in the hero
+// --------------------------------------------------
+%hero-graphic-transition-stack {
+  transition: right ($ts__hero__parallax * 2) $e__ease;
+}
+
+// Nudge hero element
+// Moves hero elements into position based on x,y and an additional offset
+// Useful when I can't wrap elements together due to parallax implementation
+// --------------------------------------------------
+@mixin nudge-hero-element($pos-x, $pos-y) {
+  $hero-graphic-x-offset-lg: -12em;
+  $hero-graphic-x-offset-lg-straddle-low: -7em;
+  $hero-graphic-x-offset-lg-straddle-high: -5em;
+  $hero-graphic-x-offset-xl: -5.5em;
+  $hero-graphic-x-offset-xl-straddle-low: .7em;
+  $hero-graphic-x-offset-xl-straddle-high: 1.75em;
+  $hero-graphic-x-offset-max: 2em;
+
+  $hero-graphic-y-offset-lg:;
+  $hero-graphic-y-offset-lg-straddle:;
+  $hero-graphic-y-offset-xl:;
+  $hero-graphic-y-offset-xl-straddle:;
+  $hero-graphic-y-offset-max:;
+
+  @media (min-width: $screen-min-lg) {
+    bottom: $pos-y;
+    right: $pos-x + $hero-graphic-x-offset-lg;
+  }
+
+  @media (min-width: $screen-min-lg-straddle-low) {
+    bottom: $pos-y;
+    right: $pos-x + $hero-graphic-x-offset-lg-straddle-low;
+  }
+
+  @media (min-width: $screen-min-lg-straddle-high) {
+    bottom: $pos-y;
+    right: $pos-x + $hero-graphic-x-offset-lg-straddle-high;
+  }
+
+  @media (min-width: $screen-min-xl) {
+    bottom: $pos-y;
+    right: $pos-x + $hero-graphic-x-offset-xl;
+  }
+
+  @media (min-width: $screen-min-xl-straddle-low) {
+    bottom: $pos-y;
+    right: $pos-x + $hero-graphic-x-offset-xl-straddle-low;
+  }
+
+  @media (min-width: $screen-min-xl-straddle-high) {
+    bottom: $pos-y;
+    right: $pos-x + $hero-graphic-x-offset-xl-straddle-high;
+  }
+
+  @media (min-width: $screen-min-max) {
+    bottom: $pos-y;
+    right: $pos-x + $hero-graphic-x-offset-max;
+  }
+}
+
+// Description border
+// --------------------------------------------------
+
+%description-limits {
+  @media (max-width: $screen-max-sm) {
+    max-width: $description-max-xs;
+  }
+
+  @media (min-width: $screen-min-sm) and (max-width: $screen-max-md) {
+    max-width: $description-max-sm;
+  }
+
+  @media (min-width: $screen-min-md) and (max-width: $screen-max-lg) {
+    max-width: $description-max-md;
+  }
+}
+
+// Section impact description
+// --------------------------------------------------
+
+%description__col {
+  @extend %description-limits;
+
+  @media (max-width: $screen-max-lg) {
+    margin: auto;
+  }
+
+  @media (min-width: $screen-min-lg) {
+    width: 50%;
+  }
+}
+
+%description__col--left {
+  @include description-gutter-space('padding-right');
+
+  @media (min-width: $screen-min-lg) {
+    float: left;
+  }
+}
+
+%description__col--right {
+  @include description-gutter-space('padding-left');
+
+  @media (min-width: $screen-min-lg) {
+    float: right;
+  }
+}
+
+// Title
+%description__title {
+  margin-bottom: 1.25em;
+
+  @media (max-width: $screen-max-lg) {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+// Impact text
+%description__impact {
+  position: relative;
+
+  margin-bottom: 1.4em;
+  padding-bottom: 1.4em;
+
+  @media (max-width: $screen-max-lg) {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  @media (min-width: $screen-min-lg) {
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  // Decorative border
+  &:after {
+    @extend %render-decorative-border;
+
+    content: "";
+
+    position: absolute;
+    bottom: 0;
+    left: 0;
+
+    margin-left: -($dec-border-width-sm / 2);
+
+    @media (max-width: $screen-max-lg) {
+      left: 50%;
+    }
+
+    @media (min-width: $screen-min-md) {
+      margin-left: -($dec-border-width-md / 2);
+    }
+
+    @media (min-width: $screen-min-lg) {
+      margin-left: auto;
+    }
+  }
+}
+
+// Section description details
+// --------------------------------------------------
+%description__detail {
+  @extend %description-limits;
+
+  @media (max-width: $screen-max-lg) {
+    text-align: center;
+    margin: auto;
+  }
+}
+
+// Document slide effects
+// --------------------------------------------------
+%loading_effects {
+
+  transition: opacity $ts__loading * 2.5 linear, transform $ts__project-slide * 1.25 $e__slow-in;
+
+  transform: translate3d(0,0,0);
+  
+  #{$s__doc-slide-next} & {
+    transform: translateX(-100%);
+    transform: translate3d(-100%,0,0);
+  }
+
+  #{$s__doc-slide-prev} & {
+    transform: translateX(100%);
+    transform: translate3d(100%,0,0);
+  }
+
+  // Immediately wait at either side of the viewport following a slide action
+  #{$s__doc-wait-right} & {
+    transition-duration: 0s;
+
+    transform: translateX(100%);
+    transform: translate3d(100%,0,0);
+  }
+
+  #{$s__doc-wait-left} & {
+    transition-duration: 0s;
+
+    transform: translateX(-100%);
+    transform: translate3d(-100%,0,0);
+  }
+
+  // Improve performance by removing translate3d when not in use
+  // Keep is applied to the topbar and hero because they can sometimes be fixed position and will cause paint thrash in chrome / webkit otherwise
+  #{$s__doc-static} &:not(.topbar):not(.hero) {
+    transform: none;
+  }
+}
+
+// Loading spinner
+// --------------------------------------------------
+%generic-loading-spinner {
+  transition: 
+    transform $ts__generic-loading-spinner ease,
+    opacity $ts__generic-loading-spinner linear;
+
+  #{$s__pf-loading} & {
+    transform: translate3d(0,0,0) scale(1);
+  }
+
+  #{$s__pf-loaded} & {
+    transform: translate3d(0,0,0) scale(0);
+    opacity: .5;
+  }
+
+  svg {
+    // Loading animation
+    animation: pulse $ts__generic-loading-spinner * 2.5 $e__ease infinite;
+
+    #{$s__pf-loaded} &,
+    #{$no-js} & {
+      animation: none;
+    }
+  }
+}
+
+@mixin foreground-sliding-next($x: 30rem, $y: 0, $z: 0) {
+  transform: translate3d(#{-$x / 3}, $y, $z);
+
+  @media (min-width: $screen-min-md) {
+    transform: translate3d(#{-$x}, $y, $z);
+  }
+}
+
+@mixin foreground-sliding-prev($x: 30rem, $y: 0, $z: 0) {
+  transform: translate3d(#{$x / 3}, $y, $z);
+  
+
+  @media (min-width: $screen-min-md) {
+    transform: translate3d(#{$x}, $y, $z);
+  }
+}
+
+@mixin foreground-sliding--out {
+  transition-delay: 0s;
+}
+
+@mixin foreground-sliding--in {
+  transition-duration: 0s;
+}
+
+%foreground-sliding-effect {
+  // Include a Javascript check to make the selection more specific
+  // This avoids problems with CSS order when extending
+
+  // Reapply transition stack for both selections to ensure that no effects are inherited from another element
+  #{$s__enhanced-effects} & {
+    transition: 
+      transform $ts__loading $e__slow-in .2s,
+      opacity $ts__loading linear .2s;
+  }
+
+  // Clear transitions when not needed
+  #{$s__doc-static} & {
+    transition: none;
+  }
+  
+  #{$s__enhanced-effects} #{$s__doc-slide-next} &,
+  #{$s__enhanced-effects} #{$s__doc-slide-prev} &,
+  #{$s__enhanced-effects} #{$s__doc-wait-right} &,
+  #{$s__enhanced-effects} #{$s__doc-wait-left} & {
+    opacity: 0;
+  }
+
+  #{$s__enhanced-effects} #{$s__doc-slide-next} & {
+    @include foreground-sliding-next;
+    @include foreground-sliding--out;
+  }
+
+  #{$s__enhanced-effects} #{$s__doc-slide-prev} & {
+    @include foreground-sliding-prev;
+    @include foreground-sliding--out;
+  }
+
+  #{$s__enhanced-effects} #{$s__doc-wait-right} & {
+    @include foreground-sliding-prev;
+    @include foreground-sliding--in;
+  }
+
+  #{$s__enhanced-effects} #{$s__doc-wait-left} & {
+    @include foreground-sliding-next;
+    @include foreground-sliding--in;
+  }
+}

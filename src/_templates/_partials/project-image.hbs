@@ -1,0 +1,24 @@
+<!-- Project image -->
+<div class="project__image js__pf-image-controller">
+
+    <!-- Loading cover -->
+    <div class="project__image__loading">
+        <div class="project__image__loading__spinner">
+            <svg><use xlink:href="#ui-loading"></use></svg>
+        </div>
+    </div>
+
+    <span class="project__image__graphic js__pf-image" data-alt="{{this.alt}}">
+        <span data-src="{{project_path}}/img/{{this.filename}}-480{{this.extension}}" data-media="(max-width: 479px)"></span>
+        <span data-src="{{project_path}}/img/{{this.filename}}-768{{this.extension}}" data-media="(min-width: 480px) and (max-width: 767px)"></span>
+        <span data-src="{{project_path}}/img/{{this.filename}}-1000{{this.extension}}" data-media="(min-width: 768px) and (max-width: 999px)"></span>
+        <span data-src="{{project_path}}/img/{{this.filename}}-1200{{this.extension}}" data-media="(min-width: 1000px) and (max-width: 1199px)"></span>
+        <span data-src="{{project_path}}/img/{{this.filename}}-1635{{this.extension}}" data-media="(min-width: 1200px) and (max-width: 1634px)"></span>
+        <span data-src="{{project_path}}/img/{{this.filename}}-2000{{this.extension}}" data-media="(min-width: 1635px)"></span>
+
+        <!-- Fallback content for non-JS browsers. Same img src as the initial, unqualified source element. -->
+        <noscript>
+            <img src="{{project_path}}/img/{{this.filename}}-1200{{this.extension}}" alt="{{this.alt}}">
+        </noscript>
+    </span>
+</div>

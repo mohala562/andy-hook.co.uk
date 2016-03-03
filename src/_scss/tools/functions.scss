@@ -1,0 +1,28 @@
+// Tools - Functions
+// --------------------------------------------------
+
+// Convert PX units to EMs, PX units to REMs
+// Include before variables as they rely on these functions for output
+// --------------------------------------------------
+
+// See http://mrdanadams.com/2012/pixel-ems-css-conversion-sass-mixin
+
+// Base unit size for em conversion
+// Will likely never need altering
+$type-conversion-base: 16;
+
+// Convert PX units to EMs
+// Example: margin-right: pem(16);
+@function pem($pxval, $base: $type-conversion-base) {
+
+  // Ensure Sass calculates it as an em unit
+  @return ($pxval / $base) + 0em;
+}
+
+// Convert PX units to REMs
+// Example: margin-right: prem(16);
+@function prem($pxval, $base: $type-conversion-base) {
+
+  // Ensure Sass calculates it as an rem unit
+  @return ($pxval / $base) + 0rem;
+}

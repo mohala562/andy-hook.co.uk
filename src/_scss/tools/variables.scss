@@ -1,0 +1,268 @@
+// Tools - Variables
+// --------------------------------------------------
+
+// Global
+// --------------------------------------------------
+
+// Document font
+$font-size-base: 100%;
+
+// Document width limits
+$document-max-width: 1635px;
+$document-min-width: 320px;
+
+// Border radius
+$border-radius: 5px;
+
+// Border thickness
+$border-thick: 2px;
+$border-thin: 1px;
+
+// Pip size
+$pip-size: 4px;
+
+// Decorative border
+$dec-border-thickness-sm: 2px;
+$dec-border-width-sm: 3em;
+
+$dec-border-thickness-md: 3px;
+$dec-border-width-md: 4em;
+
+$dec-border-thickness-lg: 4px;
+$dec-border-width-lg: 4em;
+
+// Omit unit because we use both pixel values and rem
+// Always match the max image size
+$max-image-width: 2000; 
+
+// Breakpoints
+// Set in px due to inconsistent relative unit rounding across browsers
+// This is (currently) the only way to avoid a gap when using min and max values
+// --------------------------------------------------
+
+// Min
+$screen-min-xs: 480px;
+
+$screen-min-xs-straddle-low: 600px;
+
+$screen-min-sm: 768px;
+$screen-min-md: 1000px;
+$screen-min-lg: 1200px;
+
+$screen-min-lg-straddle-low: 1265px;
+$screen-min-lg-straddle-high: 1330px;
+
+$screen-min-xl: 1400px;
+
+$screen-min-xl-straddle-low: 1475px;
+$screen-min-xl-straddle-high: 1550px;
+$screen-min-max: 1635px;
+
+// Max
+$screen-max-xs: $screen-min-xs - 1px;
+
+$screen-max-xs-straddle-low: $screen-min-xs-straddle-low - 1px;
+
+$screen-max-sm: $screen-min-sm - 1px;
+$screen-max-md: $screen-min-md - 1px;
+$screen-max-lg: $screen-min-lg - 1px;
+
+$screen-max-lg-straddle-low: $screen-min-lg-straddle-low - 1px;
+$screen-max-lg-straddle-high: $screen-min-lg-straddle-high - 1px;
+
+$screen-max-xl: $screen-min-xl - 1px;
+
+$screen-max-xl-straddle-low: $screen-min-xl-straddle-low - 1px;
+$screen-max-xl-straddle-high: $screen-min-xl-straddle-high - 1px;
+
+$screen-max-max: $screen-min-max - 1px;
+
+// Nav break
+$screen-nav-break-lower-min: $screen-min-md;
+$screen-nav-break-lower-max: $screen-max-md;
+
+$screen-nav-break-higher-min: $screen-min-lg;
+$screen-nav-break-higher-max: $screen-max-lg;
+
+// Format shift
+$screen-format-shift-min: $screen-min-lg;
+$screen-format-shift-max: $screen-max-lg;
+
+
+// Container gutters
+// --------------------------------------------------
+$gutter: prem(20);
+$gutter-xs: prem(20);
+$gutter-sm: prem(20);
+$gutter-md: prem(50);
+$gutter-lg: prem(50);
+$gutter-xl: prem(50);
+$gutter-max: prem(60);
+
+// Modernizr classes
+// --------------------------------------------------
+
+// IE9
+$ie9: '.ie9';
+
+// Javascript
+$js: '.js';
+$no-js: '.no-js';
+
+// No touch
+$touch: '.touchevents';
+$no-touch: '.no-touchevents';
+
+// 3D Transforms
+$csstransforms3d: '.csstransforms3d';
+$no-csstransforms3d: '.no-csstransforms3d';
+
+// CSS Animation
+$cssanimations: '.cssanimations';
+$no-cssanimations: '.no-cssanimations';
+
+// CSS Gradients
+$cssgradients: '.cssgradients';
+$no-cssgradients: '.no-cssgradients';
+
+// SVG animation
+$smil: '.smil';
+$no-smil: '.no-smil';
+
+// Typography
+// --------------------------------------------------
+
+// Weight
+$weight-light: 300; // Proxima Nova only
+$weight-regular: 400;
+$weight-medium: 500; // Futura PT only
+$weight-bold: 700; // Proxima Nova only
+
+// Line height
+$line-height-body: 1.5;
+$line-height-heading: 1.4;
+
+// Colours
+$heading-color: #05070a;
+$body-color: #7e8285;
+$body-color-impact: darken($body-color, 5%);
+$tertiary-color: lighten($body-color, 5%);
+
+$heading-color--invert: #fff;
+$body-color--invert: #c1cacb;
+$body-color-impact--invert: lighten($body-color--invert, 8%);
+
+$tertiary-color--invert: #aeb6b7;
+$tertiary-color--pronounced-invert: $body-color-impact--invert;
+
+// Brand Colours
+// --------------------------------------------------
+
+// Colours
+$brand-color-primary: #2a959f;
+$brand-color-primary-light: lighten($brand-color-primary, 20%);
+$brand-color-primary-dark: darken($brand-color-primary, 15%);
+
+$brand-color-secondary: #2894da;
+$brand-color-secondary-light: lighten($brand-color-secondary, 20%);
+$brand-color-secondary-dark: darken($brand-color-secondary, 10%);
+
+// Shades
+$brand-color-dark: $heading-color;
+
+$brand-color-medium: #f2f4f5;
+$brand-color-light: #fff;
+
+// Gradient
+$gradient-color-primary: #046560;
+$gradient-color-secondary: #000f26;
+
+// Document
+$document-background-color: $brand-color-dark;
+
+$loading-background-color: $document-background-color;
+
+// Error text
+$error-color-pale: #b4edf2;
+
+// Status colours
+// --------------------------------------------------
+$status-error: #c24242;
+
+// Icons
+// --------------------------------------------------
+$icon-color: $heading-color;
+$icon-color--invert: $heading-color--invert;
+
+// Layout
+// --------------------------------------------------
+$section-padding-y: prem(50);
+$section-padding-y-xs: prem(55);
+$section-padding-y-sm: prem(70);
+$section-padding-y-md: prem(90);
+$section-padding-y-lg: prem(100);
+$section-padding-y-xl: prem(105);
+$section-padding-y-max: prem(100);
+
+// Section descriptions
+// --------------------------------------------------
+$description-gutter-lg: 3rem;
+$description-gutter-xl: 4rem;
+$description-gutter-max: 5rem;
+
+$description-max-xs: 35rem;
+$description-max-sm: 45rem;
+$description-max-md: 55rem;
+
+// Module - Topbar
+// --------------------------------------------------
+$topbar-background-color: $brand-color-dark;
+$topbar-border-color: darken($brand-color-medium, 70%);
+
+$topbar-height: prem(50);
+$topbar-height-medium: prem(60);
+$topbar-height-large: prem(70);
+
+$topbar-nav-icon-size: .88em;
+
+$project-nav-offset: $topbar-height * 4;
+$project-nav-offset-medium: $topbar-height-medium * 3;
+$project-nav-offset-large: $topbar-height-large * 3;
+
+// Module - Hero
+// --------------------------------------------------
+$hero-button-padding-y: 1.25rem;
+$hero-button-padding-x: 2.2rem;
+
+// Device border size
+$hero-device-border-thickness: 4px;
+
+// Gradient crossfade speed
+$hero-gradient-crossfade-speed: 10s;
+
+// Module - Thumbnail
+// --------------------------------------------------
+
+// Sizes
+$thumbnail-large: '.gallery__thumbnail--large';
+$thumbnail-small: '.gallery__thumbnail--small';
+
+// Grid space
+$thumbnail-space: prem(10);
+$thumbnail-space-xs: prem(10);
+$thumbnail-space-sm: prem(15);
+$thumbnail-space-md: prem(20);
+$thumbnail-space-lg: prem(15);
+$thumbnail-space-xl: prem(15);
+$thumbnail-space-max: prem(20);
+
+// Module - Not found
+// --------------------------------------------------
+
+// Must match image size
+$error-stroke-height: pem(400);
+$error-stroke-width: pem(935);
+
+// Module - Warning
+// --------------------------------------------------
+$warning-bar-fixed-height: prem(75);

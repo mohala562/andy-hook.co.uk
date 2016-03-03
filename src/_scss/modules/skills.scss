@@ -1,0 +1,310 @@
+// Module - Skills
+// --------------------------------------------------
+.skills {
+  @extend %clearfix;
+  @extend %loading_effects;
+
+  position: relative;
+
+  background-color: $brand-color-light;
+
+  z-index: z('skills', 'base')
+}
+
+// Items
+// --------------------------------------------------
+
+// Containing column
+.skills__item {
+  @extend %section-padding-y;
+
+  // Shade middle column
+  // Also add scroll visibility animation settings
+  &:nth-child(2) {
+    background-color: $brand-color-medium;
+
+    // Visibility effects
+    @include effect-base {
+      background-color: $brand-color-light;
+    }
+
+    @include effect-visible {
+      transition: background-color $ts__skills * .5 linear $ts__skills * .5;
+
+      background-color: $brand-color-medium;
+    }
+
+    @media (min-width: $screen-min-lg) {
+      position: absolute;
+      height: 100%;
+      top: 0;
+
+      left: 33.333333%;
+    }
+  }
+
+  &:nth-child(3) {
+    @media (min-width: $screen-min-lg) {
+      float: right;
+    }
+  }
+
+  // Padding written shorthand to avoid padding rule specificity conflicts
+  @media (max-width: $screen-max-xs) {
+    padding-left: $gutter;
+    padding-right: $gutter;
+  }
+
+  @media (min-width: $screen-min-xs) and (max-width: $screen-max-sm) {
+    padding-left: $gutter-xs;
+    padding-right: $gutter-xs;
+  }
+
+  @media (min-width: $screen-min-lg) {
+    width: 33.333333%;
+    float: left;
+
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
+
+  @media (min-width: $screen-min-xl) {
+    padding-left: 4rem;
+    padding-right: 4rem;
+  }
+
+  @media (min-width: $screen-min-max) {
+    padding-left: 5rem;
+    padding-right: 5rem;
+  }
+
+}
+
+// Icon
+.skills__item__icon {
+  line-height: 1;
+
+  text-align: center;
+
+  margin-top: -1em;
+  margin-bottom: .5em;
+
+  // Visibility effects
+  @include effect-base {
+    opacity: 0;
+  }
+
+  @include effect-base--enhanced {
+    transform: translate3d(0,3em,0) scale(1.25);
+  }
+
+  @include effect-visible {
+    transition: 
+      opacity $ts__skills linear,
+      transform $ts__skills * 6 $e__fast-in;
+
+    opacity: 1;
+  }
+
+  @include effect-visible--enhanced {
+    transform: translate3d(0,0,0) scale(1);
+  }
+
+  // Delay execution per row
+  #{$s__base-effects} #{$s__section-visible} .skills__item:nth-child(1) & {
+    transition-delay: $ts__skills-item-delay--first + $ts__skills-item-icon-delay;
+  }
+
+  #{$s__base-effects} #{$s__section-visible} .skills__item:nth-child(2) & {
+    transition-delay: $ts__skills-item-delay--second + $ts__skills-item-icon-delay;
+    
+  }
+
+  #{$s__base-effects} #{$s__section-visible} .skills__item:nth-child(3) & {
+    transition-delay: $ts__skills-item-delay--third + $ts__skills-item-icon-delay;
+  }
+}
+
+.skills__item__icon__wrapper {
+
+  font-size: 7em;
+
+  display: inline-block;
+
+  svg {
+    display: block;
+    width: 1em;
+    height: 1em;
+  }
+
+  @media (min-width: $screen-min-xs) {
+    font-size: 8em;
+  }
+
+  @media (min-width: $screen-min-sm) {
+    font-size: 9em;
+  }
+
+  @media (min-width: $screen-min-md) {
+    font-size: 11em;
+  }
+
+  @media (min-width: $screen-min-lg) {
+    font-size: 8em;
+  }
+
+  @media (min-width: $screen-min-xl) {
+    font-size: 9em;
+  }
+
+  @media (min-width: $screen-min-max) {
+    font-size: 11em;
+  }
+}
+
+// Title
+.skills__item__title {
+  position: relative;
+
+  text-align: center;
+
+  padding-bottom: 1em;
+  margin-bottom: 1em;
+
+  // Visibility effects
+  @include effect-base {
+    opacity: 0;
+  }
+
+  @include effect-base--enhanced {
+    transform: translate3d(0,1.5em,0);
+  }
+
+  @include effect-visible {
+    transition: 
+      opacity $ts__skills linear,
+      transform $ts__skills * 5 $e__fast-in;
+
+    opacity: 1;
+  }
+
+  @include effect-visible--enhanced {
+    transform: translate3d(0,0,0);
+  }
+
+  // Delay execution per row
+  #{$s__base-effects} #{$s__section-visible} .skills__item:nth-child(1) & {
+    transition-delay: $ts__skills-item-delay--first + $ts__skills-item-title-delay;
+  }
+
+  #{$s__base-effects} #{$s__section-visible} .skills__item:nth-child(2) & {
+    transition-delay: $ts__skills-item-delay--second + $ts__skills-item-title-delay;
+  }
+
+  #{$s__base-effects} #{$s__section-visible} .skills__item:nth-child(3) & {
+    transition-delay: $ts__skills-item-delay--third + $ts__skills-item-title-delay;
+  }
+
+  // Decorative border
+  &:after {
+    @extend %render-decorative-border;
+    @extend %render-decorative-border--small;
+
+    content: "";
+    position: absolute;
+    bottom: 0;
+
+    // Horizontal center
+    left: 50%;
+    transform: translateX(-50%);
+
+    // Visibility effects
+    @include effect-base {
+      opacity: 0;
+    }
+
+    @include effect-base--enhanced {
+      transform: translate3d(-50%,1.5em,0);
+    }
+
+    @include effect-visible {
+      transition: 
+        opacity $ts__skills linear,
+        transform $ts__skills * 4 $e__fast-in;
+
+      opacity: 1;
+    }
+
+    @include effect-visible--enhanced {
+      transform: translate3d(-50%,0,0);
+    }
+
+    // Delay execution per row
+    #{$s__base-effects} #{$s__section-visible} .skills__item:nth-child(1) & {
+      transition-delay: $ts__skills-item-delay--first + $ts__skills-item-border-delay;
+    }
+
+    #{$s__base-effects} #{$s__section-visible} .skills__item:nth-child(2) & {
+      transition-delay: $ts__skills-item-delay--second + $ts__skills-item-border-delay;
+    }
+
+    #{$s__base-effects} #{$s__section-visible} .skills__item:nth-child(3) & {
+      transition-delay: $ts__skills-item-delay--third + $ts__skills-item-border-delay;
+    }
+  }
+}
+
+// Description
+.skills__item__descr {
+  @include type-scale-base--small;
+
+  text-align: center;
+
+  margin: auto;
+
+  @media (min-width: $screen-min-xs) {
+    max-width: 30rem;
+  }
+
+  @media (min-width: $screen-min-sm) {
+    max-width: 40rem;
+  }
+
+  @media (min-width: $screen-min-md) {
+    max-width: 40rem;
+  }
+
+  // Visibility effects
+  @include effect-base {
+    opacity: 0;
+  }
+
+  @include effect-base--enhanced {
+    transform: translate3d(0,2em,0);
+  }
+
+  @include effect-visible {
+    transition: 
+      opacity $ts__skills linear,
+      transform $ts__skills * 5 $e__fast-in;
+
+    opacity: 1;
+  }
+
+  @include effect-visible--enhanced {
+    transform: translate3d(0,0,0);
+  }
+
+  // Delay execution per row
+  #{$s__base-effects} #{$s__section-visible} .skills__item:nth-child(1) & {
+    transition-delay: $ts__skills-item-delay--first + $ts__skills-item-descr-delay;
+  }
+
+  #{$s__base-effects} #{$s__section-visible} .skills__item:nth-child(2) & {
+    transition-delay: $ts__skills-item-delay--second + $ts__skills-item-descr-delay;
+  }
+
+  #{$s__base-effects} #{$s__section-visible} .skills__item:nth-child(3) & {
+    transition-delay: $ts__skills-item-delay--third + $ts__skills-item-descr-delay;
+  }
+}
