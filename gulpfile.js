@@ -6,7 +6,7 @@
     var site = {
         title: 'Andy Hook',
         description: 'The portfolio of designer and front-end developer Andy Hook',
-        url: 'https://andy-hook.github.io/'
+        url: 'http://andy-hook.co.uk/'
     };
 
     // Manually require modules that won"t get picked up by gulp-load-plugins

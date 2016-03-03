@@ -16,8 +16,6 @@ define(['helpers', 'metrics'], function(helper, metric) {
 
         // On new project load
         metric.$c.document.on('pjax:end', function(){
-            console.log('pjax fire');
-
             if (ga) {
                 ga('set', 'location', window.location.href);
                 ga('send', {
@@ -30,8 +28,6 @@ define(['helpers', 'metrics'], function(helper, metric) {
 
         // On CV click
         $c.cv_button.on('click', function(){
-            console.log('cv fire');
-
             if (ga) {
                 ga('send', {
                   hitType: 'event',
