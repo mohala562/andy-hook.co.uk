@@ -42,7 +42,7 @@ define(['plugins/throttle-debounce'], function(throttle_debounce) {
 
             // Get the last directory of a url
             getLastDir: function(url) {
-                return url.substr(url.lastIndexOf('/') + 1);
+                return url.match(/([^\/]*)\/*$/)[1];
             },
 
             // Remove trailing slash from a string

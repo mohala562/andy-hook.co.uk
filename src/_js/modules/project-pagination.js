@@ -30,10 +30,11 @@ define(['helpers'], function(helper) {
         $c.thumbnails.each(function(){
 
             var href = $(this).find('a').attr('href'),
-                project_dir = helper.getLastDir(helper.stripHash(href));
+                href_clean = helper.stripHash(href),
+                last_dir = helper.getLastDir(href_clean);
 
             // Push to arrays
-            project_name_array.push(project_dir);
+            project_name_array.push(last_dir);
             project_href_array.push(href);
         });
     }
