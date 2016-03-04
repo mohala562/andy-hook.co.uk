@@ -41,7 +41,8 @@ define(['modules/pjax',
             container: project_container, // Where to put contents
             timeout: 5000, // Time before browser performs a hard refresh
             scrollTo: false, // pjax scrolls to the top of the document by default, setting this to false disables that action
-            url: request_url // The project url
+            url: request_url, // The project url
+            replace: true
         };
 
         // Perform pjax

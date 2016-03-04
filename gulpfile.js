@@ -5,7 +5,7 @@
     // Site info
     var site = {
         title: 'Andy Hook',
-        description: 'The portfolio of designer and front-end developer Andy Hook',
+        description: 'The online portfolio of designer & developer Andy Hook',
         url: 'http://andy-hook.co.uk/'
     };
 
