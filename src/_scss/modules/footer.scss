@@ -41,6 +41,9 @@
 
 // Text
 .footer__cv__text {
+  transition: 
+    transform $ts__footer__cv $e__elastic,
+    opacity $ts__footer__cv / 3 linear;
 
   text-align: center;
 
@@ -73,10 +76,6 @@
   }
 
   @include effect-visible {
-    transition: 
-      transform $ts__footer__cv $e__elastic,
-      opacity $ts__footer__cv / 3 linear;
-
     opacity: 1;
   }
 

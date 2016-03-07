@@ -2,7 +2,7 @@
 
 {{! Add 'home' class if the 'order' property doesn't exist (So we know it's the home page) }}
 <!--[if IE 9]>         <html class="no-js ie9 {{#unless order}}home{{/unless}}"> <![endif]-->
-<!--[if gt IE 9]><!--> <html class="no-touch no-js {{#unless order}}home{{/unless}}"> <!--<![endif]-->
+<!--[if gt IE 9]><!--> <html class="no-touchevents no-js {{#unless order}}home{{/unless}}"> <!--<![endif]-->
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -29,7 +29,7 @@
     <script>
         // Remove no-touch class as soon as possible if JS is enabled
         // This is a workaround for modernizr not changing it based on device type, it simply adds .touch for example
-        document.documentElement.className = document.documentElement.className.replace('no-touch','');
+        document.documentElement.className = document.documentElement.className.replace('no-touchevents','');
     </script>
 
     <!-- Analytics -->
