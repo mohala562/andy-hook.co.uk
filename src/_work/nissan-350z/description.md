@@ -40,6 +40,6 @@ images:
 
 A personal project that was the product of curiosity and admiration for texture and 3d artists. I have been a long time user of <a href="http://www.autodesk.co.uk/products/3ds-max/overview" target="_blank" title="3ds max homepage">3ds Max</a> since before my university years, though since starting a web design career I've had little use for the&nbsp;tools.
 
-With advancements in <a href="https://en.wikipedia.org/wiki/WebGL" target="_blank" title="Wikipedia entry for WebGL">WebGL</a>, popularity of frameworks such as <a href="http://threejs.org/" target="_blank" title="Three.js homepage">Three.js</a> and increasing computing power I wanted to revisit the world of 3d modeling, texturing and material&nbsp;creation.
+With advancements in <a href="https://en.wikipedia.org/wiki/WebGL" target="_blank" title="Wikipedia entry for WebGL">WebGL</a>, popularity of libraries such as <a href="http://threejs.org/" target="_blank" title="Three.js homepage">Three.js</a> and increasing computing power I wanted to revisit the world of 3d modeling, texturing and material&nbsp;creation.
 
 This model uses a crude smoothing algorithm which wasn't specifically designed for real-time rendering, however, it did give me a chance to catch up with the tech to see where the tools are now and test how much knowledge I still had of the&nbsp;process.
