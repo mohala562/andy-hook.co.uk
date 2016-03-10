@@ -2,7 +2,7 @@
 title: RH Ball & Company
 category: Design & Development
 icon: development
-order: 7
+order: 3
 collection: work
 template: main.hbs
 impact: I helped this Leicestershire based accounting company modernize their online presence and as a result, increase their online enquiry frequency and search ranking.

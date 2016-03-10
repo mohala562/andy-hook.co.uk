@@ -2,7 +2,7 @@
 title: Cymbiosis Store
 category: Design & Development
 icon: development
-order: 6
+order: 4
 collection: work
 template: main.hbs
 impact: I took lead on the interface, UX, visual design and front-end development for this fresh looking responsive store, built specifically for high-end audio enthusiasts.

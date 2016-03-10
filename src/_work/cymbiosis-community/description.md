@@ -2,7 +2,7 @@
 title: Cymbiosis Community
 category: Responsive Web Design
 icon: design
-order: 4
+order: 2
 collection: work
 template: main.hbs
 impact: Visual and user interface design for a leading audio retailer. The concept was to design a community platform catering to high-end hi-fi enthusiasts.

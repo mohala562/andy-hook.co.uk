@@ -2,7 +2,7 @@
 title: Email Design
 category: Design & Development
 icon: development
-order: 3
+order: 4
 collection: work
 template: main.hbs
 impact: Design and development of bulletproof, cross-reader compatible email campaigns for a diverse range of clients.
