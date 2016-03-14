@@ -5,7 +5,7 @@ icon: design
 order: 6
 collection: work
 template: main.hbs
-impact: I created a fresh new look, sleek but familiar identity, professionally finished stationery and recognisable signage for marketing and data company TJC.
+impact: A fresh new look, sleek but familiar identity, professionally finished stationery and recognisable signage for research company TJC.
 images:
     tjc-sketch:
         filename: tjc-sketch
