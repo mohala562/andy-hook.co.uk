@@ -2,10 +2,10 @@
 title: Cymbiosis Store
 category: Design & Development
 icon: development
-order: 4
+order: 2
 collection: work
 template: main.hbs
-impact: I took lead on the interface, UX, visual design and front-end development for this fresh looking responsive store, built specifically for high-end audio enthusiasts.
+impact: I took lead on the interface, UX, visual design and front-end development for this responsive store, built specifically for high-end audio enthusiasts.
 images:
     intro:
         filename: intro
@@ -73,6 +73,6 @@ images:
         alt: A custom 404 error message is visible. A hand drawn illustration of a broken record is accompanied by 404 text and description.
 ---
 
-Cymbiosis approached <a href="http://tjcuk.co.uk/" target="_blank" title="TJC homepage">TJC</a> regarding the implementation of a store into their existing online presence.The initial brief was heavily focused on an automated system to process small purchases, though this was subsequently (and successfully) expanded when I identified good use for the same technology in their used equipment revenue stream, advocated for an investment in web performance and made a strong case for the expansion of project scope.
+Cymbiosis approached <a href="http://tjcuk.co.uk/" target="_blank" title="TJC homepage">TJC</a> regarding the implementation of a store into their existing online presence.The initial brief was heavily focused on an automated system to process small purchases, though this was subsequently (and successfully) expanded when we identified good use for the same technology in their used equipment revenue stream, advocated for an investment in web performance and made a strong case for the expansion of project scope.
 
 The result is a platform which mixes an enquiry based system with an automated "basket and checkout" traditional store. I lead the project all the way from conception, through to the design and front-end development of an entirely new modular component system. This system would ultimately go on to be used in the full rebuild of their entire website later that&nbsp;year.

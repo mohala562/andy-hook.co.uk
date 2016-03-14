@@ -5,7 +5,7 @@ icon: development
 order: 3
 collection: work
 template: main.hbs
-impact: I helped this Leicestershire based accounting company modernize their online presence and as a result, increase their online enquiry frequency and search ranking.
+impact: TJC helped this Leicestershire based accounting company modernize their online presence and as a result, increase their online enquiry frequency and search ranking.
 images:
     intro:
         filename: intro
@@ -58,6 +58,6 @@ images:
         alt: Bottom half of the mobile mock ups area, features a tablet and two mobile phones.
 ---
 
-RH Ball & Company approached <a href="http://tjcuk.co.uk/" target="_blank" title="TJC homepage">TJC</a> seeking an affordable way to update their existing online presence. As lead designer on the project I quickly realised that their existing site did little to show their personality and laid back approach to client interaction. Following initial design exploration and interviews I established that while their web design was lacking, they did have some well designed, attractive print collateral with which the they were very satisfied. 
+RH Ball & Company approached <a href="http://tjcuk.co.uk/" target="_blank" title="TJC homepage">TJC</a> seeking an affordable way to update their existing online presence. I was the lead designer on the project and working together with the team we quickly realised that their existing site did little to show their personality and laid back approach to client interaction. Following initial design exploration and interviews we established that while their web design was lacking, they did have some well designed, attractive print collateral with which the they were very satisfied. 
 
-Using this print media as a base for inspiration I produced a series of designs utilizing the aesthetic treatment and background patterns with a goal of unifying both into a consistent brand. In order to keep the project within budget I made key decisions with <a href="http://getbootstrap.com//" target="_blank" title="Bootstrap homepage">bootstrap</a> in mind and focused on keeping the site components simple and reusable in the context of this framework.
+Using this print media as a base for inspiration we produced a series of designs utilizing the aesthetic treatment and background patterns with a goal of unifying both into a consistent brand. In order to keep the project within budget we made key decisions with <a href="http://getbootstrap.com//" target="_blank" title="Bootstrap homepage">bootstrap</a> in mind and focused on keeping the site components simple and reusable in the context of this framework.
